@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		8E20432427DBDB150031EF2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20432327DBDB150031EF2C /* AppDelegate.swift */; };
-		8E20432827DBDB150031EF2C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20432727DBDB150031EF2C /* ViewController.swift */; };
 		8E20432B27DBDB150031EF2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E20432927DBDB150031EF2C /* Main.storyboard */; };
 		8E20432D27DBDB160031EF2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E20432C27DBDB160031EF2C /* Assets.xcassets */; };
 		8E20433027DBDB160031EF2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E20432E27DBDB160031EF2C /* LaunchScreen.storyboard */; };
 		8E20433B27DBDB160031EF2C /* IOS_MovieRecommendationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20433A27DBDB160031EF2C /* IOS_MovieRecommendationTests.swift */; };
 		8E20434527DBDB160031EF2C /* IOS_MovieRecommendationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20434427DBDB160031EF2C /* IOS_MovieRecommendationUITests.swift */; };
 		8E20434727DBDB160031EF2C /* IOS_MovieRecommendationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20434627DBDB160031EF2C /* IOS_MovieRecommendationUITestsLaunchTests.swift */; };
+		8E20435527DBDFA20031EF2C /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20435427DBDFA20031EF2C /* CardViewController.swift */; };
+		8E8D23BE27DCE49D00A73C57 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D23BD27DCE49D00A73C57 /* ColorPalette.swift */; };
+		8E8D23C027DCE91800A73C57 /* AppCoordinator .swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D23BF27DCE91800A73C57 /* AppCoordinator .swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +39,6 @@
 /* Begin PBXFileReference section */
 		8E20432027DBDB150031EF2C /* IOS-MovieRecommendation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-MovieRecommendation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E20432327DBDB150031EF2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8E20432727DBDB150031EF2C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8E20432A27DBDB150031EF2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8E20432C27DBDB160031EF2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E20432F27DBDB160031EF2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +48,9 @@
 		8E20434027DBDB160031EF2C /* IOS-MovieRecommendationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IOS-MovieRecommendationUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E20434427DBDB160031EF2C /* IOS_MovieRecommendationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_MovieRecommendationUITests.swift; sourceTree = "<group>"; };
 		8E20434627DBDB160031EF2C /* IOS_MovieRecommendationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_MovieRecommendationUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8E20435427DBDFA20031EF2C /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
+		8E8D23BD27DCE49D00A73C57 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		8E8D23BF27DCE91800A73C57 /* AppCoordinator .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppCoordinator .swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +102,9 @@
 			isa = PBXGroup;
 			children = (
 				8E20432327DBDB150031EF2C /* AppDelegate.swift */,
-				8E20432727DBDB150031EF2C /* ViewController.swift */,
+				8E8D23BF27DCE91800A73C57 /* AppCoordinator .swift */,
+				8E8D23BD27DCE49D00A73C57 /* ColorPalette.swift */,
+				8E20435327DBDF8A0031EF2C /* Deck */,
 				8E20432927DBDB150031EF2C /* Main.storyboard */,
 				8E20432C27DBDB160031EF2C /* Assets.xcassets */,
 				8E20432E27DBDB160031EF2C /* LaunchScreen.storyboard */,
@@ -122,6 +128,14 @@
 				8E20434627DBDB160031EF2C /* IOS_MovieRecommendationUITestsLaunchTests.swift */,
 			);
 			path = "IOS-MovieRecommendationUITests";
+			sourceTree = "<group>";
+		};
+		8E20435327DBDF8A0031EF2C /* Deck */ = {
+			isa = PBXGroup;
+			children = (
+				8E20435427DBDFA20031EF2C /* CardViewController.swift */,
+			);
+			path = Deck;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,8 +269,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E20432827DBDB150031EF2C /* ViewController.swift in Sources */,
+				8E8D23C027DCE91800A73C57 /* AppCoordinator .swift in Sources */,
 				8E20432427DBDB150031EF2C /* AppDelegate.swift in Sources */,
+				8E20435527DBDFA20031EF2C /* CardViewController.swift in Sources */,
+				8E8D23BE27DCE49D00A73C57 /* ColorPalette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

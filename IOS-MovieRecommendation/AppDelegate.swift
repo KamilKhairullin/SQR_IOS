@@ -7,7 +7,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = ViewController()
+        
+        let coordinator = AppCoordinator()
+        window?.rootViewController = coordinator.tapBarController
         window?.makeKeyAndVisible()
         return true
     }
