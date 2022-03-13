@@ -1,13 +1,40 @@
-stages:
-  - build
-  - lint
+# stages:
+#   - build
+#   - lint
 
-build_project:
-  stage: build
-  script:
-    - xcodebuild clean -project IOS-MovieRecommendation.xcodeproj -scheme SchemeName | xcpretty
-    - xcodebuild test -project IOS-MovieRecommendation.xcodeproj -scheme SchemeName -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.3' | xcpretty -s
+# build_project:
+#   stage: build
+#   script:
+#     - xcodebuild clean -project IOS-MovieRecommendation.xcodeproj -scheme SchemeName | xcpretty
+#     - xcodebuild test -project IOS-MovieRecommendation.xcodeproj -scheme SchemeName -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.3' | xcpretty -s
+#   tags:
+#     - ios_11-3
+#     - xcode_9-3
+#     - macos_10-13
+
+stages:
+  - lint
+  - test
+  - develop
+
+variables:
+  LANG: "en_US.UTF-8"
+  LC_ALL: "en_US.UTF-8"
+
+before_script:
+  - sudo gem install bundler && bundle update
+
+lint:
   tags:
-    - ios_11-3
-    - xcode_9-3
-    - macos_10-13
+    - ios
+  stage: lint
+  script:
+    - bundle exec fastlane lint
+  only:
+    - branches
+  except:
+    - tags
+  artifacts:
+    paths:
+      - fastlane/swiftlint.html
+  allow_failure: false
