@@ -9,6 +9,7 @@ before_script:
   - su -
   - apt-get update
   - apt-get install rubygems -y
+  - cd IOS-MovieRecommendation/
   - gem install bundler && bundle update
 
 lint:
