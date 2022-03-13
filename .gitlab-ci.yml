@@ -8,7 +8,7 @@ variables:
 before_script:
   - su -
   - apt-get update
-  - apt-get install rubygems
+  - apt-get install rubygems -y
   - gem install bundler && bundle update
 
 lint:
