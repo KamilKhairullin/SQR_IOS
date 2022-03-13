@@ -1,0 +1,42 @@
+[
+    {
+        "id": "0111161",
+        "title": "The Shawshank Redemption",
+        "posterURL": "https://images-eu.ssl-images-amazon.com/images/S/pv-target-images/9964546b0ba1f6e14a6045e34b341f8ca2a3569752c5afed95b89682fcde1a68._V_SX600_.jpg",
+        "description": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+        "rating": 9.3,
+        "ratingBorder": 10.0
+    },
+    {
+        "id": "0068646",
+        "title": "The Godfather",
+        "posterURL": "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg",
+        "description": "The aging patriarch of an organized crime dynasty in postwar New York City transfers control of his clandestine empire to his reluctant youngest son.",
+        "rating": 9.2,
+        "ratingBorder": 10.0
+    },
+    {
+        "id": "0468569",
+        "title": "The Dark Knight",
+        "posterURL": "https://images-na.ssl-images-amazon.com/images/S/pv-target-images/826e20d747af639e2e2c3a95662283eabc6a6216a9bb74fc45cb1c29f2708b96._RI_V_TTW_.jpg",
+        "description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+        "rating": 9.1,
+        "ratingBorder": 10.0
+    },
+    {
+        "id": "0050083",
+        "title": "12 Angry Men",
+        "posterURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/12_Angry_Men_%281957_film_poster%29.jpg/800px-12_Angry_Men_%281957_film_poster%29.jpg",
+        "description": "The jury in a New York City murder trial is frustrated by a single member whose skeptical caution forces them to more carefully consider the evidence before jumping to a hasty verdict.",
+        "rating": 9.0,
+        "ratingBorder": 10.0
+    },
+    {
+        "id": "0108052",
+        "title": "Schindler's List",
+        "posterURL": "https://b1.filmpro.ru/c/5706.jpg",
+        "description": "In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.",
+        "rating": 9.0,
+        "ratingBorder": 10.0
+    }
+]
