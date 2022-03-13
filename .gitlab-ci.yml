@@ -1,28 +1,5 @@
-# stages:
-#   - build
-#   - lint
-
-# build_project:
-#   stage: build
-#   script:
-#     - xcodebuild clean -project IOS-MovieRecommendation.xcodeproj -scheme SchemeName | xcpretty
-#     - xcodebuild test -project IOS-MovieRecommendation.xcodeproj -scheme SchemeName -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.3' | xcpretty -s
-#   tags:
-#     - ios_11-3
-#     - xcode_9-3
-#     - macos_10-13
-
-linter:
-  stage: linter
-  image: ubuntu
-  script:
-    - chmod +x mvnw
-    - ./mvnw spotbugs:spotbugs
-  dependencies:
-    - build
-
 stages:
-  - linter
+  - lint
 
 variables:
   LANG: "en_US.UTF-8"
@@ -32,8 +9,7 @@ before_script:
   - sudo gem install bundler && bundle update
 
 lint:
-  tags:
-    - ios
+  image: ubuntu
   stage: lint
   script:
     - bundle exec fastlane lint
