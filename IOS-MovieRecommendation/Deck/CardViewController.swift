@@ -9,7 +9,10 @@ import UIKit
 
 
 extension UIColor {
-    static var customWhite = UIColor(red: 235, green: 235, blue: 235, alpha: 1)
+    static var customWhite = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+    static var customBlack = UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
+    static var customMiddleWhite = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
+    static var customWhiteTransparrent = UIColor(red: 1, green: 1, blue: 1, alpha: 0)
 }
 
 struct Movie {
@@ -44,6 +47,7 @@ class CardViewController: UIViewController {
     private var moviePoster: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -52,11 +56,12 @@ class CardViewController: UIViewController {
     private var posterBottomFade: CAGradientLayer = {
         let gl = CAGradientLayer()
         let colorTop = UIColor.clear.cgColor
-        let colorBottom = UIColor.black.cgColor
+        let colorMiddle = UIColor.customMiddleWhite.cgColor
+        let colorBottom = UIColor.white.cgColor
         
         gl.type = .axial
-        gl.colors = [colorTop, colorBottom]
-        gl.locations = [0.45, 0.95]
+        gl.colors = [colorTop, colorMiddle, colorBottom]
+        gl.locations = [0.25, 0.75, 1]
         
         return gl
     }()
@@ -65,7 +70,7 @@ class CardViewController: UIViewController {
         let label = UILabel()
         label.text = "Movie Title"
         label.font = UIFont.boldSystemFont(ofSize: 28)
-        label.textColor = .customWhite
+        label.textColor = .customBlack
         
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -75,7 +80,7 @@ class CardViewController: UIViewController {
         let label = UILabel()
         label.text = "0.0"
         label.font = UIFont.systemFont(ofSize: 22)
-        label.textColor = .customWhite
+        label.textColor = .customBlack
         
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -85,7 +90,7 @@ class CardViewController: UIViewController {
         let label = UILabel()
         label.text = "Movie description"
         label.font = UIFont.systemFont(ofSize: 11)
-        label.textColor = .customWhite
+        label.textColor = .customBlack
         label.contentMode = .topLeft
         label.numberOfLines = .zero
         
@@ -93,32 +98,22 @@ class CardViewController: UIViewController {
         return label
     }()
     
-    private var likeButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setTitle("Like", for: .normal)
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        btn.setTitleColor(.systemYellow, for: .normal)
-        btn.addTarget(self, action: #selector(nextPoster), for: .touchUpInside)
+    private var mainTopFade: CAGradientLayer = {
+        let gl = CAGradientLayer()
+        let colorTop = UIColor.black.cgColor
+        let colorBottom = UIColor.clear.cgColor
         
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        return btn
-    }()
-    
-    private var dislikeButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setTitle("DisLike", for: .normal)
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        btn.setTitleColor(.systemPurple, for: .normal)
-        btn.addTarget(self, action: #selector(nextPoster), for: .touchUpInside)
+        gl.type = .axial
+        gl.colors = [colorTop, colorBottom]
+        gl.locations = [0.05, 0.15]
         
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        return btn
+        return gl
     }()
     
     private var leftWhiteFade: CAGradientLayer = {
         let gl = CAGradientLayer()
         let colorLeft = UIColor.white.cgColor
-        let colorRight = UIColor.clear.cgColor
+        let colorRight = UIColor.customWhiteTransparrent.cgColor
         
         gl.type = .axial
         gl.startPoint = CGPoint(x: 0, y: 1)
@@ -160,15 +155,7 @@ class CardViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        posterBottomFade.frame = moviePosterContainer.bounds
-        moviePosterContainer.layer.addSublayer(posterBottomFade)
-        
-        leftWhiteFade.frame = view.bounds
-        view.layer.addSublayer(leftWhiteFade)
-
-        rightBlackFade.frame = view.bounds
-        view.layer.addSublayer(rightBlackFade)
-        
+        setupLayers()
         setupTitles()
     }
     
@@ -228,10 +215,10 @@ class CardViewController: UIViewController {
     private func setupViews() {
         view.addSubview(moviePosterContainer)
         NSLayoutConstraint.activate([
-            moviePosterContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            moviePosterContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -120),
-            moviePosterContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
-            moviePosterContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
+            moviePosterContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -48),
+            moviePosterContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
+            moviePosterContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            moviePosterContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
         
         moviePosterContainer.addSubview(moviePoster)
@@ -241,24 +228,28 @@ class CardViewController: UIViewController {
             moviePoster.leadingAnchor.constraint(equalTo: moviePosterContainer.leadingAnchor),
             moviePoster.trailingAnchor.constraint(equalTo: moviePosterContainer.trailingAnchor)
         ])
+    }
+    
+    private func setupLayers() {
+        posterBottomFade.frame = moviePosterContainer.bounds
+        moviePosterContainer.layer.addSublayer(posterBottomFade)
         
-        view.addSubview(dislikeButton)
-        NSLayoutConstraint.activate([
-            dislikeButton.topAnchor.constraint(equalTo: moviePosterContainer.bottomAnchor, constant: 32),
-            dislikeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
-            dislikeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            dislikeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: -8)
-        ])
-        dislikeButton.backgroundColor = .systemYellow
+        mainTopFade.frame = view.bounds
+        view.layer.addSublayer(mainTopFade)
+        
+        leftWhiteFade.frame = view.bounds
+        view.layer.addSublayer(leftWhiteFade)
 
-        view.addSubview(likeButton)
-        NSLayoutConstraint.activate([
-            likeButton.topAnchor.constraint(equalTo: moviePosterContainer.bottomAnchor, constant: 32),
-            likeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
-            likeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 8),
-            likeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
-        ])
-        likeButton.backgroundColor = .systemPurple
+        rightBlackFade.frame = view.bounds
+        view.layer.addSublayer(rightBlackFade)
+        
+        let cornerRad = 25.0
+        moviePoster.layer.cornerRadius = cornerRad
+        moviePoster.layer.maskedCorners = [ .layerMaxXMaxYCorner, .layerMinXMaxYCorner ]
+        
+        posterBottomFade.cornerRadius = cornerRad
+        moviePosterContainer.layer.cornerRadius = cornerRad
+        
     }
     
     private func setupTitles() {
