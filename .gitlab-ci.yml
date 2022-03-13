@@ -7,8 +7,7 @@ variables:
 
 before_script:
   - su -
-  - apt-get install sudo -y
-  - sudo gem install bundler && bundle update
+  - gem install bundler && bundle update
 
 lint:
   image: ubuntu
