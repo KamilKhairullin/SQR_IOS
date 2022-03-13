@@ -10,6 +10,9 @@ before_script:
   - apt-get update
   - apt-get install rubygems -y
   - cd IOS-MovieRecommendation/
+  - gem install google-cloud-storage -v 1.15.0
+  - gem uninstall google-cloud-storage -v 1.17.0
+  - gem cleanup
   - gem install bundler && bundle update
 
 lint:
