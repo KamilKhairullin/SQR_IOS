@@ -6,6 +6,8 @@ variables:
   LC_ALL: "en_US.UTF-8"
 
 before_script:
+  - su -
+  - apt-get install sudo -y
   - sudo gem install bundler && bundle update
 
 lint:
