@@ -12,10 +12,17 @@
 #     - xcode_9-3
 #     - macos_10-13
 
+linter:
+  stage: linter
+  image: ubuntu
+  script:
+    - chmod +x mvnw
+    - ./mvnw spotbugs:spotbugs
+  dependencies:
+    - build
+
 stages:
-  - lint
-  - test
-  - develop
+  - linter
 
 variables:
   LANG: "en_US.UTF-8"
