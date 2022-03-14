@@ -332,16 +332,7 @@ class CardViewController: UIViewController {
         let multiplierY = 1 - min(0.9, swipeYDistance / maxSwipeYDistance)
         let fadeCoef = 0.8
         
-        if gesture.state == .began {
-            
-        } else if gesture.state == .ended {
-
-        } else {
-            posterBottomFade.locations = [0.4, NSNumber( value: min(fadeCoef, max(fadeCoef * multiplierY, 0.6)) ), 1]
-        }
-        
-        
-        
+        posterBottomFade.locations = [0.4, NSNumber( value: min(fadeCoef, max(fadeCoef * multiplierY, 0.6)) ), 1]
     }
     
     
@@ -350,8 +341,8 @@ class CardViewController: UIViewController {
     private func resetSwipeFades() {
         rightBlackFade.locations = [1, 1]
         leftWhiteFade.locations = [0, 0]
-//        likeLable.alpha = 0
-//        dislikeLable.alpha = 0
+        likeLable.alpha = 0
+        dislikeLable.alpha = 0
     }
     
     private func setupViews() {
@@ -471,18 +462,17 @@ class CardViewController: UIViewController {
             movieDescription.bottomAnchor.constraint(equalTo: descriptionScrollableView.bottomAnchor, constant: -16),
         ])
         
-        
-//        view.addSubview(likeLable)
-//        NSLayoutConstraint.activate([
-//            likeLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            likeLable.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-//        ])
-//
-//        view.addSubview(dislikeLable)
-//        NSLayoutConstraint.activate([
-//            dislikeLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            dislikeLable.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-//        ])
+        view.addSubview(likeLable)
+        NSLayoutConstraint.activate([
+            likeLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            likeLable.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+
+        view.addSubview(dislikeLable)
+        NSLayoutConstraint.activate([
+            dislikeLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            dislikeLable.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
     private func toggleDescription() {
