@@ -19,8 +19,7 @@ final class AppCoordinator {
         blueViewController.tabBarItem.title = "Blue"
         blueViewController.tabBarItem.image = .add
     
-        let greenViewController = UIViewController()
-        greenViewController.view.backgroundColor = .green
+        let greenViewController = CardViewController()
         greenViewController.tabBarItem.title = "Green"
         greenViewController.tabBarItem.image = .add
     
