@@ -471,6 +471,7 @@ class CardViewController: UIViewController {
             movieDescription.bottomAnchor.constraint(equalTo: descriptionScrollableView.bottomAnchor, constant: -16),
         ])
         
+        
 //        view.addSubview(likeLable)
 //        NSLayoutConstraint.activate([
 //            likeLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
