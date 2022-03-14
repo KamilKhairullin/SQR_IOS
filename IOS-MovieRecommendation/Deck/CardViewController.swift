@@ -11,31 +11,38 @@ import UIKit
 extension UIColor {
     static var customWhite = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
     static var customBlack = UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
+    static var customBlackSemiTransparent = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
     static var customMiddleWhite = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
     static var customWhiteTransparrent = UIColor(red: 1, green: 1, blue: 1, alpha: 0)
+    static var customYellow = UIColor(red: 0.96, green: 0.98, blue: 0.098, alpha: 1)
 }
-
-struct Movie {
-    let title: String
-    let imageName: String
-    let description: String
-    
-    let rating: Float
-}
-
 
 
 class CardViewController: UIViewController {
     
+    
+    private var screenTitle: UILabel = {
+        let label = UILabel()
+        label.text = "Movies"
+        label.font = .boldSystemFont(ofSize: 24)
+        label.textColor = .customWhite
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
+    
+    
     private let movies = [
-        Movie(title: "Yellow Poster", imageName: "2", description: "Some art with yellow as a main color. There is a girl with mask and smoke coming out from the mask. In addition, it has some japanese and futuristic cyber style", rating: 7.4),
-        Movie(title: "Blue poster", imageName: "1", description: "Late sunset or almost twilight. Picture is taken in some desert. Beautifull blue sky gives some calming tone. Also, there is a man on quadrocycle", rating: 8.1),
-        Movie(title: "Peachy Poster", imageName: "3", description: "Early sunset or golden hour. On the frame, you can see a beach with wonderful ocean waves and a man going to surf", rating: 7.9)
+        Movie(imageURL: "1", title: "Blue Desert", year: 2019, producer: "Bekzhan Talgat", country: "Kazakhstan", ratingIMDB: 8.9, duration: 128, genre: ["Cool", "Calm"], description: "Late sunset or almost twilight. Picture is taken in some desert. Beautifull blue sky gives some calming tone. Also, there is a man on quadrocycle"),
+        Movie(imageURL: "2", title: "Cyber Girl", year: 2077, producer: "Alice Totti", country: "Liberty City", ratingIMDB: 9.1, duration: 153, genre: ["Epic", "Juicy"], description: "Some art with yellow as a main color. There is a girl with mask and smoke coming out from the mask. In addition, it has some japanese and futuristic cyber style"),
+        Movie(imageURL: "3", title: "Peachy Beach", year: 2007, producer: "Bauyrzhan Saduakassov", country: "California", ratingIMDB: 9.0, duration: 137, genre: ["Nastolgia", "Wonderful"], description: "Early sunset or golden hour. On the frame, you can see a beach with wonderful ocean waves and a man going to surf"),
     ]
     
     private var currentPosterIdx = -1
-    
     private var initialTouchPoint = CGPoint(x: 0, y: 0)
+    private var isDescriptionHidden = false
     
     private var moviePosterContainer: UIView = {
         let viewContainer = UIView()
@@ -66,20 +73,70 @@ class CardViewController: UIViewController {
         return gl
     }()
     
+    private var movieRating: UILabel = {
+        let label = UILabel()
+        label.text = "0.0"
+        label.font = UIFont(name: "Times New Roman", size: 36)
+        label.textColor = .customYellow
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private var movieTitle: UILabel = {
         let label = UILabel()
         label.text = "Movie Title"
-        label.font = UIFont.boldSystemFont(ofSize: 28)
+        label.font = UIFont(name: "Times New Roman", size: 36)
         label.textColor = .customBlack
         
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private var movieRating: UILabel = {
+    private var movieYear: UILabel = {
         let label = UILabel()
-        label.text = "0.0"
-        label.font = UIFont.systemFont(ofSize: 22)
+        label.text = "2022"
+        label.font = UIFont(name: "Times New Roman", size: 24)
+        label.textColor = .customBlack
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private var movieProducer: UILabel = {
+        var label = UILabel()
+        label.text = "Producer"
+        label.font = UIFont(name: "Times New Roman", size: 22)
+        label.textColor = .customBlack
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private var movieProducerName: UILabel = {
+        var label = UILabel()
+        label.text = "Producer Name"
+        label.font = UIFont(name: "Times New Roman", size: 22)
+        label.textColor = .customBlack
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private var movieCountry: UILabel = {
+        var label = UILabel()
+        label.text = "Country"
+        label.font = UIFont(name: "Times New Roman", size: 22)
+        label.textColor = .customBlack
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private var movieCountryName: UILabel = {
+        var label = UILabel()
+        label.text = "Country Name"
+        label.font = UIFont(name: "Times New Roman", size: 22)
         label.textColor = .customBlack
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -101,11 +158,12 @@ class CardViewController: UIViewController {
     private var mainTopFade: CAGradientLayer = {
         let gl = CAGradientLayer()
         let colorTop = UIColor.black.cgColor
+        let colorMid = UIColor.customBlackSemiTransparent.cgColor
         let colorBottom = UIColor.clear.cgColor
         
         gl.type = .axial
         gl.colors = [colorTop, colorBottom]
-        gl.locations = [0.05, 0.15]
+        gl.locations = [0, 0.1]
         
         return gl
     }()
@@ -144,11 +202,14 @@ class CardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        print(UIFont.familyNames)
         view.backgroundColor = .black
+        toggleDescription()
         
         nextPoster()
         setupViews()
         
+        moviePosterContainer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         moviePosterContainer.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
     }
     
@@ -170,14 +231,22 @@ class CardViewController: UIViewController {
             duration: 0.5,
             options: .transitionCrossDissolve,
             animations: { [self] in
-                moviePoster.image = UIImage(named: movies[currentPosterIdx].imageName)
+                moviePoster.image = UIImage(named: movies[currentPosterIdx].imageURL)
             },
             completion: nil
         )
         
         movieTitle.text = movies[currentPosterIdx].title
-        movieRating.text = String(movies[currentPosterIdx].rating)
+        movieYear.text = String(movies[currentPosterIdx].year)
+        movieProducerName.text = movies[currentPosterIdx].producer
+        movieCountryName.text = movies[currentPosterIdx].country
+        movieRating.text = String(movies[currentPosterIdx].ratingIMDB)
+        
         movieDescription.text = movies[currentPosterIdx].description
+    }
+    
+    @objc private func handleTap(gesture: UITapGestureRecognizer) {
+        toggleDescription()
     }
     
     @objc private func handlePan(gesture: UIPanGestureRecognizer) {
@@ -215,7 +284,7 @@ class CardViewController: UIViewController {
     private func setupViews() {
         view.addSubview(moviePosterContainer)
         NSLayoutConstraint.activate([
-            moviePosterContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -48),
+            moviePosterContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             moviePosterContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
             moviePosterContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             moviePosterContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
@@ -231,17 +300,18 @@ class CardViewController: UIViewController {
     }
     
     private func setupLayers() {
-        posterBottomFade.frame = moviePosterContainer.bounds
-        moviePosterContainer.layer.addSublayer(posterBottomFade)
-        
-        mainTopFade.frame = view.bounds
-        view.layer.addSublayer(mainTopFade)
-        
         leftWhiteFade.frame = view.bounds
         view.layer.addSublayer(leftWhiteFade)
 
         rightBlackFade.frame = view.bounds
         view.layer.addSublayer(rightBlackFade)
+        
+        
+        posterBottomFade.frame = moviePosterContainer.bounds
+        moviePosterContainer.layer.addSublayer(posterBottomFade)
+        
+        mainTopFade.frame = moviePosterContainer.bounds
+        moviePosterContainer.layer.addSublayer(mainTopFade)
         
         let cornerRad = 25.0
         moviePoster.layer.cornerRadius = cornerRad
@@ -249,10 +319,15 @@ class CardViewController: UIViewController {
         
         posterBottomFade.cornerRadius = cornerRad
         moviePosterContainer.layer.cornerRadius = cornerRad
-        
     }
     
     private func setupTitles() {
+        moviePosterContainer.addSubview(screenTitle)
+        NSLayoutConstraint.activate([
+            screenTitle.topAnchor.constraint(equalTo: moviePosterContainer.topAnchor, constant: -screenTitle.font.pointSize * 1.5),
+            screenTitle.centerXAnchor.constraint(equalTo: moviePosterContainer.centerXAnchor)
+        ])
+        
         moviePosterContainer.addSubview(movieTitle)
         NSLayoutConstraint.activate([
             movieTitle.bottomAnchor.constraint(equalTo: moviePosterContainer.bottomAnchor, constant: -128),
@@ -261,17 +336,63 @@ class CardViewController: UIViewController {
         
         moviePosterContainer.addSubview(movieRating)
         NSLayoutConstraint.activate([
-            movieRating.bottomAnchor.constraint(equalTo: movieTitle.bottomAnchor),
-            movieRating.trailingAnchor.constraint(equalTo: moviePosterContainer.trailingAnchor, constant: -16)
+            movieRating.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            movieRating.leadingAnchor.constraint(equalTo: movieTitle.leadingAnchor)
         ])
         
-        moviePosterContainer.addSubview(movieDescription)
+        moviePosterContainer.addSubview(movieYear)
         NSLayoutConstraint.activate([
-            movieDescription.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 32),
-            movieDescription.leadingAnchor.constraint(equalTo: movieTitle.leadingAnchor),
-            movieDescription.trailingAnchor.constraint(equalTo: movieRating.trailingAnchor),
-            movieDescription.bottomAnchor.constraint(equalTo: moviePosterContainer.bottomAnchor, constant: -16)
+            movieYear.bottomAnchor.constraint(equalTo: movieTitle.bottomAnchor),
+            movieYear.trailingAnchor.constraint(equalTo: moviePosterContainer.trailingAnchor, constant: -16)
         ])
+        
+        moviePosterContainer.addSubview(movieProducer)
+        NSLayoutConstraint.activate([
+            movieProducer.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 32),
+            movieProducer.leadingAnchor.constraint(equalTo: movieTitle.leadingAnchor, constant: 0)
+        ])
+        
+        moviePosterContainer.addSubview(movieCountry)
+        NSLayoutConstraint.activate([
+            movieCountry.topAnchor.constraint(equalTo: movieProducer.bottomAnchor, constant: 8),
+            movieCountry.leadingAnchor.constraint(equalTo: movieProducer.leadingAnchor, constant: 0)
+        ])
+        
+        moviePosterContainer.addSubview(movieProducerName)
+        NSLayoutConstraint.activate([
+            movieProducerName.topAnchor.constraint(equalTo: movieYear.bottomAnchor, constant: 32),
+            movieProducerName.trailingAnchor.constraint(equalTo: movieYear.trailingAnchor, constant: 0)
+        ])
+        
+        moviePosterContainer.addSubview(movieCountryName)
+        NSLayoutConstraint.activate([
+            movieCountryName.topAnchor.constraint(equalTo: movieProducerName.bottomAnchor, constant: 8),
+            movieCountryName.trailingAnchor.constraint(equalTo: movieProducerName.trailingAnchor, constant: 0)
+        ])
+        
+//        moviePosterContainer.addSubview(movieDescription)
+//        NSLayoutConstraint.activate([
+//            movieDescription.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 32),
+//            movieDescription.leadingAnchor.constraint(equalTo: movieTitle.leadingAnchor),
+//            movieDescription.trailingAnchor.constraint(equalTo: moviePosterContainer.trailingAnchor, constant: -16),
+//            movieDescription.bottomAnchor.constraint(equalTo: moviePosterContainer.bottomAnchor, constant: -16)
+//        ])
+    }
+    
+    private func toggleDescription() {
+        isDescriptionHidden.toggle()
+        
+        posterBottomFade.isHidden = isDescriptionHidden
+        
+        movieTitle.isHidden = isDescriptionHidden
+        movieYear.isHidden = isDescriptionHidden
+        movieProducer.isHidden = isDescriptionHidden
+        movieProducerName.isHidden = isDescriptionHidden
+        movieCountry.isHidden = isDescriptionHidden
+        movieCountryName.isHidden = isDescriptionHidden
+        movieRating.isHidden = isDescriptionHidden
+        
+//        movieDescription.text = movies[currentPosterIdx].description
     }
 
 }
