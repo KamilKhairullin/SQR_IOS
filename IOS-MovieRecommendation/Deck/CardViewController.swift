@@ -15,23 +15,9 @@ extension UIColor {
     static var customWhiteTransparrent = UIColor(red: 1, green: 1, blue: 1, alpha: 0)
 }
 
-struct Movie {
-    let title: String
-    let imageName: String
-    let description: String
-    
-    let rating: Float
-}
-
-
-
 class CardViewController: UIViewController {
     
-    private let movies = [
-        Movie(title: "Yellow Poster", imageName: "2", description: "Some art with yellow as a main color. There is a girl with mask and smoke coming out from the mask. In addition, it has some japanese and futuristic cyber style", rating: 7.4),
-        Movie(title: "Blue poster", imageName: "1", description: "Late sunset or almost twilight. Picture is taken in some desert. Beautifull blue sky gives some calming tone. Also, there is a man on quadrocycle", rating: 8.1),
-        Movie(title: "Peachy Poster", imageName: "3", description: "Early sunset or golden hour. On the frame, you can see a beach with wonderful ocean waves and a man going to surf", rating: 7.9)
-    ]
+    private let network = MockNetworkService(networkClient: nil)
     
     private var currentPosterIdx = -1
     
@@ -165,19 +151,30 @@ class CardViewController: UIViewController {
     @objc private func nextPoster() {
         currentPosterIdx = (currentPosterIdx + 1) % 3
         
-        UIView.transition(
-            with: moviePoster,
-            duration: 0.5,
-            options: .transitionCrossDissolve,
-            animations: { [self] in
-                moviePoster.image = UIImage(named: movies[currentPosterIdx].imageName)
-            },
-            completion: nil
-        )
-        
-        movieTitle.text = movies[currentPosterIdx].title
-        movieRating.text = String(movies[currentPosterIdx].rating)
-        movieDescription.text = movies[currentPosterIdx].description
+        network.getNextRecommendation(for: 1) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            switch result {
+            case .success(let movie):
+                UIView.transition(
+                    with: self.moviePoster,
+                    duration: 0.5,
+                    options: .transitionCrossDissolve,
+                    animations: { [self] in
+                        let url = URL(string: movie.posterURL ?? "") ?? URL(fileURLWithPath: "1")
+                        self.downloadImage(from: url)
+                    },
+                    completion: nil
+                )
+                
+                self.movieTitle.text = movie.title
+                self.movieRating.text = String(movie.rating ?? 0.0)
+                self.movieDescription.text = movie.description
+            case .failure:
+                break
+            }
+        }
     }
     
     @objc private func handlePan(gesture: UIPanGestureRecognizer) {
@@ -273,6 +270,18 @@ class CardViewController: UIViewController {
             movieDescription.bottomAnchor.constraint(equalTo: moviePosterContainer.bottomAnchor, constant: -16)
         ])
     }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
 
+    func downloadImage(from url: URL) {
+        var image: UIImage?
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil, self == self else { return }
+            DispatchQueue.main.async() { [weak self] in
+                self?.moviePoster.image = UIImage(data: data)
+            }
+        }
+    }
 }
-
