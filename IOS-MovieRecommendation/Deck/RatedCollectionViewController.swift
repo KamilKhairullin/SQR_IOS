@@ -10,13 +10,13 @@ import UIKit
 
 
 
-protocol LikedCollectionDelegate: AnyObject {
+protocol RatedCollectionDelegate: AnyObject {
     func addMovieToCollection(movie: Movie)
     func getLikedMovieAmount() -> Int
 }
 
 
-class LikedCollectionViewController: UIViewController {
+class RatedCollectionViewController: UIViewController {
     
     private var movieCollection: [Movie]
     
@@ -65,7 +65,7 @@ class LikedCollectionViewController: UIViewController {
 
 
 
-extension LikedCollectionViewController: LikedCollectionDelegate {
+extension RatedCollectionViewController: RatedCollectionDelegate {
     func addMovieToCollection(movie: Movie) {
         movieCollection.append(movie)
     }

@@ -18,15 +18,15 @@ final class AppCoordinator {
         cardView.tabBarItem.image = .add
         
         
-        let likedCollectionView = LikedCollectionViewController()
-        likedCollectionView.tabBarItem.title = "Liked"
-        likedCollectionView.tabBarItem.image = .add
+        let ratedCollectionView = RatedCollectionViewController()
+        ratedCollectionView.tabBarItem.title = "Liked"
+        ratedCollectionView.tabBarItem.image = .add
         
-        cardView.moviewCollectionDelegate = likedCollectionView
+        cardView.moviewCollectionDelegate = ratedCollectionView
     
         tapBarController.setViewControllers([
             UINavigationController(rootViewController: cardView),
-            UINavigationController(rootViewController: likedCollectionView),
+            UINavigationController(rootViewController: ratedCollectionView),
 //            UINavigationController(rootViewController: blueViewController)
         ], animated: true)
     }

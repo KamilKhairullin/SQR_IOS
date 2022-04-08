@@ -11,7 +11,7 @@ import UIKit
 
 class CardViewController: UIViewController {
     
-    public var moviewCollectionDelegate: LikedCollectionDelegate?
+    public var moviewCollectionDelegate: RatedCollectionDelegate?
     
     private var screenTitle: UILabel = {
         let label = UILabel()
