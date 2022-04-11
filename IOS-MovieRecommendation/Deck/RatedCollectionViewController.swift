@@ -40,7 +40,7 @@ class RatedCollectionViewController: UIViewController {
     
     private var mainContainerTopFadeMask: CAGradientLayer = {
         let gl = CAGradientLayer()
-        let colorTop = UIColor.clear.cgColor
+        let colorTop = ColorPalette.customBlackTransparent.cgColor
         let colorBottom = UIColor.black.cgColor
 
         gl.colors = [colorTop, colorBottom]
@@ -90,17 +90,14 @@ class RatedCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navigationController?.navigationBar.isTranslucent = true
         
-        view.backgroundColor = .systemPurple
+        view.backgroundColor = .black
         
         setupViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-//        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewDidLayoutSubviews() {
