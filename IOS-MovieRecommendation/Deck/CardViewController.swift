@@ -176,9 +176,8 @@ class CardViewController: UIViewController {
     
     private var mainTopFade: CAGradientLayer = {
         let gl = CAGradientLayer()
-        let colorTop = ColorPalette.customBlack.cgColor
-        let colorMid = ColorPalette.customBlackSemiTransparent.cgColor
-        let colorBottom = UIColor.clear.cgColor
+        let colorTop = UIColor.black.cgColor
+        let colorBottom = ColorPalette.customBlackTransparent.cgColor
         
         gl.type = .axial
         gl.colors = [colorTop, colorBottom]

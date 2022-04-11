@@ -13,6 +13,14 @@ class RatedMovieCardView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        
+        backgroundColor = .systemOrange
+        let cornerRadius = 25.0
+        layer.cornerRadius = cornerRadius
+        
+        
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init?(coder: NSCoder) {
