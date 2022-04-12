@@ -1,3 +1,5 @@
+import UIKit
+
 struct Movie: Codable {
     let id: String?
     let title: String?
@@ -5,4 +7,9 @@ struct Movie: Codable {
     let description: String?
     let rating: Float?
     let ratingBorder: Float?
+}
+
+struct MovieCard {
+    let movie: Movie
+    let image: UIImage
 }

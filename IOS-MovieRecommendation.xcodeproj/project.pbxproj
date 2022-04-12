@@ -10,6 +10,8 @@
 		074A737A27DE1E7C005F18B8 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074A737927DE1E7C005F18B8 /* MovieModel.swift */; };
 		07A9A037280096B60092A616 /* blacknote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A9A036280096B60092A616 /* blacknote.swift */; };
 		07A9A0392800976A0092A616 /* RatedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A9A0382800976A0092A616 /* RatedCollectionViewController.swift */; };
+		07C610CE2805980800338E77 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C610CD2805980800338E77 /* NetworkService.swift */; };
+		07C610D02805991100338E77 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 07C610CF2805991000338E77 /* mock.json */; };
 		8E20432427DBDB150031EF2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20432327DBDB150031EF2C /* AppDelegate.swift */; };
 		8E20432B27DBDB150031EF2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E20432927DBDB150031EF2C /* Main.storyboard */; };
 		8E20432D27DBDB160031EF2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E20432C27DBDB160031EF2C /* Assets.xcassets */; };
@@ -22,7 +24,6 @@
 		8E4CD69027DD14D000B36ADF /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4CD68F27DD14D000B36ADF /* NetworkError.swift */; };
 		8E4CD69327DD15A900B36ADF /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4CD69227DD15A900B36ADF /* NetworkClient.swift */; };
 		8E4CD69D27DD18ED00B36ADF /* MockNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4CD69C27DD18ED00B36ADF /* MockNetworkClient.swift */; };
-		8E4CD6A127DD211700B36ADF /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E4CD6A027DD211700B36ADF /* mock.json */; };
 		8E8D23BE27DCE49D00A73C57 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D23BD27DCE49D00A73C57 /* ColorPalette.swift */; };
 		8E8D23C027DCE91800A73C57 /* AppCoordinator .swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D23BF27DCE91800A73C57 /* AppCoordinator .swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,8 @@
 		074A737927DE1E7C005F18B8 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		07A9A036280096B60092A616 /* blacknote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blacknote.swift; sourceTree = "<group>"; };
 		07A9A0382800976A0092A616 /* RatedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatedCollectionViewController.swift; sourceTree = "<group>"; };
+		07C610CD2805980800338E77 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		07C610CF2805991000338E77 /* mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mock.json; sourceTree = "<group>"; };
 		8E20432027DBDB150031EF2C /* IOS-MovieRecommendation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-MovieRecommendation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E20432327DBDB150031EF2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E20432A27DBDB150031EF2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -64,7 +67,6 @@
 		8E4CD68F27DD14D000B36ADF /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		8E4CD69227DD15A900B36ADF /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		8E4CD69C27DD18ED00B36ADF /* MockNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkClient.swift; sourceTree = "<group>"; };
-		8E4CD6A027DD211700B36ADF /* mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mock.json; sourceTree = "<group>"; };
 		8E8D23BD27DCE49D00A73C57 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		8E8D23BF27DCE91800A73C57 /* AppCoordinator .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppCoordinator .swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,12 +96,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07C610CC2805968200338E77 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		8E1697DA27DD0F27005FD4F6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				07C610CD2805980800338E77 /* NetworkService.swift */,
 				8E4CD69B27DD18CB00B36ADF /* MockNetworkService */,
 				8E4CD68C27DD13DF00B36ADF /* Model */,
-				8E1697DB27DD0F36005FD4F6 /* NetworkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -111,6 +120,7 @@
 				8E20433927DBDB160031EF2C /* IOS-MovieRecommendationTests */,
 				8E20434327DBDB160031EF2C /* IOS-MovieRecommendationUITests */,
 				8E20432127DBDB150031EF2C /* Products */,
+				07C610CC2805968200338E77 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,6 +137,7 @@
 		8E20432227DBDB150031EF2C /* IOS-MovieRecommendation */ = {
 			isa = PBXGroup;
 			children = (
+				07C610CF2805991000338E77 /* mock.json */,
 				8E4CD69127DD159800B36ADF /* Networking */,
 				8E1697DA27DD0F27005FD4F6 /* Services */,
 				8E20432327DBDB150031EF2C /* AppDelegate.swift */,
@@ -309,7 +320,7 @@
 				8E20433027DBDB160031EF2C /* LaunchScreen.storyboard in Resources */,
 				8E20432D27DBDB160031EF2C /* Assets.xcassets in Resources */,
 				8E20432B27DBDB150031EF2C /* Main.storyboard in Resources */,
-				8E4CD6A127DD211700B36ADF /* mock.json in Resources */,
+				07C610D02805991100338E77 /* mock.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +355,7 @@
 				07A9A037280096B60092A616 /* blacknote.swift in Sources */,
 				8E20435527DBDFA20031EF2C /* CardViewController.swift in Sources */,
 				8E8D23BE27DCE49D00A73C57 /* ColorPalette.swift in Sources */,
+				07C610CE2805980800338E77 /* NetworkService.swift in Sources */,
 				8E4CD69327DD15A900B36ADF /* NetworkClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

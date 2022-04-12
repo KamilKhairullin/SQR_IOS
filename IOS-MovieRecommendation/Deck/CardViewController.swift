@@ -11,6 +11,8 @@ import UIKit
 
 class CardViewController: UIViewController {
     
+    private let network = MockNetworkService(networkClient: nil)
+    
     public var moviewCollectionDelegate: RatedCollectionDelegate?
     
     private var screenTitle: UILabel = {
@@ -23,11 +25,14 @@ class CardViewController: UIViewController {
         return label
     }()
     
+    private var currentMovie = Movie(id: "0", title: "Title", posterURL: "URL", description: "Description", rating: 0.0, ratingBorder: 0.0)
+    private var currentMovieImage = UIImage(named: "Leon")
+    
     
     private let movies = [
-        Movie(imageURL: "Leon", title: "Leon", year: 1994, producer: "Luc Besson", country: "France", ratingIMDB: 8.9, duration: 128, genre: ["Cool", "Calm"], description: "When 12-year-old Mathilda's family is killed, her neighbour Leon, who is a professional assassin, reluctantly takes her under his wing and teaches her the secrets of his trade"),
-        Movie(imageURL: "Matrix", title: "Matrix", year: 1999, producer: "Wachowski brothers", country: "USA", ratingIMDB: 9.1, duration: 153, genre: ["Epic", "Juicy"], description: "Thomas Anderson, a computer programmer, is led to fight an underground war against powerful computers who have constructed his entire reality with a system called the Matrix"),
-        Movie(imageURL: "Avatar", title: "Avatar", year: 2009, producer: "James Cameron", country: "USA", ratingIMDB: 9.0, duration: 137, genre: ["Nastolgia", "Wonderful"], description: "Jake, who is paraplegic, replaces his twin on the Na'vi inhabited Pandora for a corporate mission. After the natives accept him as one of their own, he must decide where his loyalties lie"),
+        Moviee(imageURL: "Leon", title: "Leon", year: 1994, producer: "Luc Besson", country: "France", ratingIMDB: 8.9, duration: 128, genre: ["Cool", "Calm"], description: "When 12-year-old Mathilda's family is killed, her neighbour Leon, who is a professional assassin, reluctantly takes her under his wing and teaches her the secrets of his trade"),
+        Moviee(imageURL: "Matrix", title: "Matrix", year: 1999, producer: "Wachowski brothers", country: "USA", ratingIMDB: 9.1, duration: 153, genre: ["Epic", "Juicy"], description: "Thomas Anderson, a computer programmer, is led to fight an underground war against powerful computers who have constructed his entire reality with a system called the Matrix"),
+        Moviee(imageURL: "Avatar", title: "Avatar", year: 2009, producer: "James Cameron", country: "USA", ratingIMDB: 9.0, duration: 137, genre: ["Nastolgia", "Wonderful"], description: "Jake, who is paraplegic, replaces his twin on the Na'vi inhabited Pandora for a corporate mission. After the natives accept him as one of their own, he must decide where his loyalties lie"),
     ]
     
     private var currentPosterIdx = -1
@@ -318,7 +323,7 @@ class CardViewController: UIViewController {
             return
         }
         
-        moviewCollectionDelegate.addMovieToCollection(movie: movies[currentPosterIdx])
+        moviewCollectionDelegate.addMovieToCollection(movie: currentMovie, image: currentMovieImage!)
         
         nextPoster()
     }
@@ -330,26 +335,56 @@ class CardViewController: UIViewController {
     private func nextPoster() {
         currentPosterIdx = (currentPosterIdx + 1) % 3
         
-        UIView.transition(
-            with: moviePoster,
-            duration: 0.5,
-            options: .transitionCrossDissolve,
-            animations: { [self] in
-                moviePoster.image = UIImage(named: movies[currentPosterIdx].imageURL)
-            },
-            completion: nil
-        )
+        network.getNextRecommendation(for: 1) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            switch result {
+            case .success(let movie):
+                self.currentMovie = movie
+                UIView.transition(
+                    with: self.moviePoster,
+                    duration: 0.5,
+                    options: .transitionCrossDissolve,
+                    animations: { [self] in
+                        let url = URL(string: movie.posterURL ?? "") ?? URL(fileURLWithPath: "1")
+                        self.downloadImage(from: url)
+                    },
+                    completion: nil
+                )
+       
+                self.movieTitle.text = movie.title
+                self.movieRating.text = String(movie.rating ?? 0.0)
+                self.movieDescription.text = movie.description
+                
+                self.descriptionScrollableView.contentOffset = CGPoint.zero
+                self.posterBottomFade.locations = [0.4, 0.8, 1]
+            case .failure:
+                break
+            }
+        }
         
-        movieTitle.text = movies[currentPosterIdx].title
-        movieYear.text = String(movies[currentPosterIdx].year)
-        movieProducerName.text = movies[currentPosterIdx].producer
-        movieCountryName.text = movies[currentPosterIdx].country
-        movieRating.text = String(movies[currentPosterIdx].ratingIMDB)
-        
-        movieDescription.text = movies[currentPosterIdx].description
-        
-        descriptionScrollableView.contentOffset = CGPoint.zero
-        posterBottomFade.locations = [0.4, 0.8, 1]
+//
+//        UIView.transition(
+//            with: moviePoster,
+//            duration: 0.5,
+//            options: .transitionCrossDissolve,
+//            animations: { [self] in
+//                moviePoster.image = UIImage(named: movies[currentPosterIdx].imageURL)
+//            },
+//            completion: nil
+//        )
+//
+//        movieTitle.text = movies[currentPosterIdx].title
+//        movieYear.text = String(movies[currentPosterIdx].year)
+//        movieProducerName.text = movies[currentPosterIdx].producer
+//        movieCountryName.text = movies[currentPosterIdx].country
+//        movieRating.text = String(movies[currentPosterIdx].ratingIMDB)
+//
+//        movieDescription.text = movies[currentPosterIdx].description
+//
+//        descriptionScrollableView.contentOffset = CGPoint.zero
+//        posterBottomFade.locations = [0.4, 0.8, 1]
     }
     
     private func resetSwipeFades() {
@@ -512,12 +547,12 @@ class CardViewController: UIViewController {
     }
 
     func downloadImage(from url: URL) {
-        var image: UIImage?
         getData(from: url) { data, response, error in
             guard let data = data, error == nil, self == self else { return }
             DispatchQueue.main.async() { [weak self] in
                 self?.moviePoster.image = UIImage(data: data)
             }
+            self.currentMovieImage = UIImage(data: data)
         }
     }
 }

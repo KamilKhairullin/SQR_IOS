@@ -8,9 +8,9 @@
 import Foundation
 
 
-struct Movie {
+struct Moviee {
     let imageURL: String
-    
+
     let title: String
     let year: Int
     let producer: String
@@ -18,7 +18,7 @@ struct Movie {
     let ratingIMDB: Float
     let duration: Int
 //    let ageLimit: Int
-    
+
     let genre: [String]
     let description: String
 }

@@ -11,14 +11,14 @@ import UIKit
 
 
 protocol RatedCollectionDelegate: AnyObject {
-    func addMovieToCollection(movie: Movie)
+    func addMovieToCollection(movie: Movie, image: UIImage)
     func getLikedMovieAmount() -> Int
 }
 
 
 class RatedCollectionViewController: UIViewController {
     
-    private var movieCollection: [Movie]
+    private var movieCollection: [MovieCard]
     
     private var screenTitle: UILabel = {
         let label = UILabel()
@@ -72,7 +72,7 @@ class RatedCollectionViewController: UIViewController {
     
 // MARK: -- override functions
     init(){
-        self.movieCollection = [Movie]()
+        self.movieCollection = [MovieCard]()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -162,7 +162,7 @@ class RatedCollectionViewController: UIViewController {
                 mp.contentMode = .scaleAspectFill
                 mp.clipsToBounds = true
                 mp.layer.cornerRadius = 25.0
-                mp.image = UIImage(named: movieCollection[i].imageURL)
+                mp.image = movieCollection[i].image
                 mp.translatesAutoresizingMaskIntoConstraints = false
                 return mp
             }()
@@ -243,8 +243,8 @@ class RatedCollectionViewController: UIViewController {
             ])
             
             if !movieCollection.isEmpty {
-                mt.text = movieCollection[i].title
-                r.text = String(movieCollection[i].ratingIMDB)
+                mt.text = movieCollection[i].movie.title
+                r.text = String(movieCollection[i].movie.rating!)
             }
             
             i += 1
@@ -256,12 +256,12 @@ class RatedCollectionViewController: UIViewController {
 
 
 extension RatedCollectionViewController: RatedCollectionDelegate {
-    func addMovieToCollection(movie: Movie) {
-        movieCollection.append(movie)
+    func addMovieToCollection(movie: Movie, image: UIImage) {
+        movieCollection.append(MovieCard(movie: movie, image: image))
         
-        DispatchQueue.global().async {
-            self.movieCollection.sort { $0.ratingIMDB > $1.ratingIMDB }
-        }
+//        DispatchQueue.global().async {
+//            self.movieCollection.sort { $0.movie.rating! > $1.movie.rating! }
+//        }
         
     }
     
