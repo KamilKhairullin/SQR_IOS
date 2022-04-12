@@ -506,7 +506,20 @@ class CardViewController: UIViewController {
         
         movieDescription.isHidden = isDescriptionHidden
     }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
 
+    func downloadImage(from url: URL) {
+        var image: UIImage?
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil, self == self else { return }
+            DispatchQueue.main.async() { [weak self] in
+                self?.moviePoster.image = UIImage(data: data)
+            }
+        }
+    }
 }
 
 extension CardViewController: UIGestureRecognizerDelegate {
