@@ -11,4 +11,7 @@ class ColorPalette {
     static var customWhiteTransparrent = UIColor(red: 1, green: 1, blue: 1, alpha: 0)
     static var customYellow = UIColor(red: 0.96, green: 0.98, blue: 0.098, alpha: 1)
     
+    static var ratedFadeTop = UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 0.5)
+    static var ratedFadeMid = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 0.5)
+    static var ratedFadeBottom = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 0.75)
 }

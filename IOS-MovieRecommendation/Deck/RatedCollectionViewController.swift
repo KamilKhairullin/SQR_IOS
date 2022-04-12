@@ -20,7 +20,6 @@ class RatedCollectionViewController: UIViewController {
     
     private var movieCollection: [Movie]
     
-    
     private var screenTitle: UILabel = {
         let label = UILabel()
         label.text = "Ratings"
@@ -51,13 +50,11 @@ class RatedCollectionViewController: UIViewController {
     
     private var cardsContainerScrollView: UIScrollView = {
         let sv = UIScrollView()
-        sv.backgroundColor = .clear
+        sv.backgroundColor = ColorPalette.customBlackTransparent
         
         sv.translatesAutoresizingMaskIntoConstraints = false
         return sv
     }()
-    
-    
     
     private var mainTopFade: CAGradientLayer = {
         let gl = CAGradientLayer()
@@ -73,14 +70,9 @@ class RatedCollectionViewController: UIViewController {
     }()
     
     
-    
-    
-    
 // MARK: -- override functions
     init(){
-        
         self.movieCollection = [Movie]()
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -92,12 +84,12 @@ class RatedCollectionViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .black
-        
         setupViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupCards()
     }
     
     override func viewDidLayoutSubviews() {
@@ -112,7 +104,6 @@ class RatedCollectionViewController: UIViewController {
 // MARK: -- functions
     
     private func setupViews() {
-        
         view.addSubview(mainContainer)
         NSLayoutConstraint.activate([
             mainContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -129,24 +120,87 @@ class RatedCollectionViewController: UIViewController {
             cardsContainerScrollView.bottomAnchor.constraint(equalTo: mainContainer.bottomAnchor)
         ])
         
-        
-        
         setupCards()
+    }
+    
+    private func setupCards() {
+        if movieCollection.isEmpty { return }
+        cardsContainerScrollView.subviews.forEach({ $0.removeFromSuperview() })
         
-        
+        var prevTmp = UIView()
+        for i in 0..<movieCollection.count {
+            let tmp = UIView()
+            tmp.translatesAutoresizingMaskIntoConstraints = false
+            tmp.backgroundColor = .systemCyan
+            tmp.layer.cornerRadius = 25.0
+            
+            cardsContainerScrollView.addSubview(tmp)
+            NSLayoutConstraint.activate([
+                tmp.leadingAnchor.constraint(equalTo: cardsContainerScrollView.leadingAnchor, constant: 16),
+                tmp.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                tmp.heightAnchor.constraint(equalToConstant: 95)
+            ])
+
+            if i == 0 {
+                NSLayoutConstraint.activate([
+                    tmp.topAnchor.constraint(equalTo: cardsContainerScrollView.topAnchor, constant: 32),
+                ])
+            } else {
+                NSLayoutConstraint.activate([
+                    tmp.topAnchor.constraint(equalTo: prevTmp.bottomAnchor, constant: 16),
+                ])
+                if i == movieCollection.count - 1 {
+                    NSLayoutConstraint.activate([
+                        tmp.bottomAnchor.constraint(equalTo: cardsContainerScrollView.bottomAnchor, constant: -16)
+                    ])
+                }
+            }
+            prevTmp = tmp
+            
+            let mp: UIImageView = {
+                let mp = UIImageView()
+                mp.contentMode = .scaleAspectFill
+                mp.clipsToBounds = true
+                mp.layer.cornerRadius = 25.0
+                mp.image = UIImage(named: movieCollection[i].imageURL)
+                mp.translatesAutoresizingMaskIntoConstraints = false
+                return mp
+            }()
+            
+            tmp.addSubview(mp)
+            NSLayoutConstraint.activate([
+                mp.topAnchor.constraint(equalTo: tmp.topAnchor),
+                mp.leadingAnchor.constraint(equalTo: tmp.leadingAnchor),
+                mp.trailingAnchor.constraint(equalTo: tmp.trailingAnchor),
+                mp.bottomAnchor.constraint(equalTo: tmp.bottomAnchor)
+            ])
+        }
         
     }
     
-    
     private func setupLayers() {
-//        mainTopFade.frame = view.bounds
-//        view.layer.addSublayer(mainTopFade)
-        
         mainContainerTopFadeMask.frame = CGRect(x: 0, y: 0, width: mainContainer.bounds.width, height: view.safeAreaLayoutGuide.layoutFrame.height)
         mainContainer.layer.mask = mainContainerTopFadeMask
         
+        for sv in cardsContainerScrollView.subviews {
+            let gl: CAGradientLayer = {
+                let gl = CAGradientLayer()
+                let colorTop = ColorPalette.ratedFadeTop.cgColor
+                let colorMid = ColorPalette.ratedFadeMid.cgColor
+                let colorBottom = ColorPalette.ratedFadeBottom.cgColor
+                gl.cornerRadius = 25.0
+                
+                gl.type = .axial
+                gl.colors = [colorTop, colorMid, colorBottom]
+                gl.locations = [0, 0.75, 1]
+                
+                return gl
+            }()
+            
+            gl.frame = CGRect(x: 0, y: 0, width: view.safeAreaLayoutGuide.layoutFrame.width - 32, height: 95)
+            sv.layer.addSublayer(gl)
+        }
     }
-    
     
     private func setupTitels() {
         view.addSubview(screenTitle)
@@ -154,39 +208,47 @@ class RatedCollectionViewController: UIViewController {
             screenTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -screenTitle.font.pointSize * 1.5),
             screenTitle.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
-    }
-    
-    
-    
-    private func setupCards() {
-        let cardHeight = 95.0
-        var prevViewAnchor: UIView = RatedMovieCardView()
-        cardsContainerScrollView.addSubview(prevViewAnchor)
-        NSLayoutConstraint.activate([
-            prevViewAnchor.topAnchor.constraint(equalTo: cardsContainerScrollView.topAnchor, constant: 32),
-            prevViewAnchor.leadingAnchor.constraint(equalTo: cardsContainerScrollView.leadingAnchor, constant: 16),
-            prevViewAnchor.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            prevViewAnchor.heightAnchor.constraint(equalToConstant: cardHeight)
-        ])
         
-        for _ in 1...10 {
-            let exampleCard = RatedMovieCardView()
-            cardsContainerScrollView.addSubview(exampleCard)
+        var i = 0
+        for sv in cardsContainerScrollView.subviews {
+            if i == movieCollection.count { break }
+            
+            let mt: UILabel = {
+                let mt = UILabel()
+                mt.text = "Title"
+                mt.font = UIFont(name: "Times New Roman", size: 36)
+                mt.textColor = ColorPalette.customBlack
+                
+                mt.translatesAutoresizingMaskIntoConstraints = false
+                return mt
+            }()
+            
+            let r: UILabel = {
+                let r = UILabel()
+                r.text = "0.0"
+                r.font = UIFont(name: "Times New Roman", size: 36)
+                r.textColor = ColorPalette.customYellow
+                
+                r.translatesAutoresizingMaskIntoConstraints = false
+                return r
+            }()
+            
+            sv.addSubview(mt)
+            sv.addSubview(r)
             NSLayoutConstraint.activate([
-                exampleCard.topAnchor.constraint(equalTo: prevViewAnchor.bottomAnchor, constant: 16),
-                exampleCard.leadingAnchor.constraint(equalTo: cardsContainerScrollView.leadingAnchor, constant: 16),
-                exampleCard.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                exampleCard.heightAnchor.constraint(equalToConstant: cardHeight)
+                mt.leadingAnchor.constraint(equalTo: sv.leadingAnchor, constant: 16),
+                mt.bottomAnchor.constraint(equalTo: sv.bottomAnchor, constant: -8),
+                r.topAnchor.constraint(equalTo: sv.topAnchor, constant: 8),
+                r.trailingAnchor.constraint(equalTo: sv.trailingAnchor, constant: -16)
             ])
             
-            prevViewAnchor = exampleCard
+            if !movieCollection.isEmpty {
+                mt.text = movieCollection[i].title
+                r.text = String(movieCollection[i].ratingIMDB)
+            }
+            
+            i += 1
         }
-        
-        prevViewAnchor.backgroundColor = .systemCyan
-        NSLayoutConstraint.activate([
-            prevViewAnchor.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            prevViewAnchor.bottomAnchor.constraint(equalTo: cardsContainerScrollView.bottomAnchor, constant: -16)
-        ])
     }
     
 }
@@ -196,6 +258,11 @@ class RatedCollectionViewController: UIViewController {
 extension RatedCollectionViewController: RatedCollectionDelegate {
     func addMovieToCollection(movie: Movie) {
         movieCollection.append(movie)
+        
+        DispatchQueue.global().async {
+            self.movieCollection.sort { $0.ratingIMDB > $1.ratingIMDB }
+        }
+        
     }
     
     func getLikedMovieAmount() -> Int {

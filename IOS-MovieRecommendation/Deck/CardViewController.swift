@@ -317,6 +317,7 @@ class CardViewController: UIViewController {
         guard let moviewCollectionDelegate = moviewCollectionDelegate else {
             return
         }
+        
         moviewCollectionDelegate.addMovieToCollection(movie: movies[currentPosterIdx])
         
         nextPoster()
