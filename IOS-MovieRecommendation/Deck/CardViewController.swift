@@ -11,7 +11,7 @@ import UIKit
 
 class CardViewController: UIViewController {
     
-    public var moviewCollectionDelegate: LikedCollectionDelegate?
+    public var moviewCollectionDelegate: RatedCollectionDelegate?
     
     private var screenTitle: UILabel = {
         let label = UILabel()
@@ -176,9 +176,8 @@ class CardViewController: UIViewController {
     
     private var mainTopFade: CAGradientLayer = {
         let gl = CAGradientLayer()
-        let colorTop = ColorPalette.customBlack.cgColor
-        let colorMid = ColorPalette.customBlackSemiTransparent.cgColor
-        let colorBottom = UIColor.clear.cgColor
+        let colorTop = UIColor.black.cgColor
+        let colorBottom = ColorPalette.customBlackTransparent.cgColor
         
         gl.type = .axial
         gl.colors = [colorTop, colorBottom]
@@ -318,6 +317,7 @@ class CardViewController: UIViewController {
         guard let moviewCollectionDelegate = moviewCollectionDelegate else {
             return
         }
+        
         moviewCollectionDelegate.addMovieToCollection(movie: movies[currentPosterIdx])
         
         nextPoster()

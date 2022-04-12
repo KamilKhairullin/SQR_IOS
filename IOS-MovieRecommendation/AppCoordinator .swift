@@ -7,6 +7,7 @@ final class AppCoordinator {
     let tapBarController: UITabBarController = {
         let view = UITabBarController()
         view.tabBar.backgroundColor = ColorPalette.customBlack
+        
         return view
     }()
 
@@ -14,20 +15,20 @@ final class AppCoordinator {
         
         
         let cardView = CardViewController()
-        cardView.tabBarItem.title = "Cards"
-        cardView.tabBarItem.image = .add
+        cardView.tabBarItem.title = "Movies"
+        cardView.tabBarItem.selectedImage = .add.withTintColor(ColorPalette.customYellow, renderingMode: .alwaysOriginal)
+        cardView.tabBarItem.image = .add.withTintColor(.systemGray)
         
+        let ratedCollectionView = RatedCollectionViewController()
+        ratedCollectionView.tabBarItem.title = "Ratings"
+        ratedCollectionView.tabBarItem.selectedImage = .add.withTintColor(ColorPalette.customYellow, renderingMode: .alwaysOriginal)
+        ratedCollectionView.tabBarItem.image = .add.withTintColor(.systemGray)
         
-        let likedCollectionView = LikedCollectionViewController()
-        likedCollectionView.tabBarItem.title = "Liked"
-        likedCollectionView.tabBarItem.image = .add
+        cardView.moviewCollectionDelegate = ratedCollectionView
         
-        cardView.moviewCollectionDelegate = likedCollectionView
-    
         tapBarController.setViewControllers([
             UINavigationController(rootViewController: cardView),
-            UINavigationController(rootViewController: likedCollectionView),
-//            UINavigationController(rootViewController: blueViewController)
+            UINavigationController(rootViewController: ratedCollectionView),
         ], animated: true)
     }
     
