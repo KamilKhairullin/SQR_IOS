@@ -159,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				8E20435427DBDFA20031EF2C /* CardViewController.swift */,
+				074A737927DE1E7C005F18B8 /* MovieModel.swift */,
 			);
 			path = Deck;
 			sourceTree = "<group>";
@@ -334,6 +335,7 @@
 				8E4CD69027DD14D000B36ADF /* NetworkError.swift in Sources */,
 				8E4CD68E27DD13EC00B36ADF /* Movie.swift in Sources */,
 				8E20432427DBDB150031EF2C /* AppDelegate.swift in Sources */,
+				074A737A27DE1E7C005F18B8 /* MovieModel.swift in Sources */,
 				8E20435527DBDFA20031EF2C /* CardViewController.swift in Sources */,
 				8E8D23BE27DCE49D00A73C57 /* ColorPalette.swift in Sources */,
 				8E4CD69327DD15A900B36ADF /* NetworkClient.swift in Sources */,
