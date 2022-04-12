@@ -11,6 +11,7 @@ import UIKit
 
 class CardViewController: UIViewController {
     
+    public var moviewCollectionDelegate: RatedCollectionDelegate?
     
     private var screenTitle: UILabel = {
         let label = UILabel()
@@ -31,7 +32,7 @@ class CardViewController: UIViewController {
     
     private var currentPosterIdx = -1
     private var initialTouchPoint = CGPoint(x: 0, y: 0)
-    private var isDescriptionHidden = false
+    private var isDescriptionHidden = true
     
     private var moviePosterContainer: UIView = {
         let viewContainer = UIView()
@@ -175,9 +176,8 @@ class CardViewController: UIViewController {
     
     private var mainTopFade: CAGradientLayer = {
         let gl = CAGradientLayer()
-        let colorTop = ColorPalette.customBlack.cgColor
-        let colorMid = ColorPalette.customBlackSemiTransparent.cgColor
-        let colorBottom = UIColor.clear.cgColor
+        let colorTop = UIColor.black.cgColor
+        let colorBottom = ColorPalette.customBlackTransparent.cgColor
         
         gl.type = .axial
         gl.colors = [colorTop, colorBottom]
@@ -267,31 +267,6 @@ class CardViewController: UIViewController {
     
 // MARK: - objc functions
     
-    @objc private func nextPoster() {
-        currentPosterIdx = (currentPosterIdx + 1) % 3
-        
-        UIView.transition(
-            with: moviePoster,
-            duration: 0.5,
-            options: .transitionCrossDissolve,
-            animations: { [self] in
-                moviePoster.image = UIImage(named: movies[currentPosterIdx].imageURL)
-            },
-            completion: nil
-        )
-        
-        movieTitle.text = movies[currentPosterIdx].title
-        movieYear.text = String(movies[currentPosterIdx].year)
-        movieProducerName.text = movies[currentPosterIdx].producer
-        movieCountryName.text = movies[currentPosterIdx].country
-        movieRating.text = String(movies[currentPosterIdx].ratingIMDB)
-        
-        movieDescription.text = movies[currentPosterIdx].description
-        
-        descriptionScrollableView.contentOffset = CGPoint.zero
-        posterBottomFade.locations = [0.4, 0.8, 1]
-    }
-    
     @objc private func handleTap(gesture: UITapGestureRecognizer) {
         toggleDescription()
     }
@@ -306,10 +281,10 @@ class CardViewController: UIViewController {
         if gesture.state == .began {
             initialTouchPoint = gesture.location(in: moviePosterContainer)
         } else if gesture.state == .ended {
-            if multiplierX > 0.5 {
-                nextPoster()
-            } else if multiplierX < -0.5 {
-                nextPoster()
+            if  multiplierX > 0.5 && swipeXDistance > 0 {
+                movieDisliked()
+            } else if multiplierX > 0.5 && swipeXDistance < 0 {
+                movieLiked()
             }
             
             resetSwipeFades()
@@ -337,6 +312,45 @@ class CardViewController: UIViewController {
     
     
  // MARK: - functions
+    
+    private func movieLiked() {
+        guard let moviewCollectionDelegate = moviewCollectionDelegate else {
+            return
+        }
+        
+        moviewCollectionDelegate.addMovieToCollection(movie: movies[currentPosterIdx])
+        
+        nextPoster()
+    }
+    
+    private func movieDisliked() {
+        nextPoster()
+    }
+    
+    private func nextPoster() {
+        currentPosterIdx = (currentPosterIdx + 1) % 3
+        
+        UIView.transition(
+            with: moviePoster,
+            duration: 0.5,
+            options: .transitionCrossDissolve,
+            animations: { [self] in
+                moviePoster.image = UIImage(named: movies[currentPosterIdx].imageURL)
+            },
+            completion: nil
+        )
+        
+        movieTitle.text = movies[currentPosterIdx].title
+        movieYear.text = String(movies[currentPosterIdx].year)
+        movieProducerName.text = movies[currentPosterIdx].producer
+        movieCountryName.text = movies[currentPosterIdx].country
+        movieRating.text = String(movies[currentPosterIdx].ratingIMDB)
+        
+        movieDescription.text = movies[currentPosterIdx].description
+        
+        descriptionScrollableView.contentOffset = CGPoint.zero
+        posterBottomFade.locations = [0.4, 0.8, 1]
+    }
     
     private func resetSwipeFades() {
         rightBlackFade.locations = [1, 1]
