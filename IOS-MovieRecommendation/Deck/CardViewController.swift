@@ -28,14 +28,6 @@ class CardViewController: UIViewController {
     private var currentMovie = Movie(id: "0", title: "Title", posterURL: "URL", description: "Description", rating: 0.0, ratingBorder: 0.0)
     private var currentMovieImage = UIImage(named: "Leon")
     
-    
-//    private let movies = [
-//        Moviee(imageURL: "Leon", title: "Leon", year: 1994, producer: "Luc Besson", country: "France", ratingIMDB: 8.9, duration: 128, genre: ["Cool", "Calm"], description: "When 12-year-old Mathilda's family is killed, her neighbour Leon, who is a professional assassin, reluctantly takes her under his wing and teaches her the secrets of his trade"),
-//        Moviee(imageURL: "Matrix", title: "Matrix", year: 1999, producer: "Wachowski brothers", country: "USA", ratingIMDB: 9.1, duration: 153, genre: ["Epic", "Juicy"], description: "Thomas Anderson, a computer programmer, is led to fight an underground war against powerful computers who have constructed his entire reality with a system called the Matrix"),
-//        Moviee(imageURL: "Avatar", title: "Avatar", year: 2009, producer: "James Cameron", country: "USA", ratingIMDB: 9.0, duration: 137, genre: ["Nastolgia", "Wonderful"], description: "Jake, who is paraplegic, replaces his twin on the Na'vi inhabited Pandora for a corporate mission. After the natives accept him as one of their own, he must decide where his loyalties lie"),
-//    ]
-    
-    private var currentPosterIdx = -1
     private var initialTouchPoint = CGPoint(x: 0, y: 0)
     private var isDescriptionHidden = true
     
@@ -333,8 +325,6 @@ class CardViewController: UIViewController {
     }
     
     private func nextPoster() {
-        currentPosterIdx = (currentPosterIdx + 1) % 3
-        
         network.getNextRecommendation(for: 1) { [weak self] result in
             guard let self = self else {
                 return
