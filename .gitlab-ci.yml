@@ -1,0 +1,30 @@
+stages:
+  - lint
+
+variables:
+  LANG: "en_US.UTF-8"
+  LC_ALL: "en_US.UTF-8"
+
+before_script:
+  - su -
+  - apt-get update
+  - apt-get install rubygems -y
+  - cd IOS-MovieRecommendation/
+  - gem install google-cloud-storage -v 1.15.0
+  - gem uninstall google-cloud-storage -v 1.17.0
+  - gem cleanup
+  - gem install bundler && bundle update
+
+lint:
+  image: ubuntu
+  stage: lint
+  script:
+    - bundle exec fastlane lint
+  only:
+    - branches
+  except:
+    - tags
+  artifacts:
+    paths:
+      - fastlane/swiftlint.html
+  allow_failure: false
