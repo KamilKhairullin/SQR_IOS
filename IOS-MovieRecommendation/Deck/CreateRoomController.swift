@@ -11,6 +11,26 @@ import UIKit
 
 class CreateRoomController: UIViewController {
     
+    let idLabel: UILabel = {
+        let l = UILabel()
+        l.text = "ID:"
+        l.font = .systemFont(ofSize: 56)
+        l.textColor = ColorPalette.customYellow
+        
+        l.translatesAutoresizingMaskIntoConstraints = false
+        return l
+    }()
+    
+    let roomIdLabel: UILabel = {
+        let l = UILabel()
+        l.text = "AB1C23"
+        l.font = .systemFont(ofSize: 56)
+        l.textColor = ColorPalette.customWhite
+        
+        l.translatesAutoresizingMaskIntoConstraints = false
+        return l
+    }()
+    
     let qrImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "qr")
@@ -18,6 +38,26 @@ class CreateRoomController: UIViewController {
         
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
+    }()
+    
+    let partyLabel: UILabel = {
+        let l = UILabel()
+        l.text = "Party:"
+        l.font = .systemFont(ofSize: 36)
+        l.textColor = ColorPalette.customYellow
+        
+        l.translatesAutoresizingMaskIntoConstraints = false
+        return l
+    }()
+    
+    let amountLabel: UILabel = {
+        let l = UILabel()
+        l.text = "12"
+        l.font = .systemFont(ofSize: 36)
+        l.textColor = ColorPalette.customWhite
+        
+        l.translatesAutoresizingMaskIntoConstraints = false
+        return l
     }()
     
     let startButton: UIButton = {
@@ -72,6 +112,7 @@ class CreateRoomController: UIViewController {
 // MARK: -- func
     
     private func setupViews() {
+        
         view.addSubview(qrImageView)
         NSLayoutConstraint.activate([
             qrImageView.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 32),
@@ -80,9 +121,29 @@ class CreateRoomController: UIViewController {
             qrImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -(view.safeAreaLayoutGuide.layoutFrame.width - 32)/8)
         ])
         
+        view.addSubview(idLabel)
+        view.addSubview(roomIdLabel)
+        NSLayoutConstraint.activate([
+            idLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 56),
+            idLabel.bottomAnchor.constraint(equalTo: qrImageView.topAnchor, constant: -24),
+            
+            roomIdLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -56),
+            roomIdLabel.bottomAnchor.constraint(equalTo: idLabel.bottomAnchor)
+        ])
+        
+        view.addSubview(partyLabel)
+        view.addSubview(amountLabel)
+        NSLayoutConstraint.activate([
+            partyLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 56),
+            partyLabel.topAnchor.constraint(equalTo: qrImageView.bottomAnchor, constant: 24),
+            
+            amountLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -56),
+            amountLabel.topAnchor.constraint(equalTo: partyLabel.topAnchor)
+        ])
+        
         view.addSubview(startButton)
         NSLayoutConstraint.activate([
-            startButton.topAnchor.constraint(equalTo: qrImageView.bottomAnchor, constant: 96),
+            startButton.topAnchor.constraint(equalTo: partyLabel.bottomAnchor, constant: 64),
             startButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
             startButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
