@@ -83,6 +83,9 @@ class Login: UIViewController {
     
     @objc private func createButtonClicked() {
         print("Create")
+        
+        let createRoom = CreateRoomController()
+        navigationController?.pushViewController(createRoom, animated: true)
     }
     
 // MARK: -- func
