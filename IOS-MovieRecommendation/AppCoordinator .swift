@@ -13,6 +13,10 @@ final class AppCoordinator {
 
     init() {
         
+        let loginView = Login()
+        loginView.tabBarItem.title = "Login"
+        loginView.tabBarItem.selectedImage = .add.withTintColor(ColorPalette.customYellow, renderingMode: .alwaysOriginal)
+        loginView.tabBarItem.image = .add.withTintColor(.systemGray)
         
         let cardView = CardViewController()
         cardView.tabBarItem.title = "Movies"
@@ -27,6 +31,7 @@ final class AppCoordinator {
         cardView.moviewCollectionDelegate = ratedCollectionView
         
         tapBarController.setViewControllers([
+            UINavigationController(rootViewController: loginView),
             UINavigationController(rootViewController: cardView),
             UINavigationController(rootViewController: ratedCollectionView),
         ], animated: true)
