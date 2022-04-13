@@ -76,15 +76,13 @@ class Login: UIViewController {
     @objc private func loginButtonClicked() {
         print("Login")
         
-        let loginPage = LoginPageController()
-        self.navigationController?.pushViewController(loginPage, animated: true)
+        let roomPage = RoomIdController()
+        self.navigationController?.pushViewController(roomPage, animated: true)
+        
     }
     
     @objc private func createButtonClicked() {
         print("Create")
-        
-        let roomPage = CreateRoomController()
-        self.navigationController?.pushViewController(roomPage, animated: true)
     }
     
 // MARK: -- func

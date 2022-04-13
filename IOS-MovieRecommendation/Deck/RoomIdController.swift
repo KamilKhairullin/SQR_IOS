@@ -8,9 +8,7 @@
 import Foundation
 import UIKit
 
-class CreateRoomController: UIViewController {
-    
-    
+class RoomIdController: UIViewController {
     
     let logoImageView: UIImageView = {
         let iv = UIImageView()
@@ -21,7 +19,7 @@ class CreateRoomController: UIViewController {
         return iv
     }()
     
-    let nameInputField: UITextField = {
+    let roomIdInputField: UITextField = {
         let iv = UITextField()
         iv.backgroundColor = ColorPalette.customWhite
         iv.textColor = ColorPalette.customBlack
@@ -29,7 +27,7 @@ class CreateRoomController: UIViewController {
         iv.font = .systemFont(ofSize: 24)
         iv.textAlignment = .center
         
-        iv.placeholder = "Your name"
+        iv.placeholder = "Room id"
         
         iv.layer.cornerRadius = 12.5
         
@@ -55,6 +53,15 @@ class CreateRoomController: UIViewController {
         btn.addTarget(self, action: #selector(nextButtonClicked), for: .touchUpInside)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
+    }()
+    
+    let qrImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.image = UIImage(named: "qr")
+        iv.contentMode = .scaleAspectFill
+        
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
     }()
     
     
@@ -83,11 +90,14 @@ class CreateRoomController: UIViewController {
 // MARK: -- objc
     
     @objc private func nextButtonClicked() {
-        guard let text = nameInputField.text else {
+        guard let roomId = roomIdInputField.text else {
             return
         }
         
-        print(text)
+        print(roomId)
+        
+        let namePage = NameController()
+        self.navigationController?.pushViewController(namePage, animated: true)
     }
     
 // MARK: -- func
@@ -101,22 +111,30 @@ class CreateRoomController: UIViewController {
             logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -192)
         ])
         
-        view.addSubview(nameInputField)
+        view.addSubview(roomIdInputField)
         NSLayoutConstraint.activate([
-            nameInputField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 96),
-            nameInputField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
-            nameInputField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
-            nameInputField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nameInputField.heightAnchor.constraint(equalToConstant: 48)
+            roomIdInputField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 96),
+            roomIdInputField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
+            roomIdInputField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
+            roomIdInputField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            roomIdInputField.heightAnchor.constraint(equalToConstant: 48)
         ])
         
         view.addSubview(nextButton)
         NSLayoutConstraint.activate([
-            nextButton.topAnchor.constraint(equalTo: nameInputField.bottomAnchor, constant: 16),
+            nextButton.topAnchor.constraint(equalTo: roomIdInputField.bottomAnchor, constant: 16),
             nextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
             nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
             nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nextButton.heightAnchor.constraint(equalToConstant: 48)
+        ])
+        
+        view.addSubview(qrImageView)
+        NSLayoutConstraint.activate([
+            qrImageView.topAnchor.constraint(equalTo: nextButton.bottomAnchor, constant: 96),
+            qrImageView.heightAnchor.constraint(equalToConstant: 96),
+            qrImageView.widthAnchor.constraint(equalToConstant: 96),
+            qrImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     
