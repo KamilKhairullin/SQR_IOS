@@ -104,6 +104,7 @@ class CardViewController: UIViewController {
         label.text = "Movie Title"
         label.font = UIFont(name: "Times New Roman", size: 36)
         label.textColor = ColorPalette.customBlack
+        label.adjustsFontSizeToFitWidth = true
         
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -436,49 +437,38 @@ class CardViewController: UIViewController {
         ])
         
         descriptionScrollableView.addSubview(movieTitle)
-        NSLayoutConstraint.activate([
-            movieTitle.topAnchor.constraint(equalTo: descriptionScrollableView.topAnchor, constant: 150),
-            movieTitle.leadingAnchor.constraint(equalTo: descriptionScrollableView.leadingAnchor, constant: 16)
-        ])
-        
         descriptionScrollableView.addSubview(movieYear)
-        NSLayoutConstraint.activate([
-            movieYear.bottomAnchor.constraint(equalTo: movieTitle.bottomAnchor),
-            movieYear.trailingAnchor.constraint(equalTo: descriptionContainer.trailingAnchor, constant: -16)
-        ])
-        
         descriptionScrollableView.addSubview(movieProducer)
-        NSLayoutConstraint.activate([
-            movieProducer.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 32),
-            movieProducer.leadingAnchor.constraint(equalTo: movieTitle.leadingAnchor, constant: 0)
-        ])
-        
         descriptionScrollableView.addSubview(movieCountry)
-        NSLayoutConstraint.activate([
-            movieCountry.topAnchor.constraint(equalTo: movieProducer.bottomAnchor, constant: 8),
-            movieCountry.leadingAnchor.constraint(equalTo: movieProducer.leadingAnchor, constant: 0)
-        ])
-        
         descriptionScrollableView.addSubview(movieProducerName)
-        NSLayoutConstraint.activate([
-            movieProducerName.topAnchor.constraint(equalTo: movieYear.bottomAnchor, constant: 32),
-            movieProducerName.trailingAnchor.constraint(equalTo: movieYear.trailingAnchor, constant: 0)
-        ])
-        
         descriptionScrollableView.addSubview(movieCountryName)
-        NSLayoutConstraint.activate([
-            movieCountryName.topAnchor.constraint(equalTo: movieProducerName.bottomAnchor, constant: 8),
-            movieCountryName.trailingAnchor.constraint(equalTo: movieProducerName.trailingAnchor, constant: 0)
-        ])
-        
         descriptionScrollableView.addSubview(movieDescription)
         NSLayoutConstraint.activate([
+            movieTitle.topAnchor.constraint(equalTo: descriptionScrollableView.topAnchor, constant: 150),
+            movieTitle.leadingAnchor.constraint(equalTo: descriptionScrollableView.leadingAnchor, constant: 16),
+            movieTitle.widthAnchor.constraint(equalToConstant: 285),
+            
+            movieYear.bottomAnchor.constraint(equalTo: movieTitle.bottomAnchor),
+            movieYear.trailingAnchor.constraint(equalTo: descriptionContainer.trailingAnchor, constant: -16),
+            
+            movieProducer.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 32),
+            movieProducer.leadingAnchor.constraint(equalTo: movieTitle.leadingAnchor, constant: 0),
+            
+            movieCountry.topAnchor.constraint(equalTo: movieProducer.bottomAnchor, constant: 8),
+            movieCountry.leadingAnchor.constraint(equalTo: movieProducer.leadingAnchor, constant: 0),
+            
+            movieProducerName.topAnchor.constraint(equalTo: movieYear.bottomAnchor, constant: 32),
+            movieProducerName.trailingAnchor.constraint(equalTo: movieYear.trailingAnchor, constant: 0),
+            
+            movieCountryName.topAnchor.constraint(equalTo: movieProducerName.bottomAnchor, constant: 8),
+            movieCountryName.trailingAnchor.constraint(equalTo: movieProducerName.trailingAnchor, constant: 0),
+            
             movieDescription.topAnchor.constraint(equalTo: movieCountry.bottomAnchor, constant: 32),
             movieDescription.leadingAnchor.constraint(equalTo: descriptionScrollableView.leadingAnchor, constant: 16),
             movieDescription.trailingAnchor.constraint(equalTo: moviePosterContainer.trailingAnchor, constant: -16),
             movieDescription.bottomAnchor.constraint(equalTo: descriptionScrollableView.bottomAnchor, constant: -16),
         ])
-        
+
         view.addSubview(likeLable)
         NSLayoutConstraint.activate([
             likeLable.centerXAnchor.constraint(equalTo: view.centerXAnchor),
