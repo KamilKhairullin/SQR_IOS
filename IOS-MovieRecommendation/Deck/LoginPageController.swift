@@ -21,23 +21,23 @@ class LoginPageController: UIViewController {
         return iv
     }()
     
-    let createButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.backgroundColor = .black
-        btn.setTitle("Name", for: .normal)
-        btn.titleLabel?.font = .systemFont(ofSize: 24)
-        btn.setTitleColor(ColorPalette.customWhite, for: .normal)
+    let roomIdInputField: UITextField = {
+        let iv = UITextField()
+        iv.backgroundColor = ColorPalette.customWhite
+        iv.textColor = ColorPalette.customBlack
+        iv.tintColor = .systemPurple
+        iv.font = .systemFont(ofSize: 24)
+        iv.textAlignment = .center
         
-        btn.layer.cornerRadius = 12.5
-        btn.layer.borderColor = ColorPalette.customWhite.cgColor
-        btn.layer.borderWidth = 2
+        iv.placeholder = "Room id"
         
-        btn.addTarget(self, action: #selector(loginButtonClicked), for: .touchUpInside)
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        return btn
+        iv.layer.cornerRadius = 12.5
+        
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
     }()
     
-    let loginButton: UIButton = {
+    let nextButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = ColorPalette.customYellow
         btn.setTitle("Next", for: .normal)
@@ -91,12 +91,8 @@ class LoginPageController: UIViewController {
     
 // MARK: -- objc
     
-    @objc private func loginButtonClicked() {
-        print("Name")
-    }
-    
     @objc private func nextButtonClicked() {
-        print("Next")
+        print(roomIdInputField.text)
     }
     
 // MARK: -- func
@@ -110,27 +106,27 @@ class LoginPageController: UIViewController {
             logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -192)
         ])
         
-        view.addSubview(createButton)
+        view.addSubview(roomIdInputField)
         NSLayoutConstraint.activate([
-            createButton.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 96),
-            createButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
-            createButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
-            createButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            createButton.heightAnchor.constraint(equalToConstant: 48)
+            roomIdInputField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 96),
+            roomIdInputField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
+            roomIdInputField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
+            roomIdInputField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            roomIdInputField.heightAnchor.constraint(equalToConstant: 48)
         ])
         
-        view.addSubview(loginButton)
+        view.addSubview(nextButton)
         NSLayoutConstraint.activate([
-            loginButton.topAnchor.constraint(equalTo: createButton.bottomAnchor, constant: 16),
-            loginButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
-            loginButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
-            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginButton.heightAnchor.constraint(equalToConstant: 48)
+            nextButton.topAnchor.constraint(equalTo: roomIdInputField.bottomAnchor, constant: 16),
+            nextButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
+            nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
+            nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            nextButton.heightAnchor.constraint(equalToConstant: 48)
         ])
         
         view.addSubview(qrImageView)
         NSLayoutConstraint.activate([
-            qrImageView.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 96),
+            qrImageView.topAnchor.constraint(equalTo: nextButton.bottomAnchor, constant: 96),
             qrImageView.heightAnchor.constraint(equalToConstant: 96),
             qrImageView.widthAnchor.constraint(equalToConstant: 96),
             qrImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
