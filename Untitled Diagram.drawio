@@ -1,1 +1,97 @@
-<mxfile host="app.diagrams.net" modified="2022-04-22T10:54:13.784Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.2 Safari/605.1.15" version="17.4.6" etag="TXmva_YcGyvzrf8dxY02" type="gitlab"><diagram id="Al1cn3xquqlNX8ngvHFC">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-04-22T11:17:32.257Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.2 Safari/605.1.15" etag="IQ6Q3zzAVTkni8sDj8CM" version="17.4.6" type="gitlab">
+  <diagram id="Al1cn3xquqlNX8ngvHFC" name="Page-1">
+    <mxGraphModel dx="1645" dy="893" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="E1P62dOauz6o8dgjr0p_-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="E1P62dOauz6o8dgjr0p_-1" target="E1P62dOauz6o8dgjr0p_-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-19" value="API CALL&lt;br&gt;&lt;br&gt;Join as participant&lt;br&gt;(Not Admin)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="E1P62dOauz6o8dgjr0p_-6">
+          <mxGeometry x="0.0093" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="E1P62dOauz6o8dgjr0p_-1" target="E1P62dOauz6o8dgjr0p_-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-15" value="API CALL&lt;br&gt;&lt;br&gt;Create Room&lt;br&gt;(Admin)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="E1P62dOauz6o8dgjr0p_-7">
+          <mxGeometry x="-0.0733" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-1" value="Login&lt;br&gt;&lt;br&gt;Create" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="350" width="120" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-2" value="First page" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="100" y="320" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="E1P62dOauz6o8dgjr0p_-3" target="E1P62dOauz6o8dgjr0p_-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-20" value="API CALL&lt;br&gt;&lt;br&gt;Sends Room ID" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="E1P62dOauz6o8dgjr0p_-8">
+          <mxGeometry x="-0.2984" y="1" relative="1" as="geometry">
+            <mxPoint x="17" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-3" value="Enter Room ID" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="180" width="120" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="E1P62dOauz6o8dgjr0p_-4" target="E1P62dOauz6o8dgjr0p_-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-17" value="API CALL&lt;br&gt;&lt;br&gt;Start Room" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="E1P62dOauz6o8dgjr0p_-11">
+          <mxGeometry x="-0.0379" y="1" relative="1" as="geometry">
+            <mxPoint y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-4" value="Start" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="530" width="120" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="E1P62dOauz6o8dgjr0p_-5" target="E1P62dOauz6o8dgjr0p_-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-24" value="API CALL&lt;br&gt;&lt;br&gt;Sends Name" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="E1P62dOauz6o8dgjr0p_-23">
+          <mxGeometry x="-0.2" y="2" relative="1" as="geometry">
+            <mxPoint x="8" y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-5" value="Enter Name" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="180" width="120" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-9" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="230" width="540" height="490" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-12" value="Like / Dislike" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1249" y="300" width="120" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-13" value="Movie Ratings" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1540" y="305" width="120" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-16" value="Receives:&lt;br&gt;1) Room ID&lt;br&gt;2) Continuous Update on people amount in room&lt;br&gt;3) QR Code (Not critical)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="320" y="660" width="150" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-18" value="Admin joins to the room as ordinary participant&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="880" y="670" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="E1P62dOauz6o8dgjr0p_-22" target="E1P62dOauz6o8dgjr0p_-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-26" value="Waits&lt;br&gt;Admin starts the room" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="E1P62dOauz6o8dgjr0p_-25">
+          <mxGeometry x="-0.5526" y="-3" relative="1" as="geometry">
+            <mxPoint x="40" y="22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-22" value="Waiting" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="870" y="180" width="120" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-27" value="1) Get Movie (First)&lt;br&gt;&lt;br&gt;2) Like / Dislike on Movie&lt;br&gt;3) Get Movie&lt;br&gt;&lt;br&gt;4) Waiting for a Match" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="560" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="E1P62dOauz6o8dgjr0p_-28" value="1) Get Movies + Ratings in Room&lt;br&gt;(People Liked &amp;nbsp;/ &amp;nbsp;Total amount of people in the room)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1490" y="565" width="220" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
