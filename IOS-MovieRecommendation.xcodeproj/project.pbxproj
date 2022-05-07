@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		074A737A27DE1E7C005F18B8 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074A737927DE1E7C005F18B8 /* MovieModel.swift */; };
+		075B47922826A66300C3A083 /* WaitingRoomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075B47912826A66300C3A083 /* WaitingRoomController.swift */; };
 		07A9A037280096B60092A616 /* blacknote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A9A036280096B60092A616 /* blacknote.swift */; };
 		07A9A0392800976A0092A616 /* RatedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A9A0382800976A0092A616 /* RatedCollectionViewController.swift */; };
 		07B000932806BA3E00F7E442 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B000922806BA3E00F7E442 /* LoginController.swift */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		074A737927DE1E7C005F18B8 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
+		075B47912826A66300C3A083 /* WaitingRoomController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomController.swift; sourceTree = "<group>"; };
 		07A9A036280096B60092A616 /* blacknote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blacknote.swift; sourceTree = "<group>"; };
 		07A9A0382800976A0092A616 /* RatedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatedCollectionViewController.swift; sourceTree = "<group>"; };
 		07B000922806BA3E00F7E442 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				07B000942806C6A100F7E442 /* NameController.swift */,
 				07B000962806E49300F7E442 /* RoomIdController.swift */,
 				07B0009828070EEB00F7E442 /* CreateRoomController.swift */,
+				075B47912826A66300C3A083 /* WaitingRoomController.swift */,
 			);
 			path = Deck;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07A9A0392800976A0092A616 /* RatedCollectionViewController.swift in Sources */,
+				075B47922826A66300C3A083 /* WaitingRoomController.swift in Sources */,
 				8E8D23C027DCE91800A73C57 /* AppCoordinator .swift in Sources */,
 				07B000952806C6A100F7E442 /* NameController.swift in Sources */,
 				8E4CD69D27DD18ED00B36ADF /* MockNetworkClient.swift in Sources */,

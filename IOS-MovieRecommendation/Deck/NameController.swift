@@ -89,6 +89,9 @@ class NameController: UIViewController {
         }
         
         print(text)
+        
+        let waitingRoom = WaitingRoomController()
+        self.navigationController?.pushViewController(waitingRoom, animated: true)
     }
     
 // MARK: -- func
