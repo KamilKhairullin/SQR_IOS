@@ -4,16 +4,15 @@ import UIKit
 
 final class AppCoordinator {
     
-    let tapBarController: UITabBarController = {
+    let tabBarController: UITabBarController = {
         let view = UITabBarController()
         view.tabBar.backgroundColor = ColorPalette.customBlack
         
         return view
     }()
 
+    let loginView = LoginViewController()
     init() {
-        
-        let loginView = Login()
         loginView.tabBarItem.title = "Login"
         loginView.tabBarItem.selectedImage = .add.withTintColor(ColorPalette.customYellow, renderingMode: .alwaysOriginal)
         loginView.tabBarItem.image = .add.withTintColor(.systemGray)
@@ -30,7 +29,7 @@ final class AppCoordinator {
         
         cardView.moviewCollectionDelegate = ratedCollectionView
         
-        tapBarController.setViewControllers([
+        tabBarController.setViewControllers([
             UINavigationController(rootViewController: loginView),
             UINavigationController(rootViewController: cardView),
             UINavigationController(rootViewController: ratedCollectionView),

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
  
 
-class Login: UIViewController {
+class LoginViewController: UIViewController {
     
     let logoImageView: UIImageView = {
         let iv = UIImageView()
@@ -61,7 +61,6 @@ class Login: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .black
         setupViews()
     }
@@ -74,16 +73,12 @@ class Login: UIViewController {
 // MARK: -- objc
     
     @objc private func loginButtonClicked() {
-        print("Login")
-        
         let roomPage = RoomIdController()
         self.navigationController?.pushViewController(roomPage, animated: true)
         
     }
     
     @objc private func createButtonClicked() {
-        print("Create")
-        
         let createRoom = CreateRoomController()
         navigationController?.pushViewController(createRoom, animated: true)
     }

@@ -10,8 +10,8 @@
 		074A737A27DE1E7C005F18B8 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074A737927DE1E7C005F18B8 /* MovieModel.swift */; };
 		07A9A037280096B60092A616 /* blacknote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A9A036280096B60092A616 /* blacknote.swift */; };
 		07A9A0392800976A0092A616 /* RatedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A9A0382800976A0092A616 /* RatedCollectionViewController.swift */; };
-		07B000932806BA3E00F7E442 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B000922806BA3E00F7E442 /* LoginController.swift */; };
-		07B000952806C6A100F7E442 /* NameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B000942806C6A100F7E442 /* NameController.swift */; };
+		07B000932806BA3E00F7E442 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B000922806BA3E00F7E442 /* LoginViewController.swift */; };
+		07B000952806C6A100F7E442 /* NameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B000942806C6A100F7E442 /* NameViewController.swift */; };
 		07B000972806E49300F7E442 /* RoomIdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B000962806E49300F7E442 /* RoomIdController.swift */; };
 		07B0009928070EEB00F7E442 /* CreateRoomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B0009828070EEB00F7E442 /* CreateRoomController.swift */; };
 		07C610CE2805980800338E77 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C610CD2805980800338E77 /* NetworkService.swift */; };
@@ -53,8 +53,8 @@
 		074A737927DE1E7C005F18B8 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		07A9A036280096B60092A616 /* blacknote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blacknote.swift; sourceTree = "<group>"; };
 		07A9A0382800976A0092A616 /* RatedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatedCollectionViewController.swift; sourceTree = "<group>"; };
-		07B000922806BA3E00F7E442 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
-		07B000942806C6A100F7E442 /* NameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameController.swift; sourceTree = "<group>"; };
+		07B000922806BA3E00F7E442 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		07B000942806C6A100F7E442 /* NameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameViewController.swift; sourceTree = "<group>"; };
 		07B000962806E49300F7E442 /* RoomIdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomIdController.swift; sourceTree = "<group>"; };
 		07B0009828070EEB00F7E442 /* CreateRoomController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomController.swift; sourceTree = "<group>"; };
 		07C610CD2805980800338E77 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -184,8 +184,8 @@
 				8E20435427DBDFA20031EF2C /* CardViewController.swift */,
 				074A737927DE1E7C005F18B8 /* MovieModel.swift */,
 				07A9A0382800976A0092A616 /* RatedCollectionViewController.swift */,
-				07B000922806BA3E00F7E442 /* LoginController.swift */,
-				07B000942806C6A100F7E442 /* NameController.swift */,
+				07B000922806BA3E00F7E442 /* LoginViewController.swift */,
+				07B000942806C6A100F7E442 /* NameViewController.swift */,
 				07B000962806E49300F7E442 /* RoomIdController.swift */,
 				07B0009828070EEB00F7E442 /* CreateRoomController.swift */,
 			);
@@ -359,9 +359,9 @@
 			files = (
 				07A9A0392800976A0092A616 /* RatedCollectionViewController.swift in Sources */,
 				8E8D23C027DCE91800A73C57 /* AppCoordinator .swift in Sources */,
-				07B000952806C6A100F7E442 /* NameController.swift in Sources */,
+				07B000952806C6A100F7E442 /* NameViewController.swift in Sources */,
 				8E4CD69D27DD18ED00B36ADF /* MockNetworkClient.swift in Sources */,
-				07B000932806BA3E00F7E442 /* LoginController.swift in Sources */,
+				07B000932806BA3E00F7E442 /* LoginViewController.swift in Sources */,
 				8E4CD69027DD14D000B36ADF /* NetworkError.swift in Sources */,
 				8E4CD68E27DD13EC00B36ADF /* Movie.swift in Sources */,
 				8E20432427DBDB150031EF2C /* AppDelegate.swift in Sources */,

@@ -27,7 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let coordinator = AppCoordinator()
-        window?.rootViewController = coordinator.tapBarController
+        let navigationController = UINavigationController()
+        navigationController.viewControllers = [coordinator.loginView]
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true
     }
