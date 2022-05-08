@@ -14,7 +14,9 @@ struct HTTPRequest {
 
     init(
         route: String,
-        headers: [String: String] = [:],
+        headers: [String: String] = ["application/json": "Content-Type",
+                                     "gzip, deflate": "Accept-Encoding"
+                                    ],
         body: Data? = nil,
         queryItems: [HTTPRequestQueryItem] = [],
         httpMethod: HTTPMethod = .get,

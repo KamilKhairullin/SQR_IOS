@@ -1,3 +1,4 @@
+import Foundation
 final class NetworkServiceImp: NetworkService {
     
     private let networkClient: NetworkClient
@@ -10,7 +11,7 @@ final class NetworkServiceImp: NetworkService {
     func register(
         username: String,
         password: String,
-        completion: @escaping (Result<String, HTTPError>) -> Void
+        completion: @escaping (Result<[String:String], HTTPError>) -> Void
     ) -> Cancellable? {
         networkClient.processRequest(request: createRegistrationRequest(id: 1), completion: completion)
     }
@@ -26,6 +27,13 @@ final class NetworkServiceImp: NetworkService {
 //    }
     
     private func createRegistrationRequest(id: Int) -> HTTPRequest {
-        return HTTPRequest(route: "http://localhost:8080/user/register")
+        HTTPRequest(
+            route: "http://proxyman.local:8080/user/login",
+            body: try? JSONSerialization.data(withJSONObject: [
+                                                               "username": "string",
+                                                               "password": "string"
+                                                         ]),
+            httpMethod: .post
+        )
     }
 }

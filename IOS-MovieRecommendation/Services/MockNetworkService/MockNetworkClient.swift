@@ -8,7 +8,7 @@
 import Foundation
 
 final class MockNetworkService: NetworkService {
-    
+
     private let networkClient: NetworkClient?
     private let mockData: [Movie]?
     
@@ -45,9 +45,9 @@ final class MockNetworkService: NetworkService {
         }
     }
     
-    func register(username: String, password: String, completion: @escaping (Result<String, HTTPError>) -> Void) -> Cancellable? {
+    func register(username: String, password: String, completion: @escaping (Result<[String:String], HTTPError>) -> Void) -> Cancellable? {
         if true {
-            completion(.success("qwerty"))
+            completion(.success(["token":"qwdqwdqwd"]))
         } else {
             completion(.failure(.failed))
         }

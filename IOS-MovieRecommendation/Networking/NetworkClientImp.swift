@@ -14,24 +14,20 @@ struct NetworkClientImp: NetworkClient {
     ) -> Cancellable? {
         do {
             let configuredURLRequest = try configureRequest(request: request)
-
             let task = urlSession.dataTask(with: configuredURLRequest) { data, response, _ in
                 guard let response = response as? HTTPURLResponse, let unwrappedData = data else {
                     NetworkClientImp.executeCompletionOnMainThread {
                         completion(.failure(HTTPError.decodingFailed))
                     }
-
                     return
                 }
                 let handledResult = HTTPNetworkResponse.handleNetworkResponse(for: response)
-
                 switch handledResult {
                 case .success:
                     let jsonDecoder = JSONDecoder()
 
                     jsonDecoder.keyDecodingStrategy = request.keyDecodingStrategy
                     jsonDecoder.dateDecodingStrategy = request.dateDecodingStrategy
-
                     guard let result = try? jsonDecoder.decode(T.self, from: unwrappedData) else {
                         NetworkClientImp.executeCompletionOnMainThread {
                             completion(.failure(HTTPError.decodingFailed))
@@ -39,7 +35,7 @@ struct NetworkClientImp: NetworkClient {
 
                         return
                     }
-
+                    
                     NetworkClientImp.executeCompletionOnMainThread {
                         completion(.success(result))
                     }
@@ -73,16 +69,14 @@ struct NetworkClientImp: NetworkClient {
         components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
 
         guard let componentsURL = components.url else { throw HTTPError.missingURLComponents }
-
         var generatedRequest = URLRequest(url: componentsURL)
-
+        
         generatedRequest.httpMethod = request.httpMethod.rawValue
         generatedRequest.httpBody = request.body
 
         request.headers.forEach {
             generatedRequest.addValue($0.key, forHTTPHeaderField: $0.value)
         }
-
         return generatedRequest
     }
 

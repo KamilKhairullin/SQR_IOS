@@ -5,7 +5,6 @@ struct HTTPNetworkResponse {
         guard let res = response else {
             return .failure(HTTPError.unwrappingError)
         }
-
         switch res.statusCode {
         case 200...299: return .success(())
         case 401: return .failure(HTTPError.authenticationError)
