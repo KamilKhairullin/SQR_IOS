@@ -81,10 +81,10 @@ class LoginRegisterViewController: UIViewController {
         let networkClient = NetworkClientImp(urlSession: .init(configuration: .default))
         let networkService = NetworkServiceImp(networkClient: networkClient)
         
-        networkService.login(username: "string", password: "string") { [weak self] response in
+        networkService.login(credentials: UserDTO(login: "string", password: "string")) { [weak self] response in
             switch response {
             case .success(let requestToken):
-                token = requestToken["token"]
+                token = requestToken.token
                 networkService.createRoom(token: token ?? "") { [weak self] response in
                     switch response {
                     case .success(let roomInfo):

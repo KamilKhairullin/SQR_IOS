@@ -2,38 +2,38 @@ import Foundation
 
 protocol NetworkService: AnyObject {
     
+    // MARK: - POST
+    
     @discardableResult
     func register(
-        username: String,
-        password: String,
-        completion: @escaping (Result<[String:String], HTTPError>) -> Void
+        credentials: UserDTO,
+        completion: @escaping (Result<TokenDTO, HTTPError>) -> Void
     ) -> Cancellable?
     
     @discardableResult
     func login(
-        username: String,
-        password: String,
-        completion: @escaping (Result<[String:String], HTTPError>) -> Void
+        credentials: UserDTO,
+        completion: @escaping (Result<TokenDTO, HTTPError>) -> Void
     ) -> Cancellable?
     
     @discardableResult
     func createRoom(
         token: String,
-        completion: @escaping (Result<CreateRoom, HTTPError>) -> Void
+        completion: @escaping (Result<RoomDTO, HTTPError>) -> Void
     ) -> Cancellable?
     
     @discardableResult
     func startRoom(
         token: String,
         slug: String,
-        completion: @escaping (Result<StartRoom, HTTPError>) -> Void
+        completion: @escaping (Result<RoomDTO, HTTPError>) -> Void
     ) -> Cancellable?
     
     @discardableResult
     func join(
         token: String,
         slug: String,
-        completion: @escaping (Result<JoinRoom, HTTPError>) -> Void
+        completion: @escaping (Result<RoomDTO, HTTPError>) -> Void
     ) -> Cancellable?
     
     @discardableResult
@@ -49,5 +49,35 @@ protocol NetworkService: AnyObject {
         token: String,
         slug: String,
         completion: @escaping (Result<Bool, HTTPError>) -> Void
+    ) -> Cancellable?
+    
+    // MARK: - GET
+    
+    @discardableResult
+    func movieInfo(
+        token: String,
+        movieId: String,
+        completion: @escaping (Result<MovieDTO, HTTPError>) -> Void
+    ) -> Cancellable?
+    
+    @discardableResult
+    func roomStats(
+        token: String,
+        slug: String,
+        completion: @escaping (Result<RoomStatsDTO, HTTPError>) -> Void
+    ) -> Cancellable?
+    
+    @discardableResult
+    func recommend(
+        token: String,
+        slug: String,
+        completion: @escaping (Result<MovieDTO, HTTPError>) -> Void
+    ) -> Cancellable?
+    
+    @discardableResult
+    func info(
+        token: String,
+        slug: String,
+        completion: @escaping (Result<RoomDTO, HTTPError>) -> Void
     ) -> Cancellable?
 }

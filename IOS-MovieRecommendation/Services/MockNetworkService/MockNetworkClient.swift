@@ -8,8 +8,28 @@
 import Foundation
 
 final class MockNetworkService: NetworkService {
-    func join(token: String, slug: String, completion: @escaping (Result<JoinRoom, HTTPError>) -> Void) -> Cancellable? {
-        completion(.success(JoinRoom(id: "mock", slug: "mock", creator: "mock", users: ["mock"], status: "mock")))
+    func recommend(token: String, slug: String, completion: @escaping (Result<MovieDTO, HTTPError>) -> Void) -> Cancellable? {
+        completion(.success(MovieDTO(id: "mock", name: "mock", posterUrl: "mock", description: "mock", rating: Rating(kinopoisk: 0.0, imdb: 0.0, tmdb: 5.0), genres: ["mock"], actors: [ActorDTO(name: "mock", photoUrl: "mock")])))
+            return nil
+    }
+    
+    func info(token: String, slug: String, completion: @escaping (Result<RoomDTO, HTTPError>) -> Void) -> Cancellable? {
+        completion(.success(RoomDTO(id: "mock", slug: "mock", creator: "mock", users: ["mock"], status: .Started)))
+        return nil
+    }
+    
+    func roomStats(token: String, slug: String, completion: @escaping (Result<RoomStatsDTO, HTTPError>) -> Void) -> Cancellable? {
+        completion(.success(RoomStatsDTO(matchedMovies: ["1", "2"], ranking: [Ranking(movieId: "1", likedUsers: ["2"])])))
+        return nil
+    }
+    
+    func movieInfo(token: String, movieId: String, completion: @escaping (Result<MovieDTO, HTTPError>) -> Void) -> Cancellable? {
+        completion(.success(MovieDTO(id: "mock", name: "mock", posterUrl: "mock", description: "mock", rating: Rating(kinopoisk: 10, imdb: 10, tmdb: 10), genres: ["mock"], actors: [ActorDTO(name: "Mock Mocker", photoUrl: "mock")])))
+        return nil
+    }
+    
+    func join(token: String, slug: String, completion: @escaping (Result<RoomDTO, HTTPError>) -> Void) -> Cancellable? {
+        completion(.success(RoomDTO(id: "mock", slug: "mock", creator: "mock", users: ["mock"], status: .Started)))
         return nil
     }
     
@@ -23,18 +43,18 @@ final class MockNetworkService: NetworkService {
         return nil
     }
     
-    func startRoom(token: String, slug: String, completion: @escaping (Result<StartRoom, HTTPError>) -> Void) -> Cancellable? {
-        completion(.success(StartRoom(id: "mock", slug: "mock", creator: "mock", users: ["mock"], status: "mock")))
+    func startRoom(token: String, slug: String, completion: @escaping (Result<RoomDTO, HTTPError>) -> Void) -> Cancellable? {
+        completion(.success(RoomDTO(id: "mock", slug: "mock", creator: "mock", users: ["mock"], status: .Started)))
         return nil
     }
     
-    func login(username: String, password: String, completion: @escaping (Result<[String : String], HTTPError>) -> Void) -> Cancellable? {
-        completion(.success(["mock": "mock"]))
+    func login(credentials: UserDTO, completion: @escaping (Result<TokenDTO, HTTPError>) -> Void) -> Cancellable? {
+        completion(.success(TokenDTO(token: "mock")))
         return nil
     }
     
-    func createRoom(token: String, completion: @escaping (Result<CreateRoom, HTTPError>) -> Void) -> Cancellable? {
-        completion(.success(CreateRoom(id: "mock", slug: "mock", creator: "mock", users: ["mock"], status: "mock")))
+    func createRoom(token: String, completion: @escaping (Result<RoomDTO, HTTPError>) -> Void) -> Cancellable? {
+        completion(.success(RoomDTO(id: "mock", slug: "mock", creator: "mock", users: ["mock"], status: .Created)))
         return nil
     }
     
@@ -75,9 +95,9 @@ final class MockNetworkService: NetworkService {
         }
     }
     
-    func register(username: String, password: String, completion: @escaping (Result<[String:String], HTTPError>) -> Void) -> Cancellable? {
+    func register(credentials: UserDTO, completion: @escaping (Result<TokenDTO, HTTPError>) -> Void) -> Cancellable? {
         if true {
-            completion(.success(["token":"qwdqwdqwd"]))
+            completion(.success(TokenDTO(token: "qwdqwdqwd")))
         } else {
             completion(.failure(.failed))
         }

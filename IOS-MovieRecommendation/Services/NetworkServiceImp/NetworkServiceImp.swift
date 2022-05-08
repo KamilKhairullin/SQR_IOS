@@ -7,28 +7,28 @@ final class NetworkServiceImp: NetworkService {
         self.networkClient = networkClient
     }
     
+    // MARK: - POST
+    
     @discardableResult
     func register(
-        username: String,
-        password: String,
-        completion: @escaping (Result<[String:String], HTTPError>) -> Void
+        credentials: UserDTO,
+        completion: @escaping (Result<TokenDTO, HTTPError>) -> Void
     ) -> Cancellable? {
-        networkClient.processRequest(request: createRegistrationRequest(username: username, password: password), completion: completion)
+        networkClient.processRequest(request: createRegistrationRequest(credentials: credentials), completion: completion)
     }
     
     @discardableResult
     func login(
-        username: String,
-        password: String,
-        completion: @escaping (Result<[String:String], HTTPError>) -> Void
+        credentials: UserDTO,
+        completion: @escaping (Result<TokenDTO, HTTPError>) -> Void
     ) -> Cancellable? {
-        networkClient.processRequest(request: createLoginRequest(username: username, password: password), completion: completion)
+        networkClient.processRequest(request: createLoginRequest(credentials: credentials), completion: completion)
     }
     
     @discardableResult
     func createRoom(
         token: String,
-        completion: @escaping (Result<CreateRoom, HTTPError>) -> Void
+        completion: @escaping (Result<RoomDTO, HTTPError>) -> Void
     ) -> Cancellable? {
         networkClient.processRequest(request: createRoomRequest(token: token), completion: completion)
     }
@@ -37,7 +37,7 @@ final class NetworkServiceImp: NetworkService {
     func startRoom(
         token: String,
         slug: String,
-        completion: @escaping (Result<StartRoom, HTTPError>) -> Void
+        completion: @escaping (Result<RoomDTO, HTTPError>) -> Void
     ) -> Cancellable? {
         networkClient.processRequest(request: startRoomRequest(token: token, slug: slug), completion: completion)
     }
@@ -46,7 +46,7 @@ final class NetworkServiceImp: NetworkService {
     func join(
         token: String,
         slug: String,
-        completion: @escaping (Result<JoinRoom, HTTPError>) -> Void
+        completion: @escaping (Result<RoomDTO, HTTPError>) -> Void
     ) -> Cancellable? {
         networkClient.processRequest(request: joinRoomRequest(token: token, slug: slug), completion: completion)
     }
@@ -70,7 +70,43 @@ final class NetworkServiceImp: NetworkService {
         networkClient.processRequest(request: dropRequest(token: token, slug: slug), completion: completion)
     }
 
-    private func createRegistrationRequest(username: String, password: String) -> HTTPRequest {
+    // MARK: - GET
+    
+    @discardableResult
+    func movieInfo(
+        token: String,
+        movieId: String,
+        completion: @escaping (Result<MovieDTO, HTTPError>) -> Void
+    ) -> Cancellable? {
+        networkClient.processRequest(request: getMovieRequest(token: token, movieId: movieId), completion: completion)
+    }
+    
+    func roomStats(
+        token: String,
+        slug: String,
+        completion: @escaping (Result<RoomStatsDTO, HTTPError>) -> Void
+    ) -> Cancellable? {
+        networkClient.processRequest(request: getRoomStatsRequest(token: token, slug: slug), completion: completion)
+    }
+    
+    func recommend(
+        token: String,
+        slug: String,
+        completion: @escaping (Result<MovieDTO, HTTPError>) -> Void
+    ) -> Cancellable? {
+        networkClient.processRequest(request: getRecommendRequest(token: token, slug: slug), completion: completion)
+    }
+    
+    func info(
+        token: String,
+        slug: String,
+        completion: @escaping (Result<RoomDTO, HTTPError>) -> Void
+    ) -> Cancellable? {
+        networkClient.processRequest(request: getRoomInfoRequest(token: token, slug: slug), completion: completion)
+    }
+    // MARK: - Private methods
+    
+    private func createRegistrationRequest(credentials: UserDTO) -> HTTPRequest {
         HTTPRequest(
             route: "http://proxyman.local:8080/user/register",
             headers:
@@ -80,8 +116,8 @@ final class NetworkServiceImp: NetworkService {
             ],
             body: try? JSONSerialization.data(withJSONObject:
                 [
-                    "username": username,
-                    "password": password
+                    "username": credentials.login,
+                    "password": credentials.password
                 ]
             ),
             httpMethod: .post
@@ -89,7 +125,7 @@ final class NetworkServiceImp: NetworkService {
     }
     
     
-    private func createLoginRequest(username: String, password: String) -> HTTPRequest {
+    private func createLoginRequest(credentials: UserDTO) -> HTTPRequest {
         HTTPRequest(
             route: "http://proxyman.local:8080/user/login",
             headers:
@@ -99,8 +135,8 @@ final class NetworkServiceImp: NetworkService {
             ],
             body: try? JSONSerialization.data(withJSONObject:
                 [
-                    "username": username,
-                    "password": password
+                    "username": credentials.login,
+                    "password": credentials.password
                 ]
             ),
             httpMethod: .post
@@ -112,6 +148,8 @@ final class NetworkServiceImp: NetworkService {
             route: "http://proxyman.local:8080/room/create",
             headers:
             [
+                "application/json": "Content-Type",
+                "gzip, deflate": "Accept-Encoding",
                 "Bearer \(token)": "Authorization"
             ],
             httpMethod: .post
@@ -123,6 +161,8 @@ final class NetworkServiceImp: NetworkService {
             route: "http://proxyman.local:8080/room/\(slug)/start",
             headers:
             [
+                "application/json": "Content-Type",
+                "gzip, deflate": "Accept-Encoding",
                 "Bearer \(token)": "Authorization"
             ],
             httpMethod: .post
@@ -134,6 +174,8 @@ final class NetworkServiceImp: NetworkService {
             route: "http://proxyman.local:8080/room/\(slug)/join",
             headers:
             [
+                "application/json": "Content-Type",
+                "gzip, deflate": "Accept-Encoding",
                 "Bearer \(token)": "Authorization"
             ],
             httpMethod: .post
@@ -145,6 +187,8 @@ final class NetworkServiceImp: NetworkService {
             route: "http://proxyman.local:8080/room/\(slug)/like",
             headers:
             [
+                "application/json": "Content-Type",
+                "gzip, deflate": "Accept-Encoding",
                 "Bearer \(token)": "Authorization"
             ],
             body: try? JSONSerialization.data(withJSONObject:
@@ -161,9 +205,59 @@ final class NetworkServiceImp: NetworkService {
             route: "http://proxyman.local:8080/room/\(slug)/drop",
             headers:
             [
+                "application/json": "Content-Type",
+                "gzip, deflate": "Accept-Encoding",
                 "Bearer \(token)": "Authorization"
             ],
             httpMethod: .post
+        )
+    }
+    
+    private func getMovieRequest(token: String, movieId: String) -> HTTPRequest {
+        HTTPRequest(
+            route: "http://proxyman.local:8080/movies/\(movieId)",
+            headers:
+            [
+                "application/json": "Content-Type",
+                "gzip, deflate": "Accept-Encoding",
+                "Bearer \(token)": "Authorization"
+            ]
+        )
+    }
+    
+    private func getRoomStatsRequest(token: String, slug: String) -> HTTPRequest {
+        HTTPRequest(
+            route: "http://proxyman.local:8080/room/\(slug)/stats",
+            headers:
+            [
+                "application/json": "Content-Type",
+                "gzip, deflate": "Accept-Encoding",
+                "Bearer \(token)": "Authorization"
+            ]
+        )
+    }
+    
+    private func getRecommendRequest(token: String, slug: String) -> HTTPRequest {
+        HTTPRequest(
+            route: "http://proxyman.local:8080/room/\(slug)/recommend",
+            headers:
+            [
+                "application/json": "Content-Type",
+                "gzip, deflate": "Accept-Encoding",
+                "Bearer \(token)": "Authorization"
+            ]
+        )
+    }
+    
+    private func getRoomInfoRequest(token: String, slug: String) -> HTTPRequest {
+        HTTPRequest(
+            route: "http://proxyman.local:8080/room/\(slug)/info",
+            headers:
+            [
+                "application/json": "Content-Type",
+                "gzip, deflate": "Accept-Encoding",
+                "Bearer \(token)": "Authorization"
+            ]
         )
     }
 }
