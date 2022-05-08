@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  RegisterViewController.swift
 //  IOS-MovieRecommendation
 //
 //  Created by Bekzhan Talgat on 08.05.2022.
@@ -7,8 +7,7 @@
 
 import UIKit
 
-
-class LoginViewController: UIViewController {
+class RegisterViewController: UIViewController {
     
     public var appCoordinator: AppCoordinator?
     
@@ -53,10 +52,10 @@ class LoginViewController: UIViewController {
         return iv
     }()
     
-    let loginButton: UIButton = {
+    let registerButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = ColorPalette.customYellow
-        btn.setTitle("Login", for: .normal)
+        btn.setTitle("Register", for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 24)
         btn.setTitleColor(UIColor.black, for: .normal)
        
@@ -137,7 +136,8 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            appCoordinator.loginSuccess()
+            appCoordinator.registerSuccess()
+//            self.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -171,13 +171,13 @@ class LoginViewController: UIViewController {
             passwordInputField.heightAnchor.constraint(equalToConstant: 48)
         ])
         
-        view.addSubview(loginButton)
+        view.addSubview(registerButton)
         NSLayoutConstraint.activate([
-            loginButton.topAnchor.constraint(equalTo: passwordInputField.bottomAnchor, constant: 64),
-            loginButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
-            loginButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
-            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginButton.heightAnchor.constraint(equalToConstant: 48)
+            registerButton.topAnchor.constraint(equalTo: passwordInputField.bottomAnchor, constant: 64),
+            registerButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
+            registerButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
+            registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            registerButton.heightAnchor.constraint(equalToConstant: 48)
         ])
 
     }
@@ -220,6 +220,9 @@ class LoginViewController: UIViewController {
     
 
     
+    
+    
+
     
     
 }

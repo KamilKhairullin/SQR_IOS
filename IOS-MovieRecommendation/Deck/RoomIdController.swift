@@ -10,6 +10,8 @@ import UIKit
 
 class RoomIdController: UIViewController {
     
+    public var appCoordinator: AppCoordinator?
+    
     let logoImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "Logo")
@@ -94,10 +96,23 @@ class RoomIdController: UIViewController {
             return
         }
         
-        print(roomId)
-        
-        let namePage = NameController()
-        self.navigationController?.pushViewController(namePage, animated: true)
+        if !checkId(roomId: roomId) {
+            incorrectFormat()
+            roomIdInputField.text = ""
+            roomIdInputField.placeholder = "Incorrect format"
+        } else {
+            UserDefaults.standard.set(roomId, forKey: "roomId")
+            
+            let waitingRoom = WaitingRoomController()
+            waitingRoom.appCoordinator = appCoordinator
+            
+            self.navigationController?.pushViewController(waitingRoom, animated: true)
+//            
+//            let namePage = NameController()
+//            namePage.appCoordinator = appCoordinator
+//
+//            self.navigationController?.pushViewController(namePage, animated: true)
+        }
     }
     
 // MARK: -- func
@@ -148,6 +163,18 @@ class RoomIdController: UIViewController {
     
     
 
+    private func checkId(roomId: String) -> Bool {
+        if roomId == "" {
+            return false
+        }
+        
+        return true
+    }
+    
+    private func incorrectFormat(){
+        print("Incorrect id format")
+    }
+    
     
     
     

@@ -89,6 +89,8 @@ class CreateRoomController: UIViewController {
         
         view.backgroundColor = .black
         setupViews()
+        
+        createARoom()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -160,6 +162,10 @@ class CreateRoomController: UIViewController {
         
     }
     
+    
+    public func createARoom() {
+        
+    }
     
     
 

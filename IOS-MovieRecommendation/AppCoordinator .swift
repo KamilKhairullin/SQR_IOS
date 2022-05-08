@@ -10,12 +10,26 @@ final class AppCoordinator {
         
         return view
     }()
-
-    let loginView = LoginViewController()
+    
+    
+    
+    let loginRegisterPage: LoginRegisterViewController
+    let joinCreatePage: JoinCreateViewController
+    
     init() {
-        loginView.tabBarItem.title = "Login"
-        loginView.tabBarItem.selectedImage = .add.withTintColor(ColorPalette.customYellow, renderingMode: .alwaysOriginal)
-        loginView.tabBarItem.image = .add.withTintColor(.systemGray)
+        loginRegisterPage = LoginRegisterViewController()
+        joinCreatePage = JoinCreateViewController()
+        
+        loginRegisterPage.tabBarItem.title = "Login"
+        loginRegisterPage.tabBarItem.selectedImage = .add.withTintColor(ColorPalette.customYellow, renderingMode: .alwaysOriginal)
+        loginRegisterPage.tabBarItem.image = .add.withTintColor(.systemGray)
+        joinCreatePage.tabBarItem.title = "Join"
+        joinCreatePage.tabBarItem.selectedImage = .add.withTintColor(ColorPalette.customYellow, renderingMode: .alwaysOriginal)
+        joinCreatePage.tabBarItem.image = .add.withTintColor(.systemGray)
+        
+        loginRegisterPage.appCoordinator = self
+        joinCreatePage.appCoordinator = self
+        
         
         let cardView = CardViewController()
         cardView.tabBarItem.title = "Movies"
@@ -29,11 +43,57 @@ final class AppCoordinator {
         
         cardView.moviewCollectionDelegate = ratedCollectionView
         
-        tabBarController.setViewControllers([
-            UINavigationController(rootViewController: loginView),
-            UINavigationController(rootViewController: cardView),
-            UINavigationController(rootViewController: ratedCollectionView),
-        ], animated: true)
+        if isUserLogedIn() {
+            tabBarController.setViewControllers([
+                UINavigationController(rootViewController: joinCreatePage),
+                UINavigationController(rootViewController: cardView),
+                UINavigationController(rootViewController: ratedCollectionView),
+            ], animated: true)
+        } else {
+            tabBarController.setViewControllers([
+                UINavigationController(rootViewController: loginRegisterPage),
+                UINavigationController(rootViewController: cardView),
+                UINavigationController(rootViewController: ratedCollectionView),
+            ], animated: true)
+        }
+        
+    }
+    
+    
+    
+    private func isUserLogedIn() -> Bool{
+        let username = UserDefaults.standard.string(forKey: "username")!
+        let password = UserDefaults.standard.string(forKey: "password")!
+        
+        print("Login this user to Backend and get token:", username, password)
+        
+        return true
+    }
+    
+    public func loginSuccess() {
+        
+    }
+    
+    public func registerSuccess() {
+        
+    }
+    
+    public func joinToRoom(){
+        let roomId = UserDefaults.standard.string(forKey: "roomId")
+        
+        print(roomId!)
+    }
+    
+    public func userWaitingRoom(){
+        let roomId = UserDefaults.standard.string(forKey: "roomId")
+        let userName = UserDefaults.standard.string(forKey: "userName")
+        
+        print(roomId!, userName!)
+        
+    }
+    
+    public func roomStarted(){
+        
     }
     
 }

@@ -10,6 +10,8 @@ import UIKit
 
 class WaitingRoomController: UIViewController {
     
+    public var appCoordinator: AppCoordinator?
+    
     let idLabel: UILabel = {
         let l = UILabel()
         l.text = "ID:"
@@ -79,6 +81,10 @@ class WaitingRoomController: UIViewController {
         
         view.backgroundColor = .black
         setupViews()
+        
+        if let appCoordinator = appCoordinator {
+            appCoordinator.userWaitingRoom()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -145,6 +151,8 @@ class WaitingRoomController: UIViewController {
     }
     
     
-    
+    public func roomStarted() {
+            
+    }
 
 }
