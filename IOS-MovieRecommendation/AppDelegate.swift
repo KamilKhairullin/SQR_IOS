@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let coordinator = AppCoordinator()
         let navigationController = UINavigationController()
-        navigationController.viewControllers = [coordinator.loginView]
+        navigationController.viewControllers = [coordinator.tabBarController]
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true

@@ -28,21 +28,31 @@ final class MockNetworkService: NetworkService {
             self.mockData = nil
         }
     }
+//
+//    func like() {
+//        print("You liked sucessefully")
+//    }
+//
+//    func dislike() {
+//        print("You disliked sucessefully")
+//    }
     
-    func like() {
-        print("You liked sucessefully")
-    }
-    
-    func dislike() {
-        print("You disliked sucessefully")
-    }
-    
-    func getNextRecommendation(for id: Int, completion: @escaping (Result<Movie, NetworkError>) -> Void) {
+    func getNextRecommendation(for id: Int, completion: @escaping (Result<Movie, HTTPError>) -> Void) {
         if let result = mockData?.randomElement() {
             completion(.success(result))
         } else {
             completion(.failure(.failed))
         }
+    }
+    
+    func register(username: String, password: String, completion: @escaping (Result<String, HTTPError>) -> Void) -> Cancellable? {
+        if true {
+            completion(.success("qwerty"))
+        } else {
+            completion(.failure(.failed))
+        }
+        
+        return nil
     }
 }
 

@@ -1,6 +1,6 @@
 import Foundation
 
-public enum NetworkError: String, Error {
+public enum HTTPError: String, Error {
     case parametersNil = "Error: Parameters are nil"
     case headersNil = "Error: Headers are nil"
     case encodingFailed = "Error: Parameter encoding failed"

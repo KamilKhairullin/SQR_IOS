@@ -1,8 +1,9 @@
 import Foundation
 
 protocol NetworkClient {
-    func recieveData<T: Decodable>(
-        completion: @escaping (Result<T, NetworkError>) -> Void
+    func processRequest<T: Decodable>(
+        request: HTTPRequest,
+        completion: @escaping (Result<T, HTTPError>) -> Void
     ) -> Cancellable?
 }
 
