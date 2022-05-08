@@ -25,7 +25,16 @@ class CardViewController: UIViewController {
         return label
     }()
     
-    private var currentMovie = Movie(id: "0", title: "Title", posterURL: "URL", description: "Description", rating: 0.0, ratingBorder: 0.0)
+//    private var currentMovie = Movie(id: "0", title: "Title", posterURL: "URL", description: "Description", rating: 0.0, ratingBorder: 0.0)
+    private var currentMovie = MovieDTO(
+        id: "id", name: "name", posterUrl: "URL", description: "Description",
+        rating: Rating(kinopoisk: 1.1, imdb: 2.2, tmdb: 3.3),
+        genres: ["Adventure", "Fantasy", "Comedy"],
+        actors: [ActorDTO(name: "Actor 1", photoUrl: "AURL"),
+                 ActorDTO(name: "Actor 2", photoUrl: "AURL"),
+                 ActorDTO(name: "Actor 3", photoUrl: "AURL")
+                ]
+    )
     private var currentMovieImage = UIImage(named: "Leon")
     
     private var initialTouchPoint = CGPoint(x: 0, y: 0)
@@ -326,34 +335,35 @@ class CardViewController: UIViewController {
     }
     
     private func nextPoster() {
-        network.getNextRecommendation(for: 1) { [weak self] result in
-            guard let self = self else {
-                return
-            }
-            switch result {
-            case .success(let movie):
-                self.currentMovie = movie
-                UIView.transition(
-                    with: self.moviePoster,
-                    duration: 0.5,
-                    options: .transitionCrossDissolve,
-                    animations: { [self] in
-                        let url = URL(string: movie.posterURL ?? "") ?? URL(fileURLWithPath: "1")
-                        self.downloadImage(from: url)
-                    },
-                    completion: nil
-                )
-       
-                self.movieTitle.text = movie.title
-                self.movieRating.text = String(movie.rating ?? 0.0)
-                self.movieDescription.text = movie.description
-                
-                self.descriptionScrollableView.contentOffset = CGPoint.zero
-                self.posterBottomFade.locations = [0.4, 0.8, 1]
-            case .failure:
-                break
-            }
-        }
+        
+//        network.getNextRecommendation(for: 1) { [weak self] result in
+//            guard let self = self else {
+//                return
+//            }
+//            switch result {
+//            case .success(let movie):
+//                self.currentMovie = movie
+//                UIView.transition(
+//                    with: self.moviePoster,
+//                    duration: 0.5,
+//                    options: .transitionCrossDissolve,
+//                    animations: { [self] in
+//                        let url = URL(string: movie.posterURL ?? "") ?? URL(fileURLWithPath: "1")
+//                        self.downloadImage(from: url)
+//                    },
+//                    completion: nil
+//                )
+//
+//                self.movieTitle.text = movie.title
+//                self.movieRating.text = String(movie.rating ?? 0.0)
+//                self.movieDescription.text = movie.description
+//
+//                self.descriptionScrollableView.contentOffset = CGPoint.zero
+//                self.posterBottomFade.locations = [0.4, 0.8, 1]
+//            case .failure:
+//                break
+//            }
+//        }
     }
     
     private func resetSwipeFades() {

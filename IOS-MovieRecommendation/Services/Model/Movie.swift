@@ -10,6 +10,6 @@ struct Movie: Codable {
 }
 
 struct MovieCard {
-    let movie: Movie
+    let movie: MovieDTO
     let image: UIImage
 }

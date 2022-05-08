@@ -11,6 +11,17 @@ import UIKit
 
 class CreateRoomController: UIViewController {
     
+    var coordinator: AppCoordinator?
+    
+    init(coordinator: AppCoordinator?) {
+        super.init(nibName: nil, bundle: nil)
+        self.coordinator = coordinator
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     let idLabel: UILabel = {
         let l = UILabel()
         l.text = "ID:"
@@ -96,7 +107,7 @@ class CreateRoomController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.isNavigationBarHidden = false
+        navigationController?.isNavigationBarHidden = true
         navigationController?.navigationBar.tintColor = ColorPalette.customYellow
     }
     
@@ -108,7 +119,7 @@ class CreateRoomController: UIViewController {
 // MARK: -- objc
     
     @objc private func startButtonClicked() {
-        print("Start")
+        coordinator?.roomStarted(on: self)
     }
     
 // MARK: -- func

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		074A737A27DE1E7C005F18B8 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074A737927DE1E7C005F18B8 /* MovieModel.swift */; };
 		075B47922826A66300C3A083 /* WaitingRoomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075B47912826A66300C3A083 /* WaitingRoomController.swift */; };
 		075B47942828153400C3A083 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075B47932828153400C3A083 /* LoginViewController.swift */; };
 		075B47962828183900C3A083 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075B47952828183900C3A083 /* RegisterViewController.swift */; };
@@ -64,7 +63,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		074A737927DE1E7C005F18B8 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		075B47912826A66300C3A083 /* WaitingRoomController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomController.swift; sourceTree = "<group>"; };
 		075B47932828153400C3A083 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		075B47952828183900C3A083 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -211,15 +209,14 @@
 			isa = PBXGroup;
 			children = (
 				8E20435427DBDFA20031EF2C /* CardViewController.swift */,
-				074A737927DE1E7C005F18B8 /* MovieModel.swift */,
 				07A9A0382800976A0092A616 /* RatedCollectionViewController.swift */,
-				07B000922806BA3E00F7E442 /* JoinCreateViewController.swift */,
 				07B000942806C6A100F7E442 /* LoginRegisterViewController.swift */,
+				075B47932828153400C3A083 /* LoginViewController.swift */,
+				075B47952828183900C3A083 /* RegisterViewController.swift */,
+				07B000922806BA3E00F7E442 /* JoinCreateViewController.swift */,
 				07B000962806E49300F7E442 /* RoomIdController.swift */,
 				07B0009828070EEB00F7E442 /* CreateRoomController.swift */,
 				075B47912826A66300C3A083 /* WaitingRoomController.swift */,
-				075B47932828153400C3A083 /* LoginViewController.swift */,
-				075B47952828183900C3A083 /* RegisterViewController.swift */,
 			);
 			path = Deck;
 			sourceTree = "<group>";
@@ -419,7 +416,6 @@
 				8E4CD68E27DD13EC00B36ADF /* Movie.swift in Sources */,
 				8E20432427DBDB150031EF2C /* AppDelegate.swift in Sources */,
 				8E5668912827C047005EF24B /* HTTPNetworkResponse.swift in Sources */,
-				074A737A27DE1E7C005F18B8 /* MovieModel.swift in Sources */,
 				8E56689A28284EAE005EF24B /* RoomDTO.swift in Sources */,
 				8E5668982827C10B005EF24B /* NetworkServiceImp.swift in Sources */,
 				8E5668A62828724D005EF24B /* UserDTO.swift in Sources */,

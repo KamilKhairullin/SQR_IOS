@@ -81,7 +81,7 @@ class JoinCreateViewController: UIViewController {
     }
     
     @objc private func createButtonClicked() {
-        let createRoom = CreateRoomController()
+        let createRoom = CreateRoomController(coordinator: appCoordinator)
         navigationController?.pushViewController(createRoom, animated: true)
     }
     

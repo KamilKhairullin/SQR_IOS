@@ -45,13 +45,11 @@ final class AppCoordinator {
         
         if isUserLogedIn() {
             tabBarController.setViewControllers([
-                UINavigationController(rootViewController: joinCreatePage),
                 UINavigationController(rootViewController: cardView),
                 UINavigationController(rootViewController: ratedCollectionView),
             ], animated: true)
         } else {
             tabBarController.setViewControllers([
-                UINavigationController(rootViewController: loginRegisterPage),
                 UINavigationController(rootViewController: cardView),
                 UINavigationController(rootViewController: ratedCollectionView),
             ], animated: true)
@@ -61,7 +59,10 @@ final class AppCoordinator {
     
     
     
-    private func isUserLogedIn() -> Bool{
+    public func isUserLogedIn() -> Bool{
+        let username = UserDefaults.standard.string(forKey: "username")
+        let password = UserDefaults.standard.string(forKey: "password")
+        
         return false
     }
     
@@ -87,8 +88,8 @@ final class AppCoordinator {
         
     }
     
-    public func roomStarted(){
-        
+    public func roomStarted(on viewController: UIViewController){
+        viewController.navigationController?.pushViewController(tabBarController, animated: true)
     }
     
 }

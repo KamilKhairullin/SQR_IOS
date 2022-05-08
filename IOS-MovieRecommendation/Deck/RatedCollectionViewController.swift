@@ -11,7 +11,7 @@ import UIKit
 
 
 protocol RatedCollectionDelegate: AnyObject {
-    func addMovieToCollection(movie: Movie, image: UIImage)
+    func addMovieToCollection(movie: MovieDTO, image: UIImage)
     func getLikedMovieAmount() -> Int
 }
 
@@ -243,8 +243,8 @@ class RatedCollectionViewController: UIViewController {
             ])
             
             if !movieCollection.isEmpty {
-                mt.text = movieCollection[i].movie.title
-                r.text = String(movieCollection[i].movie.rating!)
+                mt.text = movieCollection[i].movie.name
+                r.text = String(movieCollection[i].movie.rating.imdb)
             }
             
             i += 1
@@ -256,7 +256,7 @@ class RatedCollectionViewController: UIViewController {
 
 
 extension RatedCollectionViewController: RatedCollectionDelegate {
-    func addMovieToCollection(movie: Movie, image: UIImage) {
+    func addMovieToCollection(movie: MovieDTO, image: UIImage) {
         movieCollection.append(MovieCard(movie: movie, image: image))
         
 //        DispatchQueue.global().async {
