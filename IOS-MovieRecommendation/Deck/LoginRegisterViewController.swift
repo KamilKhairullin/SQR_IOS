@@ -76,6 +76,30 @@ class LoginRegisterViewController: UIViewController {
     
     @objc private func loginButtonClicked() {
         let loginPage = LoginViewController()
+        var token: String?
+        
+        let networkClient = NetworkClientImp(urlSession: .init(configuration: .default))
+        let networkService = NetworkServiceImp(networkClient: networkClient)
+        
+        networkService.login(username: "string", password: "string") { [weak self] response in
+            switch response {
+            case .success(let requestToken):
+                token = requestToken["token"]
+                print(token)
+                networkService.createRoom(token: token ?? "") { [weak self] response in
+                    switch response {
+                    case .success(let roomInfo):
+                        print(roomInfo.slug)
+                    case .failure(let error):
+                        print(error.rawValue)
+                    }
+                }
+            case .failure(let error):
+                print(error.rawValue)
+            }
+        }
+    
+        
         loginPage.appCoordinator = appCoordinator
         self.navigationController?.pushViewController(loginPage, animated: true)
         

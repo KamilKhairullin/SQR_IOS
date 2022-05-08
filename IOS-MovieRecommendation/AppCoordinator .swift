@@ -62,12 +62,7 @@ final class AppCoordinator {
     
     
     private func isUserLogedIn() -> Bool{
-        let username = UserDefaults.standard.string(forKey: "username")!
-        let password = UserDefaults.standard.string(forKey: "password")!
-        
-        print("Login this user to Backend and get token:", username, password)
-        
-        return true
+        return false
     }
     
     public func loginSuccess() {
