@@ -85,7 +85,6 @@ class LoginRegisterViewController: UIViewController {
             switch response {
             case .success(let requestToken):
                 token = requestToken["token"]
-                print(token)
                 networkService.createRoom(token: token ?? "") { [weak self] response in
                     switch response {
                     case .success(let roomInfo):

@@ -38,6 +38,7 @@
 		8E5668982827C10B005EF24B /* NetworkServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5668972827C10B005EF24B /* NetworkServiceImp.swift */; };
 		8E56689A28284EAE005EF24B /* CreateRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56689928284EAE005EF24B /* CreateRoom.swift */; };
 		8E56689C2828664F005EF24B /* StartRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56689B2828664F005EF24B /* StartRoom.swift */; };
+		8E56689E28286815005EF24B /* JoinRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56689D28286815005EF24B /* JoinRoom.swift */; };
 		8E8D23BE27DCE49D00A73C57 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D23BD27DCE49D00A73C57 /* ColorPalette.swift */; };
 		8E8D23C027DCE91800A73C57 /* AppCoordinator .swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D23BF27DCE91800A73C57 /* AppCoordinator .swift */; };
 /* End PBXBuildFile section */
@@ -95,6 +96,7 @@
 		8E5668972827C10B005EF24B /* NetworkServiceImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceImp.swift; sourceTree = "<group>"; };
 		8E56689928284EAE005EF24B /* CreateRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoom.swift; sourceTree = "<group>"; };
 		8E56689B2828664F005EF24B /* StartRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRoom.swift; sourceTree = "<group>"; };
+		8E56689D28286815005EF24B /* JoinRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoom.swift; sourceTree = "<group>"; };
 		8E8D23BD27DCE49D00A73C57 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		8E8D23BF27DCE91800A73C57 /* AppCoordinator .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppCoordinator .swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -222,6 +224,7 @@
 				8E4CD68D27DD13EC00B36ADF /* Movie.swift */,
 				8E56689928284EAE005EF24B /* CreateRoom.swift */,
 				8E56689B2828664F005EF24B /* StartRoom.swift */,
+				8E56689D28286815005EF24B /* JoinRoom.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				8E56689C2828664F005EF24B /* StartRoom.swift in Sources */,
 				8E56688F2827C02B005EF24B /* HTTPMethod.swift in Sources */,
 				8E5668952827C086005EF24B /* NetworkClientImp.swift in Sources */,
+				8E56689E28286815005EF24B /* JoinRoom.swift in Sources */,
 				07B000972806E49300F7E442 /* RoomIdController.swift in Sources */,
 				8E5668932827C06C005EF24B /* HTTPRequest.swift in Sources */,
 				07C610CE2805980800338E77 /* NetworkService.swift in Sources */,

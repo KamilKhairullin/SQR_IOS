@@ -8,6 +8,21 @@
 import Foundation
 
 final class MockNetworkService: NetworkService {
+    func join(token: String, slug: String, completion: @escaping (Result<JoinRoom, HTTPError>) -> Void) -> Cancellable? {
+        completion(.success(JoinRoom(id: "mock", slug: "mock", creator: "mock", users: ["mock"], status: "mock")))
+        return nil
+    }
+    
+    func like(token: String, slug: String, movieId: String, completion: @escaping (Result<Bool, HTTPError>) -> Void) -> Cancellable? {
+        completion(.success(true))
+        return nil
+    }
+    
+    func drop(token: String, slug: String, completion: @escaping (Result<Bool, HTTPError>) -> Void) -> Cancellable? {
+        completion(.success(true))
+        return nil
+    }
+    
     func startRoom(token: String, slug: String, completion: @escaping (Result<StartRoom, HTTPError>) -> Void) -> Cancellable? {
         completion(.success(StartRoom(id: "mock", slug: "mock", creator: "mock", users: ["mock"], status: "mock")))
         return nil

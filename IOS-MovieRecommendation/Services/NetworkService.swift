@@ -28,4 +28,26 @@ protocol NetworkService: AnyObject {
         slug: String,
         completion: @escaping (Result<StartRoom, HTTPError>) -> Void
     ) -> Cancellable?
+    
+    @discardableResult
+    func join(
+        token: String,
+        slug: String,
+        completion: @escaping (Result<JoinRoom, HTTPError>) -> Void
+    ) -> Cancellable?
+    
+    @discardableResult
+    func like(
+        token: String,
+        slug: String,
+        movieId: String,
+        completion: @escaping (Result<Bool, HTTPError>) -> Void
+    ) -> Cancellable?
+    
+    @discardableResult
+    func drop(
+        token: String,
+        slug: String,
+        completion: @escaping (Result<Bool, HTTPError>) -> Void
+    ) -> Cancellable?
 }
