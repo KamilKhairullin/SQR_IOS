@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let networkClient = NetworkClientImp(urlSession: .init(configuration: .default))
         let networkService = NetworkServiceImp(networkClient: networkClient)
         let unauthorizedPage = UnauthorizedPageViewController(networkService: networkService)
-        let authorizedPage = AuthorizedPageViewController()
+        let authorizedPage = AuthorizedPageViewController(networkService: networkService)
         let cardViewController = CardViewController()
         let ratedCollectionViewController = RatedCollectionViewController()
         

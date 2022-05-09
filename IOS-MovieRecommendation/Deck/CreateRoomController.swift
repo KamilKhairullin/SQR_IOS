@@ -9,13 +9,21 @@ import Foundation
 import UIKit
 
 
+protocol StartTheRoom {
+    func startTheRoom(on viewCOntroller: UIViewController)
+}
+
+
 class CreateRoomController: UIViewController {
     
-    var coordinator: AppCoordinator?
+    var appCoordinator: AppCoordinator?
+    var networkService: NetworkService
     
-    init(coordinator: AppCoordinator?) {
+    
+    init(coordinator: AppCoordinator?, networkService: NetworkService) {
+        self.appCoordinator = coordinator
+        self.networkService = networkService
         super.init(nibName: nil, bundle: nil)
-        self.coordinator = coordinator
     }
     
     required init?(coder: NSCoder) {
@@ -34,7 +42,7 @@ class CreateRoomController: UIViewController {
     
     let roomIdLabel: UILabel = {
         let l = UILabel()
-        l.text = "AB1C23"
+        l.text = "loading"
         l.font = .systemFont(ofSize: 56)
         l.textColor = ColorPalette.customWhite
         
@@ -63,7 +71,7 @@ class CreateRoomController: UIViewController {
     
     let amountLabel: UILabel = {
         let l = UILabel()
-        l.text = "12"
+        l.text = "loading"
         l.font = .systemFont(ofSize: 36)
         l.textColor = ColorPalette.customWhite
         
@@ -119,26 +127,28 @@ class CreateRoomController: UIViewController {
 // MARK: -- objc
     
     @objc private func startButtonClicked() {
-        //coordinator?.roomStarted(on: self)
+        if let appCoordinator = appCoordinator {
+            appCoordinator.startTheRoom(on: self)
+        }
     }
     
 // MARK: -- func
     
     private func setupViews() {
         
-        view.addSubview(qrImageView)
-        NSLayoutConstraint.activate([
-            qrImageView.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 32),
-            qrImageView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 32),
-            qrImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            qrImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -(view.safeAreaLayoutGuide.layoutFrame.width - 32)/8)
-        ])
+//        view.addSubview(qrImageView)
+//        NSLayoutConstraint.activate([
+//            qrImageView.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 32),
+//            qrImageView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 32),
+//            qrImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            qrImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -(view.safeAreaLayoutGuide.layoutFrame.width - 32)/8)
+//        ])
         
         view.addSubview(idLabel)
         view.addSubview(roomIdLabel)
         NSLayoutConstraint.activate([
             idLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 56),
-            idLabel.bottomAnchor.constraint(equalTo: qrImageView.topAnchor, constant: -24),
+            idLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -128),
             
             roomIdLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -56),
             roomIdLabel.bottomAnchor.constraint(equalTo: idLabel.bottomAnchor)
@@ -148,7 +158,7 @@ class CreateRoomController: UIViewController {
         view.addSubview(amountLabel)
         NSLayoutConstraint.activate([
             partyLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 56),
-            partyLabel.topAnchor.constraint(equalTo: qrImageView.bottomAnchor, constant: 24),
+            partyLabel.topAnchor.constraint(equalTo: idLabel.bottomAnchor, constant: 32),
             
             amountLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -56),
             amountLabel.topAnchor.constraint(equalTo: partyLabel.topAnchor)
@@ -156,7 +166,7 @@ class CreateRoomController: UIViewController {
         
         view.addSubview(startButton)
         NSLayoutConstraint.activate([
-            startButton.topAnchor.constraint(equalTo: partyLabel.bottomAnchor, constant: 64),
+            startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -64),
             startButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
             startButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -165,19 +175,21 @@ class CreateRoomController: UIViewController {
         
     }
     
-    private func setupLayers() {
-        
-    }
-    
-    private func setupTitles() {
-        
-    }
-    
     
     public func createARoom() {
+        let token = UserDefaults.standard.string(forKey: "token") ?? ""
         
+        networkService.createRoom(token: token) { [weak self] response in
+            switch response {
+            case .success(let roomDTO):
+                UserDefaults.standard.set(roomDTO.id, forKey: "roomId")
+                UserDefaults.standard.set(roomDTO.slug, forKey: "roomSlug")
+                
+                self?.idLabel.text = roomDTO.id
+                self?.amountLabel.text = String(roomDTO.users.count)
+            case .failure(let error):
+                print(error.rawValue)
+            }
+        }
     }
-    
-    
-
 }

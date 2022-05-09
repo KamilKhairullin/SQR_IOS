@@ -7,9 +7,25 @@
 
 import UIKit
 
+
+protocol RegisterSucceed {
+    func registerSucceed(on viewController: UIViewController, with token: String)
+}
+
+
 class RegisterViewController: UIViewController {
     
     public var appCoordinator: AppCoordinator?
+    private var networkService: NetworkService
+    
+    init(networkService: NetworkService) {
+        self.networkService = networkService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     let logoImageView: UIImageView = {
         let iv = UIImageView()
@@ -67,7 +83,7 @@ class RegisterViewController: UIViewController {
         btn.layer.masksToBounds = false
         btn.layer.cornerRadius = 12.5
         
-        btn.addTarget(self, action: #selector(nextButtonClicked), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(registerButtonClicked), for: .touchUpInside)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
@@ -94,6 +110,11 @@ class RegisterViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        usernameInputField.text = ""
+        usernameInputField.placeholder = "Username"
+        passwordInputField.text = ""
+        passwordInputField.placeholder = "Password"
+        
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.tintColor = ColorPalette.customYellow
         
@@ -106,7 +127,7 @@ class RegisterViewController: UIViewController {
     
 // MARK: -- objc
     
-    @objc private func nextButtonClicked() {
+    @objc private func registerButtonClicked() {
         guard let username = usernameInputField.text else {
             return
         }
@@ -129,15 +150,23 @@ class RegisterViewController: UIViewController {
                 passwordInputField.placeholder = "Incorrect format"
             }
         } else {
-            UserDefaults.standard.set(username, forKey: "username")
-            UserDefaults.standard.set(password, forKey: "password")
+            let userDTO = UserDTO(login: username, password: password)
             
-            guard let appCoordinator = appCoordinator else {
-                return
+            networkService.register(credentials: userDTO) { [weak self] response in
+                guard let self = self else { return }
+                switch response {
+                case .success(let data):
+                    UserDefaults.standard.set(username, forKey: "username")
+                    UserDefaults.standard.set(password, forKey: "password")
+                    self.appCoordinator?.registerSucceed(on: self, with: data.token)
+                case .failure(let error):
+                    self.usernameInputField.text = ""
+                    self.usernameInputField.placeholder = "Failed to register. Try agin"
+                    self.passwordInputField.text = ""
+                    self.passwordInputField.placeholder = "Failed to register. Try agin"
+                    print(error.rawValue)
+                }
             }
-            
-            //appCoordinator.registerSuccess()
-//            self.navigationController?.popViewController(animated: true)
         }
     }
     

@@ -270,6 +270,12 @@ class CardViewController: UIViewController {
         setupTitles()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     
     
 // MARK: - objc functions
@@ -376,7 +382,7 @@ class CardViewController: UIViewController {
     private func setupViews() {
         view.addSubview(moviePosterContainer)
         NSLayoutConstraint.activate([
-            moviePosterContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            moviePosterContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             moviePosterContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
             moviePosterContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             moviePosterContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)

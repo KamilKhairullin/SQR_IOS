@@ -91,7 +91,7 @@ class UnauthorizedPageViewController: UIViewController {
             switch response {
             case .success(let requestToken):
                 token = requestToken.token
-                self?.networkService.createRoom(token: token ?? "") { [weak self] response in
+                self?.networkService.createRoom(token: token ?? "") { response in
                     switch response {
                     case .success(let roomInfo):
                         print(roomInfo.slug)
@@ -110,7 +110,7 @@ class UnauthorizedPageViewController: UIViewController {
     }
     
     @objc private func registerButtonClicked() {
-        let registerPage = RegisterViewController()
+        let registerPage = RegisterViewController(networkService: networkService)
         navigationController?.pushViewController(registerPage, animated: true)
     }
     

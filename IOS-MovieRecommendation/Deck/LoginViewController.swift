@@ -81,7 +81,7 @@ class LoginViewController: UIViewController {
         btn.layer.masksToBounds = false
         btn.layer.cornerRadius = 12.5
         
-        btn.addTarget(self, action: #selector(nextButtonClicked), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(loginButtonClicked), for: .touchUpInside)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
@@ -108,6 +108,11 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        usernameInputField.text = ""
+        usernameInputField.placeholder = "Username"
+        passwordInputField.text = ""
+        passwordInputField.placeholder = "Password"
+        
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.tintColor = ColorPalette.customYellow
         
@@ -120,7 +125,7 @@ class LoginViewController: UIViewController {
     
 // MARK: -- objc
     
-    @objc private func nextButtonClicked() {
+    @objc private func loginButtonClicked() {
         guard let username = usernameInputField.text,
               let password = passwordInputField.text
         else { return }
@@ -150,6 +155,10 @@ class LoginViewController: UIViewController {
                     UserDefaults.standard.set(password, forKey: "password")
                     self.appCoordinator?.loginSucceed(on: self, with: data.token)
                 case .failure(let error):
+                    self.usernameInputField.text = ""
+                    self.usernameInputField.placeholder = "Failed to login. Try agin"
+                    self.passwordInputField.text = ""
+                    self.passwordInputField.placeholder = "Failed to login. Try agin"
                     print(error.rawValue)
                 }
             }

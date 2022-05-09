@@ -8,6 +8,12 @@
 import UIKit
 
 
+
+protocol WaitingForOthers {
+    func waitingForOthers(on viewController: UIViewController)
+}
+
+
 class WaitingRoomController: UIViewController {
     
     public var appCoordinator: AppCoordinator?
@@ -83,7 +89,7 @@ class WaitingRoomController: UIViewController {
         setupViews()
         
         if let appCoordinator = appCoordinator {
-            //appCoordinator.userWaitingRoom()
+            appCoordinator.waitingForOthers(on: self)
         }
     }
     
@@ -106,53 +112,43 @@ class WaitingRoomController: UIViewController {
     
     private func setupViews() {
         
-        view.addSubview(qrImageView)
-        NSLayoutConstraint.activate([
-            qrImageView.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 128),
-            qrImageView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 128),
-            qrImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            qrImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -(view.safeAreaLayoutGuide.layoutFrame.width - 32)/8)
-        ])
+//        view.addSubview(qrImageView)
+//        NSLayoutConstraint.activate([
+//            qrImageView.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 128),
+//            qrImageView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 128),
+//            qrImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            qrImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -(view.safeAreaLayoutGuide.layoutFrame.width - 32)/8)
+//        ])
         
         view.addSubview(idLabel)
         view.addSubview(roomIdLabel)
         NSLayoutConstraint.activate([
             idLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 56),
-            idLabel.bottomAnchor.constraint(equalTo: qrImageView.topAnchor, constant: -24),
+//            idLabel.bottomAnchor.constraint(equalTo: qrImageView.topAnchor, constant: -24),
+            idLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -32),
+            
             
             roomIdLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -56),
-            roomIdLabel.bottomAnchor.constraint(equalTo: idLabel.bottomAnchor)
+//            roomIdLabel.bottomAnchor.constraint(equalTo: idLabel.bottomAnchor)
+            roomIdLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -32)
         ])
         
-        view.addSubview(partyLabel)
-        view.addSubview(amountLabel)
-        NSLayoutConstraint.activate([
-            partyLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 56),
-            partyLabel.topAnchor.constraint(equalTo: qrImageView.bottomAnchor, constant: 24),
-            
-            amountLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -56),
-            amountLabel.topAnchor.constraint(equalTo: partyLabel.topAnchor)
-        ])
+//        view.addSubview(partyLabel)
+//        view.addSubview(amountLabel)
+//        NSLayoutConstraint.activate([
+//            partyLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 56),
+//            partyLabel.topAnchor.constraint(equalTo: qrImageView.bottomAnchor, constant: 24),
+//
+//            amountLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -56),
+//            amountLabel.topAnchor.constraint(equalTo: partyLabel.topAnchor)
+//        ])
         
         view.addSubview(waitingLablel)
         NSLayoutConstraint.activate([
             waitingLablel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -96),
-            waitingLablel.leadingAnchor.constraint(equalTo: partyLabel.leadingAnchor),
-            waitingLablel.trailingAnchor.constraint(equalTo: amountLabel.trailingAnchor),
+            waitingLablel.leadingAnchor.constraint(equalTo: idLabel.leadingAnchor),
+            waitingLablel.trailingAnchor.constraint(equalTo: roomIdLabel.trailingAnchor),
         ])
     }
     
-    private func setupLayers() {
-        
-    }
-    
-    private func setupTitles() {
-        
-    }
-    
-    
-    public func roomStarted() {
-            
-    }
-
 }

@@ -11,6 +11,16 @@ import UIKit
 class AuthorizedPageViewController: UIViewController {
     
     public var appCoordinator: AppCoordinator?
+    var networkService: NetworkService
+    
+    init(networkService: NetworkService) {
+        self.networkService = networkService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     let logoImageView: UIImageView = {
         let iv = UIImageView()
@@ -85,7 +95,7 @@ class AuthorizedPageViewController: UIViewController {
     }
     
     @objc private func createButtonClicked() {
-        let createRoom = CreateRoomController(coordinator: appCoordinator)
+        let createRoom = CreateRoomController(coordinator: appCoordinator, networkService: networkService)
         navigationController?.pushViewController(createRoom, animated: true)
     }
     

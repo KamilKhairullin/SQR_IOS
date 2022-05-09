@@ -8,6 +8,13 @@
 import Foundation
 import UIKit
 
+
+
+protocol JoinToTheRoom {
+    func JoinToTheRoom(on viewController: UIViewController, roomId: String, failedToJoin: @escaping () -> Void)
+}
+
+
 class RoomIdController: UIViewController {
     
     public var appCoordinator: AppCoordinator?
@@ -79,6 +86,9 @@ class RoomIdController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        roomIdInputField.text = ""
+        roomIdInputField.placeholder = "Room id"
+        
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.tintColor = ColorPalette.customYellow
         
@@ -101,17 +111,10 @@ class RoomIdController: UIViewController {
             roomIdInputField.text = ""
             roomIdInputField.placeholder = "Incorrect format"
         } else {
-            UserDefaults.standard.set(roomId, forKey: "roomId")
-            
-            let waitingRoom = WaitingRoomController()
-            waitingRoom.appCoordinator = appCoordinator
-            
-            self.navigationController?.pushViewController(waitingRoom, animated: true)
-//            
-//            let namePage = NameController()
-//            namePage.appCoordinator = appCoordinator
-//
-//            self.navigationController?.pushViewController(namePage, animated: true)
+            appCoordinator?.JoinToTheRoom(on: self, roomId: roomId) { [weak self] in
+                self?.roomIdInputField.text = ""
+                self?.roomIdInputField.placeholder = "Incorrect room id"
+            }
         }
     }
     
@@ -153,15 +156,6 @@ class RoomIdController: UIViewController {
         ])
     }
     
-    private func setupLayers() {
-        
-    }
-    
-    private func setupTitles() {
-        
-    }
-    
-    
 
     private func checkId(roomId: String) -> Bool {
         if roomId == "" {
@@ -177,10 +171,6 @@ class RoomIdController: UIViewController {
     
     
     
-    
-    
-
-    
-    
-    
 }
+
+

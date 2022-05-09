@@ -40,67 +40,25 @@ final class AppCoordinator {
         
         setupDesign()
 
-//        if isUserLogedIn() {
-//            tabBarController.setViewControllers([
-//                UINavigationController(rootViewController: cardView),
-//                UINavigationController(rootViewController: ratedCollectionView),
-//            ], animated: true)
-//        } else {
-//            tabBarController.setViewControllers([
-//                UINavigationController(rootViewController: cardView),
-//                UINavigationController(rootViewController: ratedCollectionView),
-//            ], animated: true)
-//        }
-        
     }
     
     public func getStartingPage() {
-        let username = UserDefaults.standard.string(forKey: "username") ?? ""
-        let password = UserDefaults.standard.string(forKey: "password") ?? ""
-        let userDTO = UserDTO(login: username, password: password)
+        appDelegate.configure(with: unauthorizedPage)
         
-        networkSerivce.login(credentials: userDTO) { [weak self] response in
-            switch response {
-            case .success:
-                self?.appDelegate.configure(with: self?.authorizedPage ?? UIViewController())
-            case .failure:
-                self?.appDelegate.configure(with: self?.unauthorizedPage ?? UIViewController())
-            }
-        }
+//        let username = UserDefaults.standard.string(forKey: "username") ?? ""
+//        let password = UserDefaults.standard.string(forKey: "password") ?? ""
+//        let userDTO = UserDTO(login: username, password: password)
+//
+//        networkSerivce.login(credentials: userDTO) { [weak self] response in
+//            switch response {
+//            case .success(let data):
+//                UserDefaults.standard.set(data.token, forKey: "token")
+//                self?.appDelegate.configure(with: self?.authorizedPage ?? UIViewController())
+//            case .failure:
+//                self?.appDelegate.configure(with: self?.unauthorizedPage ?? UIViewController())
+//            }
+//        }
     }
-//
-//    public func isUserLogedIn() -> Bool{
-//        let username = UserDefaults.standard.string(forKey: "username")
-//        let password = UserDefaults.standard.string(forKey: "password")
-//
-//        return false
-//    }
-//
-//    public func loginSuccess() {
-//
-//    }
-//
-//    public func registerSuccess() {
-//
-//    }
-//
-//    public func joinToRoom(){
-//        let roomId = UserDefaults.standard.string(forKey: "roomId")
-//
-//        print(roomId!)
-//    }
-//
-//    public func userWaitingRoom(){
-//        let roomId = UserDefaults.standard.string(forKey: "roomId")
-//        let userName = UserDefaults.standard.string(forKey: "userName")
-//
-//        print(roomId!, userName!)
-//
-//    }
-//
-//    public func roomStarted(on viewController: UIViewController){
-//        viewController.navigationController?.pushViewController(tabBarController, animated: true)
-//    }
     
     // MARK: - Private
     
@@ -136,8 +94,79 @@ final class AppCoordinator {
     }
 }
 
+
+
+
 extension AppCoordinator: LoginSucceed {
     func loginSucceed(on viewController: UIViewController, with token: String) {
+        UserDefaults.standard.set(token, forKey: "token")
         viewController.navigationController?.pushViewController(self.authorizedPage, animated: true)
+    }
+}
+
+extension AppCoordinator: RegisterSucceed {
+    func registerSucceed(on viewController: UIViewController, with token: String) {
+        UserDefaults.standard.set(token, forKey: "token")
+        viewController.navigationController?.pushViewController(self.authorizedPage, animated: true)
+    }
+}
+
+extension AppCoordinator: StartTheRoom {
+    func startTheRoom(on viewController: UIViewController) {
+        let token = UserDefaults.standard.string(forKey: "token") ?? ""
+        let slug = UserDefaults.standard.string(forKey: "roomSlug") ?? ""
+        
+        networkSerivce.startRoom(token: token, slug: slug) { [weak self] response in
+            guard let self = self else { return }
+            
+            switch response {
+                case .success:
+                    let tabBar = UITabBarController()
+                    tabBar.setViewControllers([
+                        self.cardViewController,
+                        self.ratedCollectionViewController
+                    ], animated: true)
+                    
+                    viewController.navigationController?.pushViewController(tabBar, animated: true)
+                case .failure(let error):
+                    print(error.rawValue)
+            }
+        }
+    }
+}
+
+extension AppCoordinator: JoinToTheRoom {
+    func JoinToTheRoom(on viewController: UIViewController, roomId: String, failedToJoin: @escaping () -> Void) {
+        let token = UserDefaults.standard.string(forKey: "token") ?? ""
+        let slug = UserDefaults.standard.string(forKey: "roomSlug") ?? ""
+        
+        networkSerivce.join(token: token, slug: slug) { [weak self] response in
+            switch response {
+            case .success(let roomDTO):
+                UserDefaults.standard.set(roomDTO.id, forKey: "roomId")
+                let waitingRoom = WaitingRoomController()
+                waitingRoom.appCoordinator = self
+                
+                viewController.navigationController?.pushViewController(waitingRoom, animated: true)
+            case .failure(let error):
+                failedToJoin()
+                print(error.rawValue)
+            }
+        }
+    }
+}
+
+extension AppCoordinator: WaitingForOthers {
+    func waitingForOthers(on viewController: UIViewController) {
+        // network Service
+        
+        
+        let tabBar = UITabBarController()
+        tabBar.setViewControllers([
+            self.cardViewController,
+            self.ratedCollectionViewController
+        ], animated: true)
+        
+        viewController.navigationController?.pushViewController(tabBar, animated: true)
     }
 }

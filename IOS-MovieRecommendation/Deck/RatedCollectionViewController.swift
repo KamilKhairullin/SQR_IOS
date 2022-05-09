@@ -106,7 +106,7 @@ class RatedCollectionViewController: UIViewController {
     private func setupViews() {
         view.addSubview(mainContainer)
         NSLayoutConstraint.activate([
-            mainContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            mainContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             mainContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             mainContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             mainContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -205,7 +205,7 @@ class RatedCollectionViewController: UIViewController {
     private func setupTitels() {
         view.addSubview(screenTitle)
         NSLayoutConstraint.activate([
-            screenTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -screenTitle.font.pointSize * 1.5),
+            screenTitle.topAnchor.constraint(equalTo: mainContainer.topAnchor, constant: -screenTitle.font.pointSize * 1.5),
             screenTitle.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
         

@@ -75,5 +75,17 @@
 //    ]
 
 
-// MARK: --
+// MARK: -- tabBar
 
+//        if isUserLogedIn() {
+//            tabBarController.setViewControllers([
+//                UINavigationController(rootViewController: cardView),
+//                UINavigationController(rootViewController: ratedCollectionView),
+//            ], animated: true)
+//        } else {
+//            tabBarController.setViewControllers([
+//                UINavigationController(rootViewController: cardView),
+//                UINavigationController(rootViewController: ratedCollectionView),
+//            ], animated: true)
+//        }
+        
