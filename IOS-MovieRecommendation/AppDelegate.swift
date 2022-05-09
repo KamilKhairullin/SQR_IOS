@@ -26,12 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
         }
         
-        let unauthorizedPage = UnauthorizedPageViewController()
+        let networkClient = NetworkClientImp(urlSession: .init(configuration: .default))
+        let networkService = NetworkServiceImp(networkClient: networkClient)
+        let unauthorizedPage = UnauthorizedPageViewController(networkService: networkService)
         let authorizedPage = AuthorizedPageViewController()
         let cardViewController = CardViewController()
         let ratedCollectionViewController = RatedCollectionViewController()
-        let networkClient = NetworkClientImp(urlSession: .init(configuration: .default))
-        let networkService = NetworkServiceImp(networkClient: networkClient)
         
         let appCoordinator = AppCoordinator(
             unauthorizedPage: unauthorizedPage,

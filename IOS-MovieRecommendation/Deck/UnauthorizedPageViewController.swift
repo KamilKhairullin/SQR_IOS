@@ -11,6 +11,16 @@ import UIKit
 class UnauthorizedPageViewController: UIViewController {
 
     public var appCoordinator: AppCoordinator?
+    private var networkService: NetworkService
+    
+    init(networkService: NetworkService) {
+        self.networkService = networkService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     let logoImageView: UIImageView = {
         let iv = UIImageView()
@@ -75,17 +85,13 @@ class UnauthorizedPageViewController: UIViewController {
 // MARK: -- objc
     
     @objc private func loginButtonClicked() {
-        let loginPage = LoginViewController()
+        let loginPage = LoginViewController(networkService: self.networkService)
         var token: String?
-        
-        let networkClient = NetworkClientImp(urlSession: .init(configuration: .default))
-        let networkService = NetworkServiceImp(networkClient: networkClient)
-        
         networkService.login(credentials: UserDTO(login: "string", password: "string")) { [weak self] response in
             switch response {
             case .success(let requestToken):
                 token = requestToken.token
-                networkService.createRoom(token: token ?? "") { [weak self] response in
+                self?.networkService.createRoom(token: token ?? "") { [weak self] response in
                     switch response {
                     case .success(let roomInfo):
                         print(roomInfo.slug)

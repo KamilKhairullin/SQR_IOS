@@ -7,10 +7,23 @@
 
 import UIKit
 
+protocol LoginSucceed {
+    func loginSucceed(on viewController: UIViewController, with token: String)
+}
 
 class LoginViewController: UIViewController {
     
     public var appCoordinator: AppCoordinator?
+    private var networkService: NetworkService
+    
+    init(networkService: NetworkService) {
+        self.networkService = networkService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     let logoImageView: UIImageView = {
         let iv = UIImageView()
@@ -129,24 +142,17 @@ class LoginViewController: UIViewController {
         } else {
             let userDTO = UserDTO(login: username, password: password)
             
-            networkSerivce.login(credentials: userDTO) { [weak self] response in
+            networkService.login(credentials: userDTO) { [weak self] response in
+                guard let self = self else { return }
                 switch response {
-                case .success:
+                case .success(let data):
                     UserDefaults.standard.set(username, forKey: "username")
                     UserDefaults.standard.set(password, forKey: "password")
-                case .failure:
-                    self?.appDelegate.configure(with: self?.unauthorizedPage ?? UIViewController())
+                    self.appCoordinator?.loginSucceed(on: self, with: data.token)
+                case .failure(let error):
+                    print(error.rawValue)
                 }
             }
-            
-            UserDefaults.standard.set(username, forKey: "username")
-            UserDefaults.standard.set(password, forKey: "password")
-            
-            guard let appCoordinator = appCoordinator else {
-                return
-            }
-            
-            //appCoordinator.loginSuccess()
         }
     }
     

@@ -136,4 +136,8 @@ final class AppCoordinator {
     }
 }
 
-
+extension AppCoordinator: LoginSucceed {
+    func loginSucceed(on viewController: UIViewController, with token: String) {
+        viewController.navigationController?.pushViewController(self.authorizedPage, animated: true)
+    }
+}
