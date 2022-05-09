@@ -87,6 +87,7 @@ class WaitingRoomController: UIViewController {
         
         view.backgroundColor = .black
         setupViews()
+        setupLabels()
         
         if let appCoordinator = appCoordinator {
             appCoordinator.waitingForOthers(on: self)
@@ -96,12 +97,16 @@ class WaitingRoomController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
+        
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.tintColor = ColorPalette.customYellow
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        
     }
     
     
@@ -149,6 +154,14 @@ class WaitingRoomController: UIViewController {
             waitingLablel.leadingAnchor.constraint(equalTo: idLabel.leadingAnchor),
             waitingLablel.trailingAnchor.constraint(equalTo: roomIdLabel.trailingAnchor),
         ])
+    }
+    
+    private func setupLabels() {
+        let roomId = UserDefaults.standard.string(forKey: "roomId") ?? ""
+        let partyAmount = UserDefaults.standard.string(forKey: "partyAmount") ?? ""
+        
+        roomIdLabel.text = roomId
+        amountLabel.text = partyAmount
     }
     
 }

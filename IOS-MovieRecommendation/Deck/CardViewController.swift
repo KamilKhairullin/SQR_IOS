@@ -342,6 +342,7 @@ class CardViewController: UIViewController {
     
     private func nextPoster() {
         
+        
 //        network.getNextRecommendation(for: 1) { [weak self] result in
 //            guard let self = self else {
 //                return

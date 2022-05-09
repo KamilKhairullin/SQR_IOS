@@ -43,7 +43,8 @@ final class AppCoordinator {
     }
     
     public func getStartingPage() {
-//        appDelegate.configure(with: unauthorizedPage)
+//        appDelegate.configure(with: authorizedPage)
+        
         
         let username = UserDefaults.standard.string(forKey: "username") ?? ""
         let password = UserDefaults.standard.string(forKey: "password") ?? ""
@@ -111,30 +112,6 @@ extension AppCoordinator: RegisterSucceed {
     }
 }
 
-extension AppCoordinator: StartTheRoom {
-    func startTheRoom(on viewController: UIViewController) {
-        let token = UserDefaults.standard.string(forKey: "token") ?? ""
-        let slug = UserDefaults.standard.string(forKey: "roomSlug") ?? ""
-        
-        networkSerivce.startRoom(token: token, slug: slug) { [weak self] response in
-            guard let self = self else { return }
-            
-            switch response {
-                case .success:
-                    let tabBar = UITabBarController()
-                    tabBar.setViewControllers([
-                        self.cardViewController,
-                        self.ratedCollectionViewController
-                    ], animated: true)
-                    
-                    viewController.navigationController?.pushViewController(tabBar, animated: true)
-                case .failure(let error):
-                    print(error.rawValue)
-            }
-        }
-    }
-}
-
 extension AppCoordinator: JoinToTheRoom {
     func JoinToTheRoom(on viewController: UIViewController, roomId: String, failedToJoin: @escaping () -> Void) {
         let token = UserDefaults.standard.string(forKey: "token") ?? ""
@@ -144,6 +121,8 @@ extension AppCoordinator: JoinToTheRoom {
             switch response {
             case .success(let roomDTO):
                 UserDefaults.standard.set(roomDTO.id, forKey: "roomId")
+                UserDefaults.standard.set(roomDTO.users.count, forKey: "partyAmount")
+                
                 let waitingRoom = WaitingRoomController()
                 waitingRoom.appCoordinator = self
                 
@@ -168,5 +147,29 @@ extension AppCoordinator: WaitingForOthers {
         ], animated: true)
         
         viewController.navigationController?.pushViewController(tabBar, animated: true)
+    }
+}
+
+extension AppCoordinator: StartTheRoom {
+    func startTheRoom(on viewController: UIViewController) {
+        let token = UserDefaults.standard.string(forKey: "token") ?? ""
+        let slug = UserDefaults.standard.string(forKey: "roomSlug") ?? ""
+        
+        networkSerivce.startRoom(token: token, slug: slug) { [weak self] response in
+            guard let self = self else { return }
+            
+            switch response {
+                case .success:
+                    let tabBar = UITabBarController()
+                    tabBar.setViewControllers([
+                        self.cardViewController,
+                        self.ratedCollectionViewController
+                    ], animated: true)
+                    
+                    viewController.navigationController?.pushViewController(tabBar, animated: true)
+                case .failure(let error):
+                    print(error.rawValue)
+            }
+        }
     }
 }

@@ -208,8 +208,6 @@
 		8E20435327DBDF8A0031EF2C /* Deck */ = {
 			isa = PBXGroup;
 			children = (
-				8E20435427DBDFA20031EF2C /* CardViewController.swift */,
-				07A9A0382800976A0092A616 /* RatedCollectionViewController.swift */,
 				07B000942806C6A100F7E442 /* UnauthorizedPageViewController.swift */,
 				075B47932828153400C3A083 /* LoginViewController.swift */,
 				075B47952828183900C3A083 /* RegisterViewController.swift */,
@@ -217,6 +215,8 @@
 				07B000962806E49300F7E442 /* RoomIdController.swift */,
 				07B0009828070EEB00F7E442 /* CreateRoomController.swift */,
 				075B47912826A66300C3A083 /* WaitingRoomController.swift */,
+				8E20435427DBDFA20031EF2C /* CardViewController.swift */,
+				07A9A0382800976A0092A616 /* RatedCollectionViewController.swift */,
 			);
 			path = Deck;
 			sourceTree = "<group>";
