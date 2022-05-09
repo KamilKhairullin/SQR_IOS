@@ -108,12 +108,9 @@ class LoginViewController: UIViewController {
 // MARK: -- objc
     
     @objc private func nextButtonClicked() {
-        guard let username = usernameInputField.text else {
-            return
-        }
-        guard let password = passwordInputField.text else {
-            return
-        }
+        guard let username = usernameInputField.text,
+              let password = passwordInputField.text
+        else { return }
         
         let isUsernameCorrect = checkUsername(username: username)
         let isPasswordCorrect = checkPassword(password: password)
@@ -130,6 +127,18 @@ class LoginViewController: UIViewController {
                 passwordInputField.placeholder = "Incorrect format"
             }
         } else {
+            let userDTO = UserDTO(login: username, password: password)
+            
+            networkSerivce.login(credentials: userDTO) { [weak self] response in
+                switch response {
+                case .success:
+                    UserDefaults.standard.set(username, forKey: "username")
+                    UserDefaults.standard.set(password, forKey: "password")
+                case .failure:
+                    self?.appDelegate.configure(with: self?.unauthorizedPage ?? UIViewController())
+                }
+            }
+            
             UserDefaults.standard.set(username, forKey: "username")
             UserDefaults.standard.set(password, forKey: "password")
             
@@ -137,7 +146,7 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            appCoordinator.loginSuccess()
+            //appCoordinator.loginSuccess()
         }
     }
     

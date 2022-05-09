@@ -83,7 +83,7 @@ class WaitingRoomController: UIViewController {
         setupViews()
         
         if let appCoordinator = appCoordinator {
-            appCoordinator.userWaitingRoom()
+            //appCoordinator.userWaitingRoom()
         }
     }
     

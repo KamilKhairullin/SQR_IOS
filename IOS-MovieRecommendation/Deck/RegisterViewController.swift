@@ -136,7 +136,7 @@ class RegisterViewController: UIViewController {
                 return
             }
             
-            appCoordinator.registerSuccess()
+            //appCoordinator.registerSuccess()
 //            self.navigationController?.popViewController(animated: true)
         }
     }

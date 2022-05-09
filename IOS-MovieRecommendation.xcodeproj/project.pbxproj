@@ -12,8 +12,8 @@
 		075B47962828183900C3A083 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075B47952828183900C3A083 /* RegisterViewController.swift */; };
 		07A9A037280096B60092A616 /* blacknote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A9A036280096B60092A616 /* blacknote.swift */; };
 		07A9A0392800976A0092A616 /* RatedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A9A0382800976A0092A616 /* RatedCollectionViewController.swift */; };
-		07B000932806BA3E00F7E442 /* JoinCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B000922806BA3E00F7E442 /* JoinCreateViewController.swift */; };
-		07B000952806C6A100F7E442 /* LoginRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B000942806C6A100F7E442 /* LoginRegisterViewController.swift */; };
+		07B000932806BA3E00F7E442 /* AuthorizedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B000922806BA3E00F7E442 /* AuthorizedPageViewController.swift */; };
+		07B000952806C6A100F7E442 /* UnauthorizedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B000942806C6A100F7E442 /* UnauthorizedPageViewController.swift */; };
 		07B000972806E49300F7E442 /* RoomIdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B000962806E49300F7E442 /* RoomIdController.swift */; };
 		07B0009928070EEB00F7E442 /* CreateRoomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B0009828070EEB00F7E442 /* CreateRoomController.swift */; };
 		07C610CE2805980800338E77 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C610CD2805980800338E77 /* NetworkService.swift */; };
@@ -68,8 +68,8 @@
 		075B47952828183900C3A083 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		07A9A036280096B60092A616 /* blacknote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blacknote.swift; sourceTree = "<group>"; };
 		07A9A0382800976A0092A616 /* RatedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatedCollectionViewController.swift; sourceTree = "<group>"; };
-		07B000922806BA3E00F7E442 /* JoinCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCreateViewController.swift; sourceTree = "<group>"; };
-		07B000942806C6A100F7E442 /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterViewController.swift; sourceTree = "<group>"; };
+		07B000922806BA3E00F7E442 /* AuthorizedPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizedPageViewController.swift; sourceTree = "<group>"; };
+		07B000942806C6A100F7E442 /* UnauthorizedPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthorizedPageViewController.swift; sourceTree = "<group>"; };
 		07B000962806E49300F7E442 /* RoomIdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomIdController.swift; sourceTree = "<group>"; };
 		07B0009828070EEB00F7E442 /* CreateRoomController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomController.swift; sourceTree = "<group>"; };
 		07C610CD2805980800338E77 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -210,10 +210,10 @@
 			children = (
 				8E20435427DBDFA20031EF2C /* CardViewController.swift */,
 				07A9A0382800976A0092A616 /* RatedCollectionViewController.swift */,
-				07B000942806C6A100F7E442 /* LoginRegisterViewController.swift */,
+				07B000942806C6A100F7E442 /* UnauthorizedPageViewController.swift */,
 				075B47932828153400C3A083 /* LoginViewController.swift */,
 				075B47952828183900C3A083 /* RegisterViewController.swift */,
-				07B000922806BA3E00F7E442 /* JoinCreateViewController.swift */,
+				07B000922806BA3E00F7E442 /* AuthorizedPageViewController.swift */,
 				07B000962806E49300F7E442 /* RoomIdController.swift */,
 				07B0009828070EEB00F7E442 /* CreateRoomController.swift */,
 				075B47912826A66300C3A083 /* WaitingRoomController.swift */,
@@ -409,9 +409,9 @@
 				8E8D23C027DCE91800A73C57 /* AppCoordinator .swift in Sources */,
 				075B47962828183900C3A083 /* RegisterViewController.swift in Sources */,
 				075B47942828153400C3A083 /* LoginViewController.swift in Sources */,
-				07B000952806C6A100F7E442 /* LoginRegisterViewController.swift in Sources */,
+				07B000952806C6A100F7E442 /* UnauthorizedPageViewController.swift in Sources */,
 				8E4CD69D27DD18ED00B36ADF /* MockNetworkClient.swift in Sources */,
-				07B000932806BA3E00F7E442 /* JoinCreateViewController.swift in Sources */,
+				07B000932806BA3E00F7E442 /* AuthorizedPageViewController.swift in Sources */,
 				8E4CD69027DD14D000B36ADF /* HTTPError.swift in Sources */,
 				8E4CD68E27DD13EC00B36ADF /* Movie.swift in Sources */,
 				8E20432427DBDB150031EF2C /* AppDelegate.swift in Sources */,

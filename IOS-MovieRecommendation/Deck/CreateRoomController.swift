@@ -119,7 +119,7 @@ class CreateRoomController: UIViewController {
 // MARK: -- objc
     
     @objc private func startButtonClicked() {
-        coordinator?.roomStarted(on: self)
+        //coordinator?.roomStarted(on: self)
     }
     
 // MARK: -- func

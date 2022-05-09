@@ -8,7 +8,7 @@
 import UIKit
  
 
-class JoinCreateViewController: UIViewController {
+class AuthorizedPageViewController: UIViewController {
     
     public var appCoordinator: AppCoordinator?
     

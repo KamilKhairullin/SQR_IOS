@@ -26,11 +26,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
         }
         
-        let coordinator = AppCoordinator()
+        let unauthorizedPage = UnauthorizedPageViewController()
+        let authorizedPage = AuthorizedPageViewController()
+        let cardViewController = CardViewController()
+        let ratedCollectionViewController = RatedCollectionViewController()
+        let networkClient = NetworkClientImp(urlSession: .init(configuration: .default))
+        let networkService = NetworkServiceImp(networkClient: networkClient)
+        
+        let appCoordinator = AppCoordinator(
+            unauthorizedPage: unauthorizedPage,
+            authorizedPage: authorizedPage,
+            cardViewController: cardViewController,
+            ratedCollectionViewController: ratedCollectionViewController,
+            networkSerivce: networkService,
+            appDelegate: self
+        )
+        
+        unauthorizedPage.appCoordinator = appCoordinator
+        authorizedPage.appCoordinator = appCoordinator
+        cardViewController.moviewCollectionDelegate = ratedCollectionViewController
+        
         let navigationController = UINavigationController()
-        navigationController.viewControllers = [coordinator.tabBarController]
+        navigationController.viewControllers = [UIViewController()]
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+        appCoordinator.getStartingPage()
         return true
+    }
+}
+
+extension AppDelegate: Configurable {
+    func configure(with viewController: UIViewController) {
+        let navigationController = UINavigationController()
+        navigationController.viewControllers = [viewController]
+        window?.rootViewController = navigationController
     }
 }

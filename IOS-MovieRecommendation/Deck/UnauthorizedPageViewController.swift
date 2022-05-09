@@ -8,7 +8,7 @@
 import UIKit
  
 
-class LoginRegisterViewController: UIViewController {
+class UnauthorizedPageViewController: UIViewController {
 
     public var appCoordinator: AppCoordinator?
     
@@ -98,7 +98,6 @@ class LoginRegisterViewController: UIViewController {
             }
         }
     
-        
         loginPage.appCoordinator = appCoordinator
         self.navigationController?.pushViewController(loginPage, animated: true)
         
