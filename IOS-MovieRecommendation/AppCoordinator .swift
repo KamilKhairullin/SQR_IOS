@@ -44,28 +44,28 @@ final class AppCoordinator {
     
     public func getStartingPage() {
 //        appDelegate.configure(with: authorizedPage)
-        let tabBar = UITabBarController()
-        tabBar.setViewControllers([
-            self.cardViewController,
-            self.ratedCollectionViewController
-        ], animated: true)
-        
-        appDelegate.configure(with: tabBar)
-        
-        
-//        let username = UserDefaults.standard.string(forKey: "username") ?? ""
-//        let password = UserDefaults.standard.string(forKey: "password") ?? ""
-//        let userDTO = UserDTO(login: username, password: password)
+//        let tabBar = UITabBarController()
+//        tabBar.setViewControllers([
+//            self.cardViewController,
+//            self.ratedCollectionViewController
+//        ], animated: true)
 //
-//        networkSerivce.login(credentials: userDTO) { [weak self] response in
-//            switch response {
-//            case .success(let data):
-//                UserDefaults.standard.set(data.token, forKey: "token")
-//                self?.appDelegate.configure(with: self?.authorizedPage ?? UIViewController())
-//            case .failure:
-//                self?.appDelegate.configure(with: self?.unauthorizedPage ?? UIViewController())
-//            }
-//        }
+//        appDelegate.configure(with: tabBar)
+        
+        
+        let username = UserDefaults.standard.string(forKey: "username") ?? ""
+        let password = UserDefaults.standard.string(forKey: "password") ?? ""
+        let userDTO = UserDTO(login: username, password: password)
+
+        networkSerivce.login(credentials: userDTO) { [weak self] response in
+            switch response {
+            case .success(let data):
+                UserDefaults.standard.set(data.token, forKey: "token")
+                self?.appDelegate.configure(with: self?.authorizedPage ?? UIViewController())
+            case .failure:
+                self?.appDelegate.configure(with: self?.unauthorizedPage ?? UIViewController())
+            }
+        }
     }
     
     // MARK: - Private
