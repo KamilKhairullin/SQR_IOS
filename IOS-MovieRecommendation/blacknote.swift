@@ -89,3 +89,35 @@
 //            ], animated: true)
 //        }
         
+
+// MARK: -- MockNetwork
+//    private var currentMovie = Movie(id: "0", title: "Title", posterURL: "URL", description: "Description", rating: 0.0, ratingBorder: 0.0)
+
+//        network.getNextRecommendation(for: 1) { [weak self] result in
+//            guard let self = self else {
+//                return
+//            }
+//            switch result {
+//            case .success(let movie):
+//                self.currentMovie = movie
+//                UIView.transition(
+//                    with: self.moviePoster,
+//                    duration: 0.5,
+//                    options: .transitionCrossDissolve,
+//                    animations: { [self] in
+//                        let url = URL(string: movie.posterURL ?? "") ?? URL(fileURLWithPath: "1")
+//                        self.downloadImage(from: url)
+//                    },
+//                    completion: nil
+//                )
+//
+//                self.movieTitle.text = movie.title
+//                self.movieRating.text = String(movie.rating ?? 0.0)
+//                self.movieDescription.text = movie.description
+//
+//                self.descriptionScrollableView.contentOffset = CGPoint.zero
+//                self.posterBottomFade.locations = [0.4, 0.8, 1]
+//            case .failure:
+//                break
+//            }
+//        }

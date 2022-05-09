@@ -11,9 +11,18 @@ import UIKit
 
 class CardViewController: UIViewController {
     
-    private let network = MockNetworkService(networkClient: nil)
-    
     public var moviewCollectionDelegate: RatedCollectionDelegate?
+    var networkService: NetworkService
+    
+    init(networkService: NetworkService) {
+        self.networkService = networkService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     private var screenTitle: UILabel = {
         let label = UILabel()
@@ -25,7 +34,6 @@ class CardViewController: UIViewController {
         return label
     }()
     
-//    private var currentMovie = Movie(id: "0", title: "Title", posterURL: "URL", description: "Description", rating: 0.0, ratingBorder: 0.0)
     private var currentMovie = MovieDTO(
         id: "id", name: "name", posterUrl: "URL", description: "Description",
         rating: Rating(kinopoisk: 1.1, imdb: 2.2, tmdb: 3.3),
@@ -331,9 +339,21 @@ class CardViewController: UIViewController {
             return
         }
         
-        moviewCollectionDelegate.addMovieToCollection(movie: currentMovie, image: currentMovieImage!)
+        let token = UserDefaults.standard.string(forKey: "token") ?? ""
+        let slug = UserDefaults.standard.string(forKey: "roomSlug") ?? ""
+        let movieId = currentMovie.id
         
-        nextPoster()
+        networkService.like(token: token, slug: slug, movieId: movieId) { [weak self] response in
+            guard let self = self else { return }
+            
+            switch response {
+                case .success:
+                    moviewCollectionDelegate.addMovieToCollection(movie: self.currentMovie, image: self.currentMovieImage!)
+                    self.nextPoster()
+                case .failure(let error):
+                    print(error.rawValue)
+            }
+        }
     }
     
     private func movieDisliked() {
@@ -341,36 +361,39 @@ class CardViewController: UIViewController {
     }
     
     private func nextPoster() {
+        moviePoster.image = UIImage(named: "Leon")
+        let token = UserDefaults.standard.string(forKey: "token") ?? ""
+        let slug = UserDefaults.standard.string(forKey: "roomSlug") ?? ""
         
-        
-//        network.getNextRecommendation(for: 1) { [weak self] result in
-//            guard let self = self else {
-//                return
-//            }
-//            switch result {
-//            case .success(let movie):
-//                self.currentMovie = movie
-//                UIView.transition(
-//                    with: self.moviePoster,
-//                    duration: 0.5,
-//                    options: .transitionCrossDissolve,
-//                    animations: { [self] in
-//                        let url = URL(string: movie.posterURL ?? "") ?? URL(fileURLWithPath: "1")
-//                        self.downloadImage(from: url)
-//                    },
-//                    completion: nil
-//                )
-//
-//                self.movieTitle.text = movie.title
-//                self.movieRating.text = String(movie.rating ?? 0.0)
-//                self.movieDescription.text = movie.description
-//
-//                self.descriptionScrollableView.contentOffset = CGPoint.zero
-//                self.posterBottomFade.locations = [0.4, 0.8, 1]
-//            case .failure:
-//                break
-//            }
-//        }
+        networkService.recommend(token: token, slug: slug) { [weak self] response in
+            guard let self = self else { return }
+            
+            switch response {
+                case .success(let movie):
+                    self.currentMovie = movie
+                    UIView.transition(
+                       with: self.moviePoster,
+                       duration: 0.5,
+                       options: .transitionCrossDissolve,
+                       animations: { [self] in
+                           let url = URL(string: movie.posterUrl) ?? URL(fileURLWithPath: "1")
+                           self.downloadImage(from: url)
+                       },
+                       completion: nil
+                    )
+                
+                    self.movieTitle.text = movie.name
+                    self.movieRating.text = String(movie.rating.imdb)
+                    self.movieDescription.text = movie.description
+    
+                    self.descriptionScrollableView.contentOffset = CGPoint.zero
+                    self.posterBottomFade.locations = [0.4, 0.8, 1]
+                
+                case .failure(let error):
+                    print(error.rawValue)
+            }
+        }
+
     }
     
     private func resetSwipeFades() {

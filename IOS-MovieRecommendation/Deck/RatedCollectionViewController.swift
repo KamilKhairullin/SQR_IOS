@@ -19,6 +19,19 @@ protocol RatedCollectionDelegate: AnyObject {
 class RatedCollectionViewController: UIViewController {
     
     private var movieCollection: [MovieCard]
+    var networkService: NetworkService
+    
+    init(networkService: NetworkService) {
+        self.movieCollection = [MovieCard]()
+        self.networkService = networkService
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     private var screenTitle: UILabel = {
         let label = UILabel()
@@ -71,14 +84,6 @@ class RatedCollectionViewController: UIViewController {
     
     
 // MARK: -- override functions
-    init(){
-        self.movieCollection = [MovieCard]()
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
