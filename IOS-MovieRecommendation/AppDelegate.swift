@@ -46,11 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         authorizedPage.appCoordinator = appCoordinator
         cardViewController.moviewCollectionDelegate = ratedCollectionViewController
         
-        let navigationController = UINavigationController()
-        navigationController.viewControllers = [UIViewController()]
-        window?.rootViewController = navigationController
+        window?.rootViewController = UIViewController()
         window?.makeKeyAndVisible()
-        appCoordinator.getStartingPage()
         return true
     }
 }

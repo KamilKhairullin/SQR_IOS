@@ -39,20 +39,11 @@ final class AppCoordinator {
         self.appDelegate = appDelegate
         
         setupDesign()
-
+        getStartingPage()
     }
     
     public func getStartingPage() {
-//        appDelegate.configure(with: authorizedPage)
-//        let tabBar = UITabBarController()
-//        tabBar.setViewControllers([
-//            self.cardViewController,
-//            self.ratedCollectionViewController
-//        ], animated: true)
-//
-//        appDelegate.configure(with: tabBar)
-        
-        
+      
         let username = UserDefaults.standard.string(forKey: "username") ?? ""
         let password = UserDefaults.standard.string(forKey: "password") ?? ""
         let userDTO = UserDTO(login: username, password: password)
@@ -175,6 +166,7 @@ extension AppCoordinator: StartTheRoom {
                     
                     viewController.navigationController?.pushViewController(tabBar, animated: true)
                 case .failure(let error):
+                    print("here")
                     print(error.rawValue)
             }
         }

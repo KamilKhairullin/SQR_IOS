@@ -5,7 +5,7 @@ struct RoomDTO: Decodable {
     let slug: String
     let creator: String
     let users: [String]
-    let status: RoomStatus
+    let status: String
 }
 
 enum RoomStatus: Decodable {

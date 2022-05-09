@@ -137,7 +137,7 @@ class WaitingRoomController: UIViewController {
 //            roomIdLabel.bottomAnchor.constraint(equalTo: idLabel.bottomAnchor)
             roomIdLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -32)
         ])
-        
+
 //        view.addSubview(partyLabel)
 //        view.addSubview(amountLabel)
 //        NSLayoutConstraint.activate([

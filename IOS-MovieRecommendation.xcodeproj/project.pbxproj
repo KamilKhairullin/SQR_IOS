@@ -18,6 +18,7 @@
 		07B0009928070EEB00F7E442 /* CreateRoomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B0009828070EEB00F7E442 /* CreateRoomController.swift */; };
 		07C610CE2805980800338E77 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C610CD2805980800338E77 /* NetworkService.swift */; };
 		07C610D02805991100338E77 /* mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 07C610CF2805991000338E77 /* mock.json */; };
+		8E10DD3C2829206000C11053 /* LoginFieldTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10DD3B2829206000C11053 /* LoginFieldTest.swift */; };
 		8E20432427DBDB150031EF2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20432327DBDB150031EF2C /* AppDelegate.swift */; };
 		8E20432B27DBDB150031EF2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E20432927DBDB150031EF2C /* Main.storyboard */; };
 		8E20432D27DBDB160031EF2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E20432C27DBDB160031EF2C /* Assets.xcassets */; };
@@ -74,6 +75,7 @@
 		07B0009828070EEB00F7E442 /* CreateRoomController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomController.swift; sourceTree = "<group>"; };
 		07C610CD2805980800338E77 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		07C610CF2805991000338E77 /* mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mock.json; sourceTree = "<group>"; };
+		8E10DD3B2829206000C11053 /* LoginFieldTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFieldTest.swift; sourceTree = "<group>"; };
 		8E20432027DBDB150031EF2C /* IOS-MovieRecommendation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-MovieRecommendation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E20432327DBDB150031EF2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E20432A27DBDB150031EF2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -135,6 +137,22 @@
 			children = (
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		8E10DD392829203600C11053 /* Cases */ = {
+			isa = PBXGroup;
+			children = (
+				8E10DD3A2829204300C11053 /* Login */,
+			);
+			path = Cases;
+			sourceTree = "<group>";
+		};
+		8E10DD3A2829204300C11053 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				8E10DD3B2829206000C11053 /* LoginFieldTest.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		8E1697DA27DD0F27005FD4F6 /* Services */ = {
@@ -199,6 +217,7 @@
 		8E20434327DBDB160031EF2C /* IOS-MovieRecommendationUITests */ = {
 			isa = PBXGroup;
 			children = (
+				8E10DD392829203600C11053 /* Cases */,
 				8E20434427DBDB160031EF2C /* IOS_MovieRecommendationUITests.swift */,
 				8E20434627DBDB160031EF2C /* IOS_MovieRecommendationUITestsLaunchTests.swift */,
 			);
@@ -449,6 +468,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E20434727DBDB160031EF2C /* IOS_MovieRecommendationUITestsLaunchTests.swift in Sources */,
+				8E10DD3C2829206000C11053 /* LoginFieldTest.swift in Sources */,
 				8E20434527DBDB160031EF2C /* IOS_MovieRecommendationUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

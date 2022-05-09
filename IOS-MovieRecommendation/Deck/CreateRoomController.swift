@@ -43,7 +43,7 @@ class CreateRoomController: UIViewController {
     let roomIdLabel: UILabel = {
         let l = UILabel()
         l.text = "loading"
-        l.font = .systemFont(ofSize: 56)
+        l.font = .systemFont(ofSize: 36)
         l.textColor = ColorPalette.customWhite
         
         l.translatesAutoresizingMaskIntoConstraints = false
@@ -115,7 +115,7 @@ class CreateRoomController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.tintColor = ColorPalette.customYellow
     }
     
@@ -136,20 +136,13 @@ class CreateRoomController: UIViewController {
     
     private func setupViews() {
         
-//        view.addSubview(qrImageView)
-//        NSLayoutConstraint.activate([
-//            qrImageView.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 32),
-//            qrImageView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 32),
-//            qrImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            qrImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -(view.safeAreaLayoutGuide.layoutFrame.width - 32)/8)
-//        ])
-        
         view.addSubview(idLabel)
         view.addSubview(roomIdLabel)
         NSLayoutConstraint.activate([
             idLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 56),
             idLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -128),
             
+            roomIdLabel.leadingAnchor.constraint(equalTo: idLabel.trailingAnchor),
             roomIdLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -56),
             roomIdLabel.bottomAnchor.constraint(equalTo: idLabel.bottomAnchor)
         ])
@@ -185,7 +178,7 @@ class CreateRoomController: UIViewController {
                 UserDefaults.standard.set(roomDTO.id, forKey: "roomId")
                 UserDefaults.standard.set(roomDTO.slug, forKey: "roomSlug")
                 
-                self?.idLabel.text = roomDTO.id
+                self?.roomIdLabel.text = roomDTO.slug
                 self?.amountLabel.text = String(roomDTO.users.count)
             case .failure(let error):
                 print(error.rawValue)
