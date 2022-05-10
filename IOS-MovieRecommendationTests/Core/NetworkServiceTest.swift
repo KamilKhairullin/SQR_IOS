@@ -20,7 +20,7 @@ class NetworkSerivceTest: XCTestCase {
         var result = false
         let exp = expectation(description: "aboba")
 
-        networkService.login(credentials: UserDTO(login: "mock", password: "mock")) { [weak self] response in
+        networkService.login(credentials: UserDTO(login: "mock", password: "mock")) { response in
             switch response {
             case .success:
                 result = true
@@ -47,7 +47,7 @@ class NetworkSerivceTest: XCTestCase {
         var result = false
         let exp = expectation(description: "aboba")
 
-        networkService.register(credentials: UserDTO(login: "mock", password: "mock")) { [weak self] response in
+        networkService.register(credentials: UserDTO(login: "mock", password: "mock")) { response in
             switch response {
             case .success:
                 result = true
@@ -74,7 +74,7 @@ class NetworkSerivceTest: XCTestCase {
         var result = false
         let exp = expectation(description: "aboba")
 
-        networkService.startRoom(token: "mock", slug: "mock") { [weak self] response in
+        networkService.startRoom(token: "mock", slug: "mock") { response in
             switch response {
             case .success:
                 result = true
@@ -101,7 +101,7 @@ class NetworkSerivceTest: XCTestCase {
         var result = false
         let exp = expectation(description: "aboba")
 
-        networkService.join(token: "mock", slug: "mock") { [weak self] response in
+        networkService.join(token: "mock", slug: "mock") { response in
             switch response {
             case .success:
                 result = true
@@ -128,7 +128,7 @@ class NetworkSerivceTest: XCTestCase {
         var result = false
         let exp = expectation(description: "aboba")
 
-        networkService.like(token: "mock", slug: "mock", movieId: "mock") { [weak self] response in
+        networkService.like(token: "mock", slug: "mock", movieId: "mock") { response in
             switch response {
             case .success:
                 result = true

@@ -19,12 +19,12 @@ class HTTPNetworkResponseTest: XCTestCase {
             statusCode: 200,
             httpVersion: "mock",
             headerFields: nil
-        ) as? HTTPURLResponse
+        )
 
         let httpResponse = HTTPNetworkResponse.handleNetworkResponse(for: response)
         switch httpResponse {
         case .failure:
-            XCTFail()
+            XCTFail("Test failed")
         default:
             break
         }
@@ -37,12 +37,12 @@ class HTTPNetworkResponseTest: XCTestCase {
             statusCode: 401,
             httpVersion: "mock",
             headerFields: nil
-        ) as? HTTPURLResponse
+        )
 
         let httpResponse = HTTPNetworkResponse.handleNetworkResponse(for: response)
         switch httpResponse {
         case .success:
-            XCTFail()
+            XCTFail("Test failed")
         default:
             break
         }
@@ -55,12 +55,12 @@ class HTTPNetworkResponseTest: XCTestCase {
             statusCode: 400,
             httpVersion: "mock",
             headerFields: nil
-        ) as? HTTPURLResponse
+        )
 
         let httpResponse = HTTPNetworkResponse.handleNetworkResponse(for: response)
         switch httpResponse {
         case .success:
-            XCTFail()
+            XCTFail("Test failed")
         default:
             break
         }
@@ -73,12 +73,12 @@ class HTTPNetworkResponseTest: XCTestCase {
             statusCode: 501,
             httpVersion: "mock",
             headerFields: nil
-        ) as? HTTPURLResponse
+        )
 
         let httpResponse = HTTPNetworkResponse.handleNetworkResponse(for: response)
         switch httpResponse {
         case .success:
-            XCTFail()
+            XCTFail("Test failed")
         default:
             break
         }
