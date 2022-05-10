@@ -21,6 +21,7 @@ final class AppCoordinator {
     private var ratedCollectionViewController: RatedCollectionViewController
     private var networkSerivce: NetworkService
     private weak var appDelegate: AppDelegate?
+
     // MARK: - Lifecycle
 
     init(
@@ -50,7 +51,7 @@ final class AppCoordinator {
 
         networkSerivce.login(credentials: userDTO) { [weak self] response in
             switch response {
-            case .success(let data):
+            case let .success(data):
                 UserDefaults.standard.set(data.token, forKey: "token")
                 self?.appDelegate?.configure(with: self?.authorizedPage ?? UIViewController())
             case .failure:
@@ -70,25 +71,37 @@ final class AppCoordinator {
 
     private func setupUnauthorizedPageDesign() {
         unauthorizedPage.tabBarItem.title = "Login"
-        unauthorizedPage.tabBarItem.selectedImage = .add.withTintColor(ColorPalette.customYellow, renderingMode: .alwaysOriginal)
+        unauthorizedPage.tabBarItem.selectedImage = .add.withTintColor(
+            ColorPalette.customYellow,
+            renderingMode: .alwaysOriginal
+        )
         unauthorizedPage.tabBarItem.image = .add.withTintColor(.systemGray)
     }
 
     private func setupAuthorizedPageDesign() {
         authorizedPage.tabBarItem.title = "Join"
-        authorizedPage.tabBarItem.selectedImage = .add.withTintColor(ColorPalette.customYellow, renderingMode: .alwaysOriginal)
+        authorizedPage.tabBarItem.selectedImage = .add.withTintColor(
+            ColorPalette.customYellow,
+            renderingMode: .alwaysOriginal
+        )
         authorizedPage.tabBarItem.image = .add.withTintColor(.systemGray)
     }
 
     private func setupCardViewControllerDesign() {
         cardViewController.tabBarItem.title = "Movies"
-        cardViewController.tabBarItem.selectedImage = .add.withTintColor(ColorPalette.customYellow, renderingMode: .alwaysOriginal)
+        cardViewController.tabBarItem.selectedImage = .add.withTintColor(
+            ColorPalette.customYellow,
+            renderingMode: .alwaysOriginal
+        )
         cardViewController.tabBarItem.image = .add.withTintColor(.systemGray)
     }
 
     private func setupRatedCollectionViewDesign() {
         ratedCollectionViewController.tabBarItem.title = "Ratings"
-        ratedCollectionViewController.tabBarItem.selectedImage = .add.withTintColor(ColorPalette.customYellow, renderingMode: .alwaysOriginal)
+        ratedCollectionViewController.tabBarItem.selectedImage = .add.withTintColor(
+            ColorPalette.customYellow,
+            renderingMode: .alwaysOriginal
+        )
         ratedCollectionViewController.tabBarItem.image = .add.withTintColor(.systemGray)
     }
 }
@@ -96,14 +109,14 @@ final class AppCoordinator {
 extension AppCoordinator: LoginSucceed {
     func loginSucceed(on viewController: UIViewController, with token: String) {
         UserDefaults.standard.set(token, forKey: "token")
-        viewController.navigationController?.pushViewController(self.authorizedPage, animated: true)
+        viewController.navigationController?.pushViewController(authorizedPage, animated: true)
     }
 }
 
 extension AppCoordinator: RegisterSucceed {
     func registerSucceed(on viewController: UIViewController, with token: String) {
         UserDefaults.standard.set(token, forKey: "token")
-        viewController.navigationController?.pushViewController(self.authorizedPage, animated: true)
+        viewController.navigationController?.pushViewController(authorizedPage, animated: true)
     }
 }
 
@@ -114,7 +127,7 @@ extension AppCoordinator: JoinToTheRoom {
 
         networkSerivce.join(token: token, slug: slug) { [weak self] response in
             switch response {
-            case .success(let roomDTO):
+            case let .success(roomDTO):
                 UserDefaults.standard.set(roomDTO.id, forKey: "roomId")
                 UserDefaults.standard.set(roomDTO.users.count, forKey: "partyAmount")
 
@@ -122,7 +135,7 @@ extension AppCoordinator: JoinToTheRoom {
                 waitingRoom.appCoordinator = self
 
                 viewController.navigationController?.pushViewController(waitingRoom, animated: true)
-            case .failure(let error):
+            case let .failure(error):
                 failedToJoin()
                 print(error.rawValue)
             }
@@ -136,8 +149,8 @@ extension AppCoordinator: WaitingForOthers {
 
         let tabBar = UITabBarController()
         tabBar.setViewControllers([
-            self.cardViewController,
-            self.ratedCollectionViewController
+            cardViewController,
+            ratedCollectionViewController
         ], animated: true)
 
         viewController.navigationController?.pushViewController(tabBar, animated: true)
@@ -153,17 +166,17 @@ extension AppCoordinator: StartTheRoom {
             guard let self = self else { return }
 
             switch response {
-                case .success:
-                    let tabBar = UITabBarController()
-                    tabBar.setViewControllers([
-                        self.cardViewController,
-                        self.ratedCollectionViewController
-                    ], animated: true)
+            case .success:
+                let tabBar = UITabBarController()
+                tabBar.setViewControllers([
+                    self.cardViewController,
+                    self.ratedCollectionViewController
+                ], animated: true)
 
-                    viewController.navigationController?.pushViewController(tabBar, animated: true)
-                case .failure(let error):
-                    print("here")
-                    print(error.rawValue)
+                viewController.navigationController?.pushViewController(tabBar, animated: true)
+            case let .failure(error):
+                print("here")
+                print(error.rawValue)
             }
         }
     }

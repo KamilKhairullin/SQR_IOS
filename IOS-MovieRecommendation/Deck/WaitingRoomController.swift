@@ -1,10 +1,3 @@
-//
-//  WaitingRoomController.swift
-//  IOS-MovieRecommendation
-//
-//  Created by Bekzhan Talgat on 07.05.2022.
-//
-
 import UIKit
 
 protocol WaitingForOthers {
@@ -75,7 +68,7 @@ class WaitingRoomController: UIViewController {
         return l
     }()
 
-// MARK: - - lifecycle, override
+    // MARK: - - lifecycle, override
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,20 +94,11 @@ class WaitingRoomController: UIViewController {
 
     }
 
-// MARK: - - objc
+    // MARK: - - objc
 
-// MARK: - - func
+    // MARK: - - func
 
     private func setupViews() {
-
-//        view.addSubview(qrImageView)
-//        NSLayoutConstraint.activate([
-//            qrImageView.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 128),
-//            qrImageView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.width - 128),
-//            qrImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            qrImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -(view.safeAreaLayoutGuide.layoutFrame.width - 32)/8)
-//        ])
-
         view.addSubview(idLabel)
         view.addSubview(roomIdLabel)
         NSLayoutConstraint.activate([

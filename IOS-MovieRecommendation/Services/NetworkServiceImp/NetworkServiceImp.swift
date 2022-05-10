@@ -16,7 +16,10 @@ final class NetworkServiceImp: NetworkService {
         credentials: UserDTO,
         completion: @escaping (Result<TokenDTO, HTTPError>) -> Void
     ) -> Cancellable? {
-        networkClient.processRequest(request: createRegistrationRequest(credentials: credentials), completion: completion)
+        networkClient.processRequest(
+            request: createRegistrationRequest(credentials: credentials),
+            completion: completion
+        )
     }
 
     @discardableResult
@@ -60,7 +63,10 @@ final class NetworkServiceImp: NetworkService {
         movieId: String,
         completion: @escaping (Result<Bool, HTTPError>) -> Void
     ) -> Cancellable? {
-        networkClient.processRequest(request: likeRequest(token: token, slug: slug, movieId: movieId), completion: completion)
+        networkClient.processRequest(
+            request: likeRequest(token: token, slug: slug, movieId: movieId),
+            completion: completion
+        )
     }
 
     @discardableResult
@@ -106,6 +112,7 @@ final class NetworkServiceImp: NetworkService {
     ) -> Cancellable? {
         networkClient.processRequest(request: getRoomInfoRequest(token: token, slug: slug), completion: completion)
     }
+
     // MARK: - Private methods
 
     private func createRegistrationRequest(credentials: UserDTO) -> HTTPRequest {
@@ -116,7 +123,8 @@ final class NetworkServiceImp: NetworkService {
                 "application/json": "Content-Type",
                 "gzip, deflate": "Accept-Encoding"
             ],
-            body: try? JSONSerialization.data(withJSONObject:
+            body: try? JSONSerialization.data(
+                withJSONObject:
                 [
                     "username": credentials.login,
                     "password": credentials.password
@@ -134,7 +142,8 @@ final class NetworkServiceImp: NetworkService {
                 "application/json": "Content-Type",
                 "gzip, deflate": "Accept-Encoding"
             ],
-            body: try? JSONSerialization.data(withJSONObject:
+            body: try? JSONSerialization.data(
+                withJSONObject:
                 [
                     "username": credentials.login,
                     "password": credentials.password
@@ -192,7 +201,8 @@ final class NetworkServiceImp: NetworkService {
                 "gzip, deflate": "Accept-Encoding",
                 "Bearer \(token)": "Authorization"
             ],
-            body: try? JSONSerialization.data(withJSONObject:
+            body: try? JSONSerialization.data(
+                withJSONObject:
                 [
                     "movieId": movieId
                 ]

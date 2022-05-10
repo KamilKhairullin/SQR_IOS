@@ -23,8 +23,6 @@
 		8E20432D27DBDB160031EF2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E20432C27DBDB160031EF2C /* Assets.xcassets */; };
 		8E20433027DBDB160031EF2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E20432E27DBDB160031EF2C /* LaunchScreen.storyboard */; };
 		8E20433B27DBDB160031EF2C /* IOS_MovieRecommendationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20433A27DBDB160031EF2C /* IOS_MovieRecommendationTests.swift */; };
-		8E20434527DBDB160031EF2C /* IOS_MovieRecommendationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20434427DBDB160031EF2C /* IOS_MovieRecommendationUITests.swift */; };
-		8E20434727DBDB160031EF2C /* IOS_MovieRecommendationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20434627DBDB160031EF2C /* IOS_MovieRecommendationUITestsLaunchTests.swift */; };
 		8E20435527DBDFA20031EF2C /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20435427DBDFA20031EF2C /* CardViewController.swift */; };
 		8E4CD68E27DD13EC00B36ADF /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4CD68D27DD13EC00B36ADF /* Movie.swift */; };
 		8E4CD69027DD14D000B36ADF /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4CD68F27DD14D000B36ADF /* HTTPError.swift */; };
@@ -83,8 +81,6 @@
 		8E20433627DBDB160031EF2C /* IOS-MovieRecommendationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IOS-MovieRecommendationTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E20433A27DBDB160031EF2C /* IOS_MovieRecommendationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_MovieRecommendationTests.swift; sourceTree = "<group>"; };
 		8E20434027DBDB160031EF2C /* IOS-MovieRecommendationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IOS-MovieRecommendationUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E20434427DBDB160031EF2C /* IOS_MovieRecommendationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_MovieRecommendationUITests.swift; sourceTree = "<group>"; };
-		8E20434627DBDB160031EF2C /* IOS_MovieRecommendationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_MovieRecommendationUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8E20435427DBDFA20031EF2C /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		8E4CD68D27DD13EC00B36ADF /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		8E4CD68F27DD14D000B36ADF /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
@@ -214,8 +210,6 @@
 			isa = PBXGroup;
 			children = (
 				8E10DD392829203600C11053 /* Cases */,
-				8E20434427DBDB160031EF2C /* IOS_MovieRecommendationUITests.swift */,
-				8E20434627DBDB160031EF2C /* IOS_MovieRecommendationUITestsLaunchTests.swift */,
 				8E10DD3B2829206000C11053 /* LoginFieldTest.swift */,
 			);
 			path = "IOS-MovieRecommendationUITests";
@@ -463,9 +457,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E20434727DBDB160031EF2C /* IOS_MovieRecommendationUITestsLaunchTests.swift in Sources */,
 				8E10DD3C2829206000C11053 /* LoginFieldTest.swift in Sources */,
-				8E20434527DBDB160031EF2C /* IOS_MovieRecommendationUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

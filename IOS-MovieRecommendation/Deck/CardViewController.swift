@@ -1,10 +1,3 @@
-//
-//  CardViewController.swift
-//  IOS-MovieRecommendation
-//
-//  Created by Kamil on 11.03.2022.
-//
-
 import UIKit
 
 // swiftlint:disable file_length type_body_length
@@ -19,6 +12,7 @@ final class CardViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -37,10 +31,11 @@ final class CardViewController: UIViewController {
         id: "id", name: "name", posterUrl: "URL", description: "Description",
         rating: Rating(kinopoisk: 1.1, imdb: 2.2, tmdb: 3.3),
         genres: ["Adventure", "Fantasy", "Comedy"],
-        actors: [ActorDTO(name: "Actor 1", photoUrl: "AURL"),
-                 ActorDTO(name: "Actor 2", photoUrl: "AURL"),
-                 ActorDTO(name: "Actor 3", photoUrl: "AURL")
-                ]
+        actors: [
+            ActorDTO(name: "Actor 1", photoUrl: "AURL"),
+            ActorDTO(name: "Actor 2", photoUrl: "AURL"),
+            ActorDTO(name: "Actor 3", photoUrl: "AURL")
+        ]
     )
     private var currentMovieImage = UIImage(named: "Leon")
 
@@ -251,7 +246,7 @@ final class CardViewController: UIViewController {
         return gl
     }()
 
-// MARK: - override functions
+    // MARK: - override functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -280,10 +275,10 @@ final class CardViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
     }
 
-// MARK: - objc functions
+    // MARK: - objc functions
 
     @objc private func handleTap(gesture: UITapGestureRecognizer) {
         toggleDescription()
@@ -299,7 +294,7 @@ final class CardViewController: UIViewController {
         if gesture.state == .began {
             initialTouchPoint = gesture.location(in: moviePosterContainer)
         } else if gesture.state == .ended {
-            if  multiplierX > 0.5 && swipeXDistance > 0 {
+            if multiplierX > 0.5 && swipeXDistance > 0 {
                 movieDisliked()
             } else if multiplierX > 0.5 && swipeXDistance < 0 {
                 movieLiked()
@@ -325,10 +320,10 @@ final class CardViewController: UIViewController {
         let multiplierY = 1 - min(0.9, swipeYDistance / maxSwipeYDistance)
         let fadeCoef = 0.8
 
-        posterBottomFade.locations = [0.4, NSNumber( value: min(fadeCoef, max(fadeCoef * multiplierY, 0.6)) ), 1]
+        posterBottomFade.locations = [0.4, NSNumber(value: min(fadeCoef, max(fadeCoef * multiplierY, 0.6))), 1]
     }
 
- // MARK: - functions
+    // MARK: - functions
 
     private func movieLiked() {
         guard let moviewCollectionDelegate = moviewCollectionDelegate else {
@@ -343,11 +338,14 @@ final class CardViewController: UIViewController {
             guard let self = self else { return }
 
             switch response {
-                case .success:
-                    moviewCollectionDelegate.addMovieToCollection(movie: self.currentMovie, image: self.currentMovieImage!)
-                    self.nextPoster()
-                case .failure(let error):
-                    print(error.rawValue)
+            case .success:
+                moviewCollectionDelegate.addMovieToCollection(
+                    movie: self.currentMovie,
+                    image: self.currentMovieImage!
+                )
+                self.nextPoster()
+            case let .failure(error):
+                print(error.rawValue)
             }
         }
     }
@@ -364,28 +362,28 @@ final class CardViewController: UIViewController {
             guard let self = self else { return }
 
             switch response {
-                case .success(let movie):
-                    self.currentMovie = movie
-                    UIView.transition(
-                       with: self.moviePoster,
-                       duration: 0.5,
-                       options: .transitionCrossDissolve,
-                       animations: { [self] in
-                           let url = URL(string: movie.posterUrl) ?? URL(fileURLWithPath: "1")
-                           self.downloadImage(from: url)
-                       },
-                       completion: nil
-                    )
+            case let .success(movie):
+                self.currentMovie = movie
+                UIView.transition(
+                    with: self.moviePoster,
+                    duration: 0.5,
+                    options: .transitionCrossDissolve,
+                    animations: { [self] in
+                        let url = URL(string: movie.posterUrl) ?? URL(fileURLWithPath: "1")
+                        self.downloadImage(from: url)
+                    },
+                    completion: nil
+                )
 
-                    self.movieTitle.text = movie.name
-                    self.movieRating.text = String(movie.rating.imdb ?? 0.0)
-                    self.movieDescription.text = movie.description
+                self.movieTitle.text = movie.name
+                self.movieRating.text = String(movie.rating.imdb ?? 0.0)
+                self.movieDescription.text = movie.description
 
-                    self.descriptionScrollableView.contentOffset = CGPoint.zero
-                    self.posterBottomFade.locations = [0.4, 0.8, 1]
+                self.descriptionScrollableView.contentOffset = CGPoint.zero
+                self.posterBottomFade.locations = [0.4, 0.8, 1]
 
-                case .failure(let error):
-                    print(error.rawValue)
+            case let .failure(error):
+                print(error.rawValue)
             }
         }
 
@@ -403,8 +401,14 @@ final class CardViewController: UIViewController {
         NSLayoutConstraint.activate([
             moviePosterContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             moviePosterContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
-            moviePosterContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            moviePosterContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+            moviePosterContainer.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: 16
+            ),
+            moviePosterContainer.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: -16
+            )
         ])
 
         moviePosterContainer.addSubview(moviePoster)
@@ -428,8 +432,14 @@ final class CardViewController: UIViewController {
         descriptionContainer.addSubview(descriptionScrollableView)
         NSLayoutConstraint.activate([
             descriptionScrollableView.topAnchor.constraint(equalTo: descriptionContainer.topAnchor, constant: 0),
-            descriptionScrollableView.leadingAnchor.constraint(equalTo: descriptionContainer.leadingAnchor, constant: 0),
-            descriptionScrollableView.trailingAnchor.constraint(equalTo: descriptionContainer.trailingAnchor, constant: 0),
+            descriptionScrollableView.leadingAnchor.constraint(
+                equalTo: descriptionContainer.leadingAnchor,
+                constant: 0
+            ),
+            descriptionScrollableView.trailingAnchor.constraint(
+                equalTo: descriptionContainer.trailingAnchor,
+                constant: 0
+            ),
             descriptionScrollableView.bottomAnchor.constraint(equalTo: descriptionContainer.bottomAnchor, constant: 0)
         ])
     }
@@ -448,7 +458,7 @@ final class CardViewController: UIViewController {
 
         let cornerRad = 25.0
         moviePoster.layer.cornerRadius = cornerRad
-        moviePoster.layer.maskedCorners = [ .layerMaxXMaxYCorner, .layerMinXMaxYCorner ]
+        moviePoster.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
 
         posterBottomFade.cornerRadius = cornerRad
         moviePosterContainer.layer.cornerRadius = cornerRad
@@ -461,7 +471,10 @@ final class CardViewController: UIViewController {
     private func setupTitles() {
         moviePosterContainer.addSubview(screenTitle)
         NSLayoutConstraint.activate([
-            screenTitle.topAnchor.constraint(equalTo: moviePosterContainer.topAnchor, constant: -screenTitle.font.pointSize * 1.5),
+            screenTitle.topAnchor.constraint(
+                equalTo: moviePosterContainer.topAnchor,
+                constant: -screenTitle.font.pointSize * 1.5
+            ),
             screenTitle.centerXAnchor.constraint(equalTo: moviePosterContainer.centerXAnchor)
         ])
 
@@ -552,7 +565,10 @@ final class CardViewController: UIViewController {
 }
 
 extension CardViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(
+        _ gestureRecognizer: UIGestureRecognizer,
+        shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+    ) -> Bool {
         return true
     }
 }

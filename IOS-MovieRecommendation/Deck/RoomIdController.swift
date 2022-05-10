@@ -1,10 +1,3 @@
-//
-//  CreateRoomController.swift
-//  IOS-MovieRecommendation
-//
-//  Created by Bekzhan Talgat on 13.04.2022.
-//
-
 import Foundation
 import UIKit
 
@@ -70,7 +63,7 @@ class RoomIdController: UIViewController {
         return iv
     }()
 
-// MARK: - - lifecycle, override
+    // MARK: - - lifecycle, override
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,7 +87,7 @@ class RoomIdController: UIViewController {
         super.viewDidLayoutSubviews()
     }
 
-// MARK: - - objc
+    // MARK: - - objc
 
     @objc private func nextButtonClicked() {
         guard let roomId = roomIdInputField.text else {
@@ -113,7 +106,7 @@ class RoomIdController: UIViewController {
         }
     }
 
-// MARK: - - func
+    // MARK: - - func
 
     private func setupViews() {
         view.addSubview(logoImageView)

@@ -1,0 +1,19 @@
+--exclude **/Generated,DerivedData,Pods,XcodeTemplates
+
+# Keep alphabetically
+--assetliterals visual-width
+--closingparen balanced
+--commas inline
+--decimalgrouping 3,3
+--header strip
+--ifdef no-indent
+--importgrouping testable-bottom
+--indent 4
+--maxwidth 120
+--selfrequired startPolling
+--specifierorder public,override
+--stripunusedargs closure-only
+--wraparguments before-first
+--wrapcollections before-first
+
+--disable andOperator,blankLinesAtEndOfScope,blankLinesAtStartOfScope,preferKeyPath,strongOutlets,wrapMultilineStatementBraces

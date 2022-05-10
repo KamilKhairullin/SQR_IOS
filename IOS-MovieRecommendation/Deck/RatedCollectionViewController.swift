@@ -1,10 +1,3 @@
-//
-//  LikedCollectionViewController.swift
-//  IOS-MovieRecommendation
-//
-//  Created by Bekzhan Talgat on 08.04.2022.
-//
-
 import Foundation
 import UIKit
 
@@ -19,12 +12,13 @@ class RatedCollectionViewController: UIViewController {
     var networkService: NetworkService
 
     init(networkService: NetworkService) {
-        self.movieCollection = [MovieCard]()
+        movieCollection = [MovieCard]()
         self.networkService = networkService
 
         super.init(nibName: nil, bundle: nil)
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -78,7 +72,7 @@ class RatedCollectionViewController: UIViewController {
         return gl
     }()
 
-// MARK: - - override functions
+    // MARK: - - override functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,7 +93,7 @@ class RatedCollectionViewController: UIViewController {
         setupTitels()
     }
 
-// MARK: - - functions
+    // MARK: - - functions
 
     private func setupViews() {
         view.addSubview(mainContainer)
@@ -123,10 +117,10 @@ class RatedCollectionViewController: UIViewController {
 
     private func setupCards() {
         if movieCollection.isEmpty { return }
-        cardsContainerScrollView.subviews.forEach({ $0.removeFromSuperview() })
+        cardsContainerScrollView.subviews.forEach { $0.removeFromSuperview() }
 
         var prevTmp = UIView()
-        for i in 0..<movieCollection.count {
+        for i in 0 ..< movieCollection.count {
             let tmp = UIView()
             tmp.translatesAutoresizingMaskIntoConstraints = false
             tmp.backgroundColor = .systemCyan
@@ -177,7 +171,12 @@ class RatedCollectionViewController: UIViewController {
     }
 
     private func setupLayers() {
-        mainContainerTopFadeMask.frame = CGRect(x: 0, y: 0, width: mainContainer.bounds.width, height: view.safeAreaLayoutGuide.layoutFrame.height)
+        mainContainerTopFadeMask.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: mainContainer.bounds.width,
+            height: view.safeAreaLayoutGuide.layoutFrame.height
+        )
         mainContainer.layer.mask = mainContainerTopFadeMask
 
         for sv in cardsContainerScrollView.subviews {
@@ -203,7 +202,10 @@ class RatedCollectionViewController: UIViewController {
     private func setupTitels() {
         view.addSubview(screenTitle)
         NSLayoutConstraint.activate([
-            screenTitle.topAnchor.constraint(equalTo: mainContainer.topAnchor, constant: -screenTitle.font.pointSize * 1.5),
+            screenTitle.topAnchor.constraint(
+                equalTo: mainContainer.topAnchor,
+                constant: -screenTitle.font.pointSize * 1.5
+            ),
             screenTitle.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
 

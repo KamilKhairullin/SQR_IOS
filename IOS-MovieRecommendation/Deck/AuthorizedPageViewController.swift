@@ -1,10 +1,3 @@
-//
-//  LoginController.swift
-//  IOS-MovieRecommendation
-//
-//  Created by Bekzhan Talgat on 13.04.2022.
-//
-
 import UIKit
 
 class AuthorizedPageViewController: UIViewController {
@@ -17,6 +10,7 @@ class AuthorizedPageViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -30,7 +24,7 @@ class AuthorizedPageViewController: UIViewController {
         return iv
     }()
 
-    let loginButton: UIButton = {
+    lazy var loginButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = ColorPalette.customYellow
         btn.setTitle("Join a room", for: .normal)
@@ -50,7 +44,7 @@ class AuthorizedPageViewController: UIViewController {
         return btn
     }()
 
-    let createButton: UIButton = {
+    lazy var createButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = .black
         btn.setTitle("Create a Room", for: .normal)
@@ -66,7 +60,7 @@ class AuthorizedPageViewController: UIViewController {
         return btn
     }()
 
-// MARK: - - lifecycle, override
+    // MARK: - - lifecycle, override
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,15 +74,15 @@ class AuthorizedPageViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
     }
 
-// MARK: - - objc
+    // MARK: - - objc
 
     @objc private func loginButtonClicked() {
         let roomPage = RoomIdController()
         roomPage.appCoordinator = appCoordinator
-        self.navigationController?.pushViewController(roomPage, animated: true)
+        navigationController?.pushViewController(roomPage, animated: true)
 
     }
 
@@ -97,7 +91,7 @@ class AuthorizedPageViewController: UIViewController {
         navigationController?.pushViewController(createRoom, animated: true)
     }
 
-// MARK: - - func
+    // MARK: - - func
 
     private func setupViews() {
         view.addSubview(logoImageView)
@@ -127,12 +121,8 @@ class AuthorizedPageViewController: UIViewController {
         ])
     }
 
-    private func setupLayers() {
+    private func setupLayers() {}
 
-    }
-
-    private func setupTitles() {
-
-    }
+    private func setupTitles() {}
 
 }

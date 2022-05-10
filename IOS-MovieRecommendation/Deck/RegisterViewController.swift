@@ -1,10 +1,3 @@
-//
-//  RegisterViewController.swift
-//  IOS-MovieRecommendation
-//
-//  Created by Bekzhan Talgat on 08.05.2022.
-//
-
 import UIKit
 
 protocol RegisterSucceed {
@@ -21,6 +14,7 @@ class RegisterViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -66,7 +60,7 @@ class RegisterViewController: UIViewController {
         return iv
     }()
 
-    let registerButton: UIButton = {
+    lazy var registerButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = ColorPalette.customYellow
         btn.setTitle("Register", for: .normal)
@@ -95,7 +89,7 @@ class RegisterViewController: UIViewController {
         return iv
     }()
 
-// MARK: - - lifecycle, override
+    // MARK: - - lifecycle, override
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,7 +115,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLayoutSubviews()
     }
 
-// MARK: - - objc
+    // MARK: - - objc
 
     @objc private func registerButtonClicked() {
         guard let username = usernameInputField.text else {
@@ -151,11 +145,11 @@ class RegisterViewController: UIViewController {
             networkService.register(credentials: userDTO) { [weak self] response in
                 guard let self = self else { return }
                 switch response {
-                case .success(let data):
+                case let .success(data):
                     UserDefaults.standard.set(username, forKey: "username")
                     UserDefaults.standard.set(password, forKey: "password")
                     self.appCoordinator?.registerSucceed(on: self, with: data.token)
-                case .failure(let error):
+                case let .failure(error):
                     self.usernameInputField.text = ""
                     self.usernameInputField.placeholder = "Failed to register. Try agin"
                     self.passwordInputField.text = ""
@@ -166,7 +160,7 @@ class RegisterViewController: UIViewController {
         }
     }
 
-// MARK: - - func
+    // MARK: - - func
 
     private func setupViews() {
         view.addSubview(logoImageView)
@@ -181,7 +175,10 @@ class RegisterViewController: UIViewController {
         NSLayoutConstraint.activate([
             usernameInputField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 96),
             usernameInputField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
-            usernameInputField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
+            usernameInputField.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: -32
+            ),
             usernameInputField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             usernameInputField.heightAnchor.constraint(equalToConstant: 48)
         ])
@@ -190,7 +187,10 @@ class RegisterViewController: UIViewController {
         NSLayoutConstraint.activate([
             passwordInputField.topAnchor.constraint(equalTo: usernameInputField.bottomAnchor, constant: 16),
             passwordInputField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
-            passwordInputField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -32),
+            passwordInputField.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: -32
+            ),
             passwordInputField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             passwordInputField.heightAnchor.constraint(equalToConstant: 48)
         ])

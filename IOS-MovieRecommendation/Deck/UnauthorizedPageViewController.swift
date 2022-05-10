@@ -1,10 +1,3 @@
-//
-//  LoginPageController.swift
-//  IOS-MovieRecommendation
-//
-//  Created by Bekzhan Talgat on 13.04.2022.
-//
-
 import UIKit
 
 class UnauthorizedPageViewController: UIViewController {
@@ -17,6 +10,7 @@ class UnauthorizedPageViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -66,7 +60,7 @@ class UnauthorizedPageViewController: UIViewController {
         return btn
     }()
 
-// MARK: - - lifecycle, override
+    // MARK: - - lifecycle, override
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,30 +72,30 @@ class UnauthorizedPageViewController: UIViewController {
         super.viewDidLayoutSubviews()
     }
 
-// MARK: - - objc
+    // MARK: - - objc
 
     @objc private func loginButtonClicked() {
-        let loginPage = LoginViewController(networkService: self.networkService)
+        let loginPage = LoginViewController(networkService: networkService)
         var token: String?
         networkService.login(credentials: UserDTO(login: "string", password: "string")) { [weak self] response in
             switch response {
-            case .success(let requestToken):
+            case let .success(requestToken):
                 token = requestToken.token
                 self?.networkService.createRoom(token: token ?? "") { response in
                     switch response {
-                    case .success(let roomInfo):
+                    case let .success(roomInfo):
                         print(roomInfo.slug)
-                    case .failure(let error):
+                    case let .failure(error):
                         print(error.rawValue)
                     }
                 }
-            case .failure(let error):
+            case let .failure(error):
                 print(error.rawValue)
             }
         }
 
         loginPage.appCoordinator = appCoordinator
-        self.navigationController?.pushViewController(loginPage, animated: true)
+        navigationController?.pushViewController(loginPage, animated: true)
 
     }
 
@@ -110,7 +104,7 @@ class UnauthorizedPageViewController: UIViewController {
         navigationController?.pushViewController(registerPage, animated: true)
     }
 
-// MARK: - - func
+    // MARK: - - func
 
     private func setupViews() {
         view.addSubview(logoImageView)
@@ -140,12 +134,8 @@ class UnauthorizedPageViewController: UIViewController {
         ])
     }
 
-    private func setupLayers() {
+    private func setupLayers() {}
 
-    }
-
-    private func setupTitles() {
-
-    }
+    private func setupTitles() {}
 
 }

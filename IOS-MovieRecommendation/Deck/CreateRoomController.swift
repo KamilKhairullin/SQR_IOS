@@ -1,10 +1,3 @@
-//
-//  CreateRoomController.swift
-//  IOS-MovieRecommendation
-//
-//  Created by Bekzhan Talgat on 13.04.2022.
-//
-
 import Foundation
 import UIKit
 
@@ -18,11 +11,12 @@ class CreateRoomController: UIViewController {
     var networkService: NetworkService
 
     init(coordinator: AppCoordinator?, networkService: NetworkService) {
-        self.appCoordinator = coordinator
+        appCoordinator = coordinator
         self.networkService = networkService
         super.init(nibName: nil, bundle: nil)
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -96,7 +90,7 @@ class CreateRoomController: UIViewController {
         return btn
     }()
 
-// MARK: - - lifecycle, override
+    // MARK: - - lifecycle, override
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,7 +112,7 @@ class CreateRoomController: UIViewController {
         super.viewDidLayoutSubviews()
     }
 
-// MARK: - - objc
+    // MARK: - - objc
 
     @objc private func startButtonClicked() {
         if let appCoordinator = appCoordinator {
@@ -126,7 +120,7 @@ class CreateRoomController: UIViewController {
         }
     }
 
-// MARK: - - func
+    // MARK: - - func
 
     private func setupViews() {
 
@@ -167,13 +161,13 @@ class CreateRoomController: UIViewController {
 
         networkService.createRoom(token: token) { [weak self] response in
             switch response {
-            case .success(let roomDTO):
+            case let .success(roomDTO):
                 UserDefaults.standard.set(roomDTO.id, forKey: "roomId")
                 UserDefaults.standard.set(roomDTO.slug, forKey: "roomSlug")
 
                 self?.roomIdLabel.text = roomDTO.slug
                 self?.amountLabel.text = String(roomDTO.users.count)
-            case .failure(let error):
+            case let .failure(error):
                 print(error.rawValue)
             }
         }
