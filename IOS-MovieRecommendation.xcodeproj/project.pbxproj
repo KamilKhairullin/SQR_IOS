@@ -41,6 +41,14 @@
 		8E5668AA2828759A005EF24B /* ActorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5668A92828759A005EF24B /* ActorDTO.swift */; };
 		8E8D23BE27DCE49D00A73C57 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D23BD27DCE49D00A73C57 /* ColorPalette.swift */; };
 		8E8D23C027DCE91800A73C57 /* AppCoordinator .swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D23BF27DCE91800A73C57 /* AppCoordinator .swift */; };
+		8E935582282A452F004FBFE7 /* LoginViewControllerBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E935581282A452F004FBFE7 /* LoginViewControllerBuilderTest.swift */; };
+		8E935584282A4560004FBFE7 /* RegisterViewControllerBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E935583282A4560004FBFE7 /* RegisterViewControllerBuilderTest.swift */; };
+		8E935586282A4579004FBFE7 /* AuthorizedPageViewControllerBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E935585282A4579004FBFE7 /* AuthorizedPageViewControllerBuilderTest.swift */; };
+		8E935588282A459D004FBFE7 /* RoomIdControllerBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E935587282A459D004FBFE7 /* RoomIdControllerBuilderTest.swift */; };
+		8E93558A282A45DE004FBFE7 /* CreateRoomControllerBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E935589282A45DE004FBFE7 /* CreateRoomControllerBuilderTest.swift */; };
+		8E93558C282A45F6004FBFE7 /* WaitingRoomControllerBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E93558B282A45F6004FBFE7 /* WaitingRoomControllerBuilderTest.swift */; };
+		8E93558E282A464B004FBFE7 /* CardViewControllerBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E93558D282A464B004FBFE7 /* CardViewControllerBuilderTest.swift */; };
+		8E935590282A4688004FBFE7 /* RatedCollectionViewControllerBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E93558F282A4688004FBFE7 /* RatedCollectionViewControllerBuilderTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +107,14 @@
 		8E5668A92828759A005EF24B /* ActorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDTO.swift; sourceTree = "<group>"; };
 		8E8D23BD27DCE49D00A73C57 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		8E8D23BF27DCE91800A73C57 /* AppCoordinator .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppCoordinator .swift"; sourceTree = "<group>"; };
+		8E935581282A452F004FBFE7 /* LoginViewControllerBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerBuilderTest.swift; sourceTree = "<group>"; };
+		8E935583282A4560004FBFE7 /* RegisterViewControllerBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerBuilderTest.swift; sourceTree = "<group>"; };
+		8E935585282A4579004FBFE7 /* AuthorizedPageViewControllerBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizedPageViewControllerBuilderTest.swift; sourceTree = "<group>"; };
+		8E935587282A459D004FBFE7 /* RoomIdControllerBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomIdControllerBuilderTest.swift; sourceTree = "<group>"; };
+		8E935589282A45DE004FBFE7 /* CreateRoomControllerBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomControllerBuilderTest.swift; sourceTree = "<group>"; };
+		8E93558B282A45F6004FBFE7 /* WaitingRoomControllerBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomControllerBuilderTest.swift; sourceTree = "<group>"; };
+		8E93558D282A464B004FBFE7 /* CardViewControllerBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewControllerBuilderTest.swift; sourceTree = "<group>"; };
+		8E93558F282A4688004FBFE7 /* RatedCollectionViewControllerBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatedCollectionViewControllerBuilderTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +218,14 @@
 			isa = PBXGroup;
 			children = (
 				8E20433A27DBDB160031EF2C /* IOS_MovieRecommendationTests.swift */,
+				8E935581282A452F004FBFE7 /* LoginViewControllerBuilderTest.swift */,
+				8E935583282A4560004FBFE7 /* RegisterViewControllerBuilderTest.swift */,
+				8E935585282A4579004FBFE7 /* AuthorizedPageViewControllerBuilderTest.swift */,
+				8E935587282A459D004FBFE7 /* RoomIdControllerBuilderTest.swift */,
+				8E935589282A45DE004FBFE7 /* CreateRoomControllerBuilderTest.swift */,
+				8E93558B282A45F6004FBFE7 /* WaitingRoomControllerBuilderTest.swift */,
+				8E93558D282A464B004FBFE7 /* CardViewControllerBuilderTest.swift */,
+				8E93558F282A4688004FBFE7 /* RatedCollectionViewControllerBuilderTest.swift */,
 			);
 			path = "IOS-MovieRecommendationTests";
 			sourceTree = "<group>";
@@ -449,7 +473,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E935582282A452F004FBFE7 /* LoginViewControllerBuilderTest.swift in Sources */,
+				8E93558C282A45F6004FBFE7 /* WaitingRoomControllerBuilderTest.swift in Sources */,
+				8E935588282A459D004FBFE7 /* RoomIdControllerBuilderTest.swift in Sources */,
+				8E93558A282A45DE004FBFE7 /* CreateRoomControllerBuilderTest.swift in Sources */,
+				8E935584282A4560004FBFE7 /* RegisterViewControllerBuilderTest.swift in Sources */,
+				8E935586282A4579004FBFE7 /* AuthorizedPageViewControllerBuilderTest.swift in Sources */,
+				8E93558E282A464B004FBFE7 /* CardViewControllerBuilderTest.swift in Sources */,
 				8E20433B27DBDB160031EF2C /* IOS_MovieRecommendationTests.swift in Sources */,
+				8E935590282A4688004FBFE7 /* RatedCollectionViewControllerBuilderTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
