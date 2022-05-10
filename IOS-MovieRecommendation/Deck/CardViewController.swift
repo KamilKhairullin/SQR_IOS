@@ -119,9 +119,10 @@ class CardViewController: UIViewController {
     private var movieTitle: UILabel = {
         let label = UILabel()
         label.text = "Movie Title"
-        label.font = UIFont(name: "Times New Roman", size: 36)
+        label.font = UIFont(name: "Times New Roman", size: 24)
         label.textColor = ColorPalette.customBlack
-        label.adjustsFontSizeToFitWidth = true
+        //label.adjustsFontSizeToFitWidth = true
+        label.lineBreakMode = .byTruncatingTail
         
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -132,6 +133,7 @@ class CardViewController: UIViewController {
         label.text = "2022"
         label.font = UIFont(name: "Times New Roman", size: 24)
         label.textColor = ColorPalette.customBlack
+        label.textAlignment = .right
         
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -361,7 +363,6 @@ class CardViewController: UIViewController {
     }
     
     private func nextPoster() {
-        moviePoster.image = UIImage(named: "Leon")
         let token = UserDefaults.standard.string(forKey: "token") ?? ""
         let slug = UserDefaults.standard.string(forKey: "roomSlug") ?? ""
         
@@ -383,7 +384,7 @@ class CardViewController: UIViewController {
                     )
                 
                     self.movieTitle.text = movie.name
-                    self.movieRating.text = String(movie.rating.imdb)
+                    self.movieRating.text = String(movie.rating.imdb ?? 0.0)
                     self.movieDescription.text = movie.description
     
                     self.descriptionScrollableView.contentOffset = CGPoint.zero
@@ -486,10 +487,11 @@ class CardViewController: UIViewController {
         NSLayoutConstraint.activate([
             movieTitle.topAnchor.constraint(equalTo: descriptionScrollableView.topAnchor, constant: 150),
             movieTitle.leadingAnchor.constraint(equalTo: descriptionScrollableView.leadingAnchor, constant: 16),
-            movieTitle.widthAnchor.constraint(equalToConstant: 285),
-            
+            movieTitle.trailingAnchor.constraint(equalTo: movieYear.leadingAnchor),
+        
             movieYear.bottomAnchor.constraint(equalTo: movieTitle.bottomAnchor),
             movieYear.trailingAnchor.constraint(equalTo: descriptionContainer.trailingAnchor, constant: -16),
+            movieYear.widthAnchor.constraint(equalToConstant: 60),
             
             movieProducer.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 32),
             movieProducer.leadingAnchor.constraint(equalTo: movieTitle.leadingAnchor, constant: 0),

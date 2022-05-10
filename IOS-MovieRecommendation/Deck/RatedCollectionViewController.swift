@@ -249,7 +249,7 @@ class RatedCollectionViewController: UIViewController {
             
             if !movieCollection.isEmpty {
                 mt.text = movieCollection[i].movie.name
-                r.text = String(movieCollection[i].movie.rating.imdb)
+                r.text = String(movieCollection[i].movie.rating.imdb ?? 0.0)
             }
             
             i += 1

@@ -11,7 +11,7 @@ struct MovieDTO: Decodable {
 }
 
 struct Rating: Decodable {
-    let kinopoisk: Double
-    let imdb: Double
-    let tmdb: Double
+    let kinopoisk: Double?
+    let imdb: Double?
+    let tmdb: Double?
 }

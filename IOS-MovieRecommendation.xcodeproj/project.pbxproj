@@ -150,7 +150,6 @@
 		8E10DD3A2829204300C11053 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				8E10DD3B2829206000C11053 /* LoginFieldTest.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -220,6 +219,7 @@
 				8E10DD392829203600C11053 /* Cases */,
 				8E20434427DBDB160031EF2C /* IOS_MovieRecommendationUITests.swift */,
 				8E20434627DBDB160031EF2C /* IOS_MovieRecommendationUITestsLaunchTests.swift */,
+				8E10DD3B2829206000C11053 /* LoginFieldTest.swift */,
 			);
 			path = "IOS-MovieRecommendationUITests";
 			sourceTree = "<group>";

@@ -28,6 +28,7 @@ struct NetworkClientImp: NetworkClient {
 
                     jsonDecoder.keyDecodingStrategy = request.keyDecodingStrategy
                     jsonDecoder.dateDecodingStrategy = request.dateDecodingStrategy
+                    try? jsonDecoder.decode(T.self, from: unwrappedData)
                     guard let result = try? jsonDecoder.decode(T.self, from: unwrappedData) else {
                         NetworkClientImp.executeCompletionOnMainThread {
                             completion(.failure(HTTPError.decodingFailed))
