@@ -5,7 +5,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window:UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
         if #available(iOS 15, *) {
@@ -18,7 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let tabBarApperance = UITabBarAppearance()
             tabBarApperance.configureWithTransparentBackground()
             tabBarApperance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.systemGray]
-            tabBarApperance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: ColorPalette.customYellow]
+            tabBarApperance.stackedLayoutAppearance.selected.titleTextAttributes = [
+                .foregroundColor: ColorPalette.customYellow
+            ]
             tabBarApperance.stackedLayoutAppearance.normal.iconColor = .systemGray
             tabBarApperance.stackedLayoutAppearance.selected.iconColor = ColorPalette.customYellow
 

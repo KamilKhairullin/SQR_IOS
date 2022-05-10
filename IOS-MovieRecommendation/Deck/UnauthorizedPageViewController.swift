@@ -30,7 +30,7 @@ class UnauthorizedPageViewController: UIViewController {
         return iv
     }()
 
-    let loginButton: UIButton = {
+    lazy var loginButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = ColorPalette.customYellow
         btn.setTitle("Login", for: .normal)
@@ -50,7 +50,7 @@ class UnauthorizedPageViewController: UIViewController {
         return btn
     }()
 
-    let registerButton: UIButton = {
+    lazy var registerButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = .black
         btn.setTitle("Register", for: .normal)

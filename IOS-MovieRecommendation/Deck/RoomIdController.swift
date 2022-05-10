@@ -41,7 +41,7 @@ class RoomIdController: UIViewController {
         return iv
     }()
 
-    let nextButton: UIButton = {
+    lazy var nextButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = ColorPalette.customYellow
         btn.setTitle("Next", for: .normal)

@@ -7,7 +7,9 @@
 
 import UIKit
 
-class CardViewController: UIViewController {
+// swiftlint:disable file_length type_body_length
+
+final class CardViewController: UIViewController {
 
     public weak var moviewCollectionDelegate: RatedCollectionDelegate?
     var networkService: NetworkService

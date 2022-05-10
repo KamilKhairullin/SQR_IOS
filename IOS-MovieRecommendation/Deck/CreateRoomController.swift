@@ -76,7 +76,7 @@ class CreateRoomController: UIViewController {
         return l
     }()
 
-    let startButton: UIButton = {
+    lazy var startButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = ColorPalette.customYellow
         btn.setTitle("Start", for: .normal)
