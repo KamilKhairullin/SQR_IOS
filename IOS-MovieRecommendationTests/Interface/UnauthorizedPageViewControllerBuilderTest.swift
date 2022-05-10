@@ -1,8 +1,7 @@
-import Foundation
 import XCTest
 @testable import IOS_MovieRecommendation
 
-class CardViewControllerBuilderTest: XCTestCase {
+class UnauthorizedPageViewControllerBuilderTest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -16,10 +15,18 @@ class CardViewControllerBuilderTest: XCTestCase {
         // Given
         let networkClient = NetworkClientImp(urlSession: .init(configuration: .default))
         let networkService = NetworkServiceImp(networkClient: networkClient)
-        let builder = CardViewController(networkService: networkService)
-
+        let builder = UnauthorizedPageViewController(networkService: networkService)
         // Then
-        XCTAssertNotNil(builder.networkService)
+        XCTAssertNil(builder.appCoordinator)
         XCTAssertNotNil(builder.view)
+    }
+
+    func testSetupViews() {
+        // Given
+        let networkClient = NetworkClientImp(urlSession: .init(configuration: .default))
+        let networkService = NetworkServiceImp(networkClient: networkClient)
+        let builder = UnauthorizedPageViewController(networkService: networkService)
+
+        builder.exposPrivateLoginButtonClicked()
     }
 }

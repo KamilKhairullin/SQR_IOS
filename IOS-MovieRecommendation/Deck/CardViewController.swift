@@ -572,3 +572,23 @@ extension CardViewController: UIGestureRecognizerDelegate {
         return true
     }
 }
+
+#if DEBUG
+extension CardViewController {
+    public func exposePrivateMovieDisliked() {
+        return movieDisliked()
+    }
+
+    public func exposePrivateMovieLiked() {
+        return movieLiked()
+    }
+
+    public func exposePrivateSetupLayers() {
+        return setupLayers()
+    }
+
+    public func exposePrivateNextPoster() {
+        return nextPoster()
+    }
+}
+#endif

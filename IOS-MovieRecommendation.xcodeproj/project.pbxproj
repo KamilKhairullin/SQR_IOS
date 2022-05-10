@@ -22,12 +22,11 @@
 		8E20432B27DBDB150031EF2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E20432927DBDB150031EF2C /* Main.storyboard */; };
 		8E20432D27DBDB160031EF2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E20432C27DBDB160031EF2C /* Assets.xcassets */; };
 		8E20433027DBDB160031EF2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E20432E27DBDB160031EF2C /* LaunchScreen.storyboard */; };
-		8E20433B27DBDB160031EF2C /* IOS_MovieRecommendationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20433A27DBDB160031EF2C /* IOS_MovieRecommendationTests.swift */; };
+		8E20433B27DBDB160031EF2C /* UnauthorizedPageViewControllerBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20433A27DBDB160031EF2C /* UnauthorizedPageViewControllerBuilderTest.swift */; };
 		8E20435527DBDFA20031EF2C /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20435427DBDFA20031EF2C /* CardViewController.swift */; };
 		8E4CD68E27DD13EC00B36ADF /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4CD68D27DD13EC00B36ADF /* Movie.swift */; };
 		8E4CD69027DD14D000B36ADF /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4CD68F27DD14D000B36ADF /* HTTPError.swift */; };
 		8E4CD69327DD15A900B36ADF /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4CD69227DD15A900B36ADF /* NetworkClient.swift */; };
-		8E4CD69D27DD18ED00B36ADF /* MockNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4CD69C27DD18ED00B36ADF /* MockNetworkClient.swift */; };
 		8E56688F2827C02B005EF24B /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56688E2827C02B005EF24B /* HTTPMethod.swift */; };
 		8E5668912827C047005EF24B /* HTTPNetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5668902827C047005EF24B /* HTTPNetworkResponse.swift */; };
 		8E5668932827C06C005EF24B /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5668922827C06C005EF24B /* HTTPRequest.swift */; };
@@ -49,6 +48,9 @@
 		8E93558C282A45F6004FBFE7 /* WaitingRoomControllerBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E93558B282A45F6004FBFE7 /* WaitingRoomControllerBuilderTest.swift */; };
 		8E93558E282A464B004FBFE7 /* CardViewControllerBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E93558D282A464B004FBFE7 /* CardViewControllerBuilderTest.swift */; };
 		8E935590282A4688004FBFE7 /* RatedCollectionViewControllerBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E93558F282A4688004FBFE7 /* RatedCollectionViewControllerBuilderTest.swift */; };
+		8E935592282A4B64004FBFE7 /* NetworkServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E935591282A4B64004FBFE7 /* NetworkServiceTest.swift */; };
+		8E935596282A524B004FBFE7 /* HTTPNetworkResponseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E935595282A524B004FBFE7 /* HTTPNetworkResponseTest.swift */; };
+		8E935598282A5BFA004FBFE7 /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E935597282A5BFA004FBFE7 /* AppCoordinatorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,13 +89,12 @@
 		8E20432F27DBDB160031EF2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E20433127DBDB160031EF2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E20433627DBDB160031EF2C /* IOS-MovieRecommendationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IOS-MovieRecommendationTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E20433A27DBDB160031EF2C /* IOS_MovieRecommendationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_MovieRecommendationTests.swift; sourceTree = "<group>"; };
+		8E20433A27DBDB160031EF2C /* UnauthorizedPageViewControllerBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthorizedPageViewControllerBuilderTest.swift; sourceTree = "<group>"; };
 		8E20434027DBDB160031EF2C /* IOS-MovieRecommendationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IOS-MovieRecommendationUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E20435427DBDFA20031EF2C /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		8E4CD68D27DD13EC00B36ADF /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		8E4CD68F27DD14D000B36ADF /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 		8E4CD69227DD15A900B36ADF /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
-		8E4CD69C27DD18ED00B36ADF /* MockNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkClient.swift; sourceTree = "<group>"; };
 		8E56688E2827C02B005EF24B /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		8E5668902827C047005EF24B /* HTTPNetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPNetworkResponse.swift; sourceTree = "<group>"; };
 		8E5668922827C06C005EF24B /* HTTPRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
@@ -115,6 +116,9 @@
 		8E93558B282A45F6004FBFE7 /* WaitingRoomControllerBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomControllerBuilderTest.swift; sourceTree = "<group>"; };
 		8E93558D282A464B004FBFE7 /* CardViewControllerBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewControllerBuilderTest.swift; sourceTree = "<group>"; };
 		8E93558F282A4688004FBFE7 /* RatedCollectionViewControllerBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatedCollectionViewControllerBuilderTest.swift; sourceTree = "<group>"; };
+		8E935591282A4B64004FBFE7 /* NetworkServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTest.swift; sourceTree = "<group>"; };
+		8E935595282A524B004FBFE7 /* HTTPNetworkResponseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPNetworkResponseTest.swift; sourceTree = "<group>"; };
+		8E935597282A5BFA004FBFE7 /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +164,7 @@
 		8E10DD3A2829204300C11053 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				8E10DD3B2829206000C11053 /* LoginFieldTest.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -167,7 +172,6 @@
 		8E1697DA27DD0F27005FD4F6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				8E4CD69B27DD18CB00B36ADF /* MockNetworkService */,
 				8E5668962827C0FA005EF24B /* NetworkServiceImp */,
 				07C610CD2805980800338E77 /* NetworkService.swift */,
 				8E4CD68C27DD13DF00B36ADF /* Model */,
@@ -217,15 +221,8 @@
 		8E20433927DBDB160031EF2C /* IOS-MovieRecommendationTests */ = {
 			isa = PBXGroup;
 			children = (
-				8E20433A27DBDB160031EF2C /* IOS_MovieRecommendationTests.swift */,
-				8E935581282A452F004FBFE7 /* LoginViewControllerBuilderTest.swift */,
-				8E935583282A4560004FBFE7 /* RegisterViewControllerBuilderTest.swift */,
-				8E935585282A4579004FBFE7 /* AuthorizedPageViewControllerBuilderTest.swift */,
-				8E935587282A459D004FBFE7 /* RoomIdControllerBuilderTest.swift */,
-				8E935589282A45DE004FBFE7 /* CreateRoomControllerBuilderTest.swift */,
-				8E93558B282A45F6004FBFE7 /* WaitingRoomControllerBuilderTest.swift */,
-				8E93558D282A464B004FBFE7 /* CardViewControllerBuilderTest.swift */,
-				8E93558F282A4688004FBFE7 /* RatedCollectionViewControllerBuilderTest.swift */,
+				8E935594282A4B7A004FBFE7 /* Interface */,
+				8E935593282A4B76004FBFE7 /* Core */,
 			);
 			path = "IOS-MovieRecommendationTests";
 			sourceTree = "<group>";
@@ -234,7 +231,6 @@
 			isa = PBXGroup;
 			children = (
 				8E10DD392829203600C11053 /* Cases */,
-				8E10DD3B2829206000C11053 /* LoginFieldTest.swift */,
 			);
 			path = "IOS-MovieRecommendationUITests";
 			sourceTree = "<group>";
@@ -290,20 +286,38 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		8E4CD69B27DD18CB00B36ADF /* MockNetworkService */ = {
-			isa = PBXGroup;
-			children = (
-				8E4CD69C27DD18ED00B36ADF /* MockNetworkClient.swift */,
-			);
-			path = MockNetworkService;
-			sourceTree = "<group>";
-		};
 		8E5668962827C0FA005EF24B /* NetworkServiceImp */ = {
 			isa = PBXGroup;
 			children = (
 				8E5668972827C10B005EF24B /* NetworkServiceImp.swift */,
 			);
 			path = NetworkServiceImp;
+			sourceTree = "<group>";
+		};
+		8E935593282A4B76004FBFE7 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				8E935591282A4B64004FBFE7 /* NetworkServiceTest.swift */,
+				8E935595282A524B004FBFE7 /* HTTPNetworkResponseTest.swift */,
+				8E935597282A5BFA004FBFE7 /* AppCoordinatorTests.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		8E935594282A4B7A004FBFE7 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				8E20433A27DBDB160031EF2C /* UnauthorizedPageViewControllerBuilderTest.swift */,
+				8E935581282A452F004FBFE7 /* LoginViewControllerBuilderTest.swift */,
+				8E935583282A4560004FBFE7 /* RegisterViewControllerBuilderTest.swift */,
+				8E935585282A4579004FBFE7 /* AuthorizedPageViewControllerBuilderTest.swift */,
+				8E935587282A459D004FBFE7 /* RoomIdControllerBuilderTest.swift */,
+				8E935589282A45DE004FBFE7 /* CreateRoomControllerBuilderTest.swift */,
+				8E93558B282A45F6004FBFE7 /* WaitingRoomControllerBuilderTest.swift */,
+				8E93558D282A464B004FBFE7 /* CardViewControllerBuilderTest.swift */,
+				8E93558F282A4688004FBFE7 /* RatedCollectionViewControllerBuilderTest.swift */,
+			);
+			path = Interface;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -444,7 +458,6 @@
 				075B47962828183900C3A083 /* RegisterViewController.swift in Sources */,
 				075B47942828153400C3A083 /* LoginViewController.swift in Sources */,
 				07B000952806C6A100F7E442 /* UnauthorizedPageViewController.swift in Sources */,
-				8E4CD69D27DD18ED00B36ADF /* MockNetworkClient.swift in Sources */,
 				07B000932806BA3E00F7E442 /* AuthorizedPageViewController.swift in Sources */,
 				8E4CD69027DD14D000B36ADF /* HTTPError.swift in Sources */,
 				8E4CD68E27DD13EC00B36ADF /* Movie.swift in Sources */,
@@ -479,9 +492,12 @@
 				8E93558A282A45DE004FBFE7 /* CreateRoomControllerBuilderTest.swift in Sources */,
 				8E935584282A4560004FBFE7 /* RegisterViewControllerBuilderTest.swift in Sources */,
 				8E935586282A4579004FBFE7 /* AuthorizedPageViewControllerBuilderTest.swift in Sources */,
+				8E935592282A4B64004FBFE7 /* NetworkServiceTest.swift in Sources */,
 				8E93558E282A464B004FBFE7 /* CardViewControllerBuilderTest.swift in Sources */,
-				8E20433B27DBDB160031EF2C /* IOS_MovieRecommendationTests.swift in Sources */,
+				8E935598282A5BFA004FBFE7 /* AppCoordinatorTests.swift in Sources */,
+				8E20433B27DBDB160031EF2C /* UnauthorizedPageViewControllerBuilderTest.swift in Sources */,
 				8E935590282A4688004FBFE7 /* RatedCollectionViewControllerBuilderTest.swift in Sources */,
+				8E935596282A524B004FBFE7 /* HTTPNetworkResponseTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,6 +673,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -685,6 +702,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

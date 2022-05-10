@@ -231,3 +231,11 @@ class RegisterViewController: UIViewController {
     }
 
 }
+
+#if DEBUG
+extension RegisterViewController {
+    public func exposePrivateRegisterButtonClicked() {
+        return registerButtonClicked()
+    }
+}
+#endif

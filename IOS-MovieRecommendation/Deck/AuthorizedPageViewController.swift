@@ -120,9 +120,4 @@ class AuthorizedPageViewController: UIViewController {
             createButton.heightAnchor.constraint(equalToConstant: 48)
         ])
     }
-
-    private func setupLayers() {}
-
-    private func setupTitles() {}
-
 }

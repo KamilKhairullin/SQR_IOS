@@ -256,11 +256,6 @@ class RatedCollectionViewController: UIViewController {
 extension RatedCollectionViewController: RatedCollectionDelegate {
     func addMovieToCollection(movie: MovieDTO, image: UIImage) {
         movieCollection.append(MovieCard(movie: movie, image: image))
-
-//        DispatchQueue.global().async {
-//            self.movieCollection.sort { $0.movie.rating! > $1.movie.rating! }
-//        }
-
     }
 
     func getLikedMovieAmount() -> Int {
@@ -268,3 +263,23 @@ extension RatedCollectionViewController: RatedCollectionDelegate {
     }
 
 }
+
+#if DEBUG
+extension RatedCollectionViewController {
+    public func exposePrivateSetupCards() {
+        return setupCards()
+    }
+
+    public func exposePrivateSetupViews() {
+        return setupViews()
+    }
+
+    public func exposePrivateSetupLayers() {
+        return setupLayers()
+    }
+
+    public func exposePrivateSetupTitles() {
+        return setupTitels()
+    }
+}
+#endif

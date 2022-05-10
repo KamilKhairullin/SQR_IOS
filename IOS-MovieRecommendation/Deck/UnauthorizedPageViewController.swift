@@ -15,7 +15,7 @@ class UnauthorizedPageViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    let logoImageView: UIImageView = {
+    private lazy var logoImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "Logo")
         iv.contentMode = .scaleAspectFill
@@ -24,7 +24,7 @@ class UnauthorizedPageViewController: UIViewController {
         return iv
     }()
 
-    lazy var loginButton: UIButton = {
+    private lazy var loginButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = ColorPalette.customYellow
         btn.setTitle("Login", for: .normal)
@@ -44,7 +44,7 @@ class UnauthorizedPageViewController: UIViewController {
         return btn
     }()
 
-    lazy var registerButton: UIButton = {
+    private lazy var registerButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = .black
         btn.setTitle("Register", for: .normal)
@@ -133,9 +133,12 @@ class UnauthorizedPageViewController: UIViewController {
             registerButton.heightAnchor.constraint(equalToConstant: 48)
         ])
     }
-
-    private func setupLayers() {}
-
-    private func setupTitles() {}
-
 }
+
+#if DEBUG
+extension UnauthorizedPageViewController {
+    public func exposPrivateLoginButtonClicked() {
+        return loginButtonClicked()
+    }
+}
+#endif

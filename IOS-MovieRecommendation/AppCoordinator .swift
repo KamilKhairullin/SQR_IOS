@@ -30,7 +30,7 @@ final class AppCoordinator {
         cardViewController: CardViewController,
         ratedCollectionViewController: RatedCollectionViewController,
         networkSerivce: NetworkService,
-        appDelegate: AppDelegate
+        appDelegate: AppDelegate?
     ) {
         self.unauthorizedPage = unauthorizedPage
         self.authorizedPage = authorizedPage

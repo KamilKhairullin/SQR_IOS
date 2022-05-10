@@ -228,3 +228,11 @@ class LoginViewController: UIViewController {
     }
 
 }
+
+#if DEBUG
+extension LoginViewController {
+    public func exposPrivateLoginButtonClicked() {
+        return loginButtonClicked()
+    }
+}
+#endif
