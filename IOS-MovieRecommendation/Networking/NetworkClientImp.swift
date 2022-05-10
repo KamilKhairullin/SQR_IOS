@@ -28,7 +28,6 @@ struct NetworkClientImp: NetworkClient {
 
                     jsonDecoder.keyDecodingStrategy = request.keyDecodingStrategy
                     jsonDecoder.dateDecodingStrategy = request.dateDecodingStrategy
-                    try? jsonDecoder.decode(T.self, from: unwrappedData)
                     guard let result = try? jsonDecoder.decode(T.self, from: unwrappedData) else {
                         NetworkClientImp.executeCompletionOnMainThread {
                             completion(.failure(HTTPError.decodingFailed))
@@ -36,7 +35,7 @@ struct NetworkClientImp: NetworkClient {
 
                         return
                     }
-                    
+
                     NetworkClientImp.executeCompletionOnMainThread {
                         completion(.success(result))
                     }
@@ -71,7 +70,7 @@ struct NetworkClientImp: NetworkClient {
 
         guard let componentsURL = components.url else { throw HTTPError.missingURLComponents }
         var generatedRequest = URLRequest(url: componentsURL)
-        
+
         generatedRequest.httpMethod = request.httpMethod.rawValue
         generatedRequest.httpBody = request.body
 

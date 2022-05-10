@@ -6,38 +6,37 @@
 //
 
 import UIKit
- 
 
 class UnauthorizedPageViewController: UIViewController {
 
     public var appCoordinator: AppCoordinator?
     private var networkService: NetworkService
-    
+
     init(networkService: NetworkService) {
         self.networkService = networkService
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     let logoImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "Logo")
         iv.contentMode = .scaleAspectFill
-        
+
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
-    
+
     let loginButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = ColorPalette.customYellow
         btn.setTitle("Login", for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 24)
         btn.setTitleColor(UIColor.black, for: .normal)
-       
+
         btn.layer.cornerRadius = 12.5
         btn.layer.shadowColor = UIColor.systemGray.cgColor
         btn.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
@@ -45,45 +44,42 @@ class UnauthorizedPageViewController: UIViewController {
         btn.layer.shadowRadius = 2.5
         btn.layer.masksToBounds = false
         btn.layer.cornerRadius = 12.5
-        
+
         btn.addTarget(self, action: #selector(loginButtonClicked), for: .touchUpInside)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
-    
+
     let registerButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = .black
         btn.setTitle("Register", for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 24)
         btn.setTitleColor(ColorPalette.customWhite, for: .normal)
-        
+
         btn.layer.cornerRadius = 12.5
         btn.layer.borderColor = ColorPalette.customWhite.cgColor
         btn.layer.borderWidth = 2
-        
+
         btn.addTarget(self, action: #selector(registerButtonClicked), for: .touchUpInside)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
-    
-    
-// MARK: -- lifecycle, override
-    
-    
+
+// MARK: - - lifecycle, override
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
         setupViews()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-    
-    
-// MARK: -- objc
-    
+
+// MARK: - - objc
+
     @objc private func loginButtonClicked() {
         let loginPage = LoginViewController(networkService: self.networkService)
         var token: String?
@@ -103,19 +99,19 @@ class UnauthorizedPageViewController: UIViewController {
                 print(error.rawValue)
             }
         }
-    
+
         loginPage.appCoordinator = appCoordinator
         self.navigationController?.pushViewController(loginPage, animated: true)
-        
+
     }
-    
+
     @objc private func registerButtonClicked() {
         let registerPage = RegisterViewController(networkService: networkService)
         navigationController?.pushViewController(registerPage, animated: true)
     }
-    
-// MARK: -- func
-    
+
+// MARK: - - func
+
     private func setupViews() {
         view.addSubview(logoImageView)
         NSLayoutConstraint.activate([
@@ -124,7 +120,7 @@ class UnauthorizedPageViewController: UIViewController {
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -128)
         ])
-        
+
         view.addSubview(loginButton)
         NSLayoutConstraint.activate([
             loginButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 32),
@@ -133,7 +129,7 @@ class UnauthorizedPageViewController: UIViewController {
             loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 192),
             loginButton.heightAnchor.constraint(equalToConstant: 48)
         ])
-        
+
         view.addSubview(registerButton)
         NSLayoutConstraint.activate([
             registerButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
@@ -143,15 +139,13 @@ class UnauthorizedPageViewController: UIViewController {
             registerButton.heightAnchor.constraint(equalToConstant: 48)
         ])
     }
-    
-    private func setupLayers() {
-        
-    }
-    
-    private func setupTitles() {
-        
-    }
-    
-    
-}
 
+    private func setupLayers() {
+
+    }
+
+    private func setupTitles() {
+
+    }
+
+}

@@ -8,26 +8,23 @@
 import Foundation
 import UIKit
 
-
-
 protocol JoinToTheRoom {
     func JoinToTheRoom(on viewController: UIViewController, roomId: String, failedToJoin: @escaping () -> Void)
 }
 
-
 class RoomIdController: UIViewController {
-    
+
     public var appCoordinator: AppCoordinator?
-    
+
     let logoImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "Logo")
         iv.contentMode = .scaleAspectFill
-        
+
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
-    
+
     let roomIdInputField: UITextField = {
         let iv = UITextField()
         iv.backgroundColor = ColorPalette.customWhite
@@ -35,22 +32,22 @@ class RoomIdController: UIViewController {
         iv.tintColor = .systemPurple
         iv.font = .systemFont(ofSize: 24)
         iv.textAlignment = .center
-        
+
         iv.placeholder = "Room id"
-        
+
         iv.layer.cornerRadius = 12.5
-        
+
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
-    
+
     let nextButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = ColorPalette.customYellow
         btn.setTitle("Next", for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 24)
         btn.setTitleColor(UIColor.black, for: .normal)
-       
+
         btn.layer.cornerRadius = 12.5
         btn.layer.shadowColor = UIColor.systemGray.cgColor
         btn.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
@@ -58,54 +55,52 @@ class RoomIdController: UIViewController {
         btn.layer.shadowRadius = 2.5
         btn.layer.masksToBounds = false
         btn.layer.cornerRadius = 12.5
-        
+
         btn.addTarget(self, action: #selector(nextButtonClicked), for: .touchUpInside)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
-    
+
     let qrImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "qr")
         iv.contentMode = .scaleAspectFill
-        
+
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
-    
-    
-// MARK: -- lifecycle, override
-    
+
+// MARK: - - lifecycle, override
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = .black
         setupViews()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         roomIdInputField.text = ""
         roomIdInputField.placeholder = "Room id"
-        
+
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.tintColor = ColorPalette.customYellow
-        
+
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-    
-    
-// MARK: -- objc
-    
+
+// MARK: - - objc
+
     @objc private func nextButtonClicked() {
         guard let roomId = roomIdInputField.text else {
             return
         }
-        
+
         if !checkId(roomId: roomId) {
             incorrectFormat()
             roomIdInputField.text = ""
@@ -117,9 +112,9 @@ class RoomIdController: UIViewController {
             }
         }
     }
-    
-// MARK: -- func
-    
+
+// MARK: - - func
+
     private func setupViews() {
         view.addSubview(logoImageView)
         NSLayoutConstraint.activate([
@@ -128,7 +123,7 @@ class RoomIdController: UIViewController {
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -192)
         ])
-        
+
         view.addSubview(roomIdInputField)
         NSLayoutConstraint.activate([
             roomIdInputField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 96),
@@ -137,7 +132,7 @@ class RoomIdController: UIViewController {
             roomIdInputField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             roomIdInputField.heightAnchor.constraint(equalToConstant: 48)
         ])
-        
+
         view.addSubview(nextButton)
         NSLayoutConstraint.activate([
             nextButton.topAnchor.constraint(equalTo: roomIdInputField.bottomAnchor, constant: 16),
@@ -146,7 +141,7 @@ class RoomIdController: UIViewController {
             nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             nextButton.heightAnchor.constraint(equalToConstant: 48)
         ])
-        
+
         view.addSubview(qrImageView)
         NSLayoutConstraint.activate([
             qrImageView.topAnchor.constraint(equalTo: nextButton.bottomAnchor, constant: 96),
@@ -155,22 +150,17 @@ class RoomIdController: UIViewController {
             qrImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
-    
 
     private func checkId(roomId: String) -> Bool {
         if roomId == "" {
             return false
         }
-        
+
         return true
     }
-    
-    private func incorrectFormat(){
+
+    private func incorrectFormat() {
         print("Incorrect id format")
     }
-    
-    
-    
+
 }
-
-

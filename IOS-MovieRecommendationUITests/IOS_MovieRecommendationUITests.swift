@@ -5,9 +5,9 @@
 ////  Created by Kamil on 11.03.2022.
 ////
 //
-//import XCTest
+// import XCTest
 //
-//class IOS_MovieRecommendationUITests: XCTestCase {
+// class IOS_MovieRecommendationUITests: XCTestCase {
 //
 //    override func setUpWithError() throws {
 //        // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -39,4 +39,4 @@
 //            }
 //        }
 //    }
-//}
+// }

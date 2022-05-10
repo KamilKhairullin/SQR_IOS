@@ -9,4 +9,3 @@ struct Ranking: Decodable {
     let movieId: String
     let likedUsers: [String]
 }
-

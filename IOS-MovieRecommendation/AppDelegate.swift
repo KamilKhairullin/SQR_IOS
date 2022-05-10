@@ -7,7 +7,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        
+
         if #available(iOS 15, *) {
             let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithTransparentBackground()
@@ -25,14 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UITabBar.appearance().standardAppearance = tabBarApperance
             UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
         }
-        
+
         let networkClient = NetworkClientImp(urlSession: .init(configuration: .default))
         let networkService = NetworkServiceImp(networkClient: networkClient)
         let unauthorizedPage = UnauthorizedPageViewController(networkService: networkService)
         let authorizedPage = AuthorizedPageViewController(networkService: networkService)
         let cardViewController = CardViewController(networkService: networkService)
         let ratedCollectionViewController = RatedCollectionViewController(networkService: networkService)
-        
+
         let appCoordinator = AppCoordinator(
             unauthorizedPage: unauthorizedPage,
             authorizedPage: authorizedPage,
@@ -41,11 +41,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             networkSerivce: networkService,
             appDelegate: self
         )
-        
+
         unauthorizedPage.appCoordinator = appCoordinator
         authorizedPage.appCoordinator = appCoordinator
         cardViewController.moviewCollectionDelegate = ratedCollectionViewController
-        
+
         window?.rootViewController = UIViewController()
         window?.makeKeyAndVisible()
         return true

@@ -12,28 +12,28 @@ protocol LoginSucceed {
 }
 
 class LoginViewController: UIViewController {
-    
+
     public var appCoordinator: AppCoordinator?
     private var networkService: NetworkService
-    
+
     init(networkService: NetworkService) {
         self.networkService = networkService
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     let logoImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "Logo")
         iv.contentMode = .scaleAspectFill
-        
+
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
-    
+
     let usernameInputField: UITextField = {
         let iv = UITextField()
         iv.backgroundColor = ColorPalette.customWhite
@@ -41,15 +41,15 @@ class LoginViewController: UIViewController {
         iv.tintColor = .systemPurple
         iv.font = .systemFont(ofSize: 24)
         iv.textAlignment = .center
-        
+
         iv.placeholder = "Username"
-        
+
         iv.layer.cornerRadius = 12.5
-        
+
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
-    
+
     let passwordInputField: UITextField = {
         let iv = UITextField()
         iv.backgroundColor = ColorPalette.customWhite
@@ -57,22 +57,22 @@ class LoginViewController: UIViewController {
         iv.tintColor = .systemPurple
         iv.font = .systemFont(ofSize: 24)
         iv.textAlignment = .center
-        
+
         iv.placeholder = "Password"
-        
+
         iv.layer.cornerRadius = 12.5
-        
+
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
-    
+
     let loginButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.backgroundColor = ColorPalette.customYellow
         btn.setTitle("Login", for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 24)
         btn.setTitleColor(UIColor.black, for: .normal)
-       
+
         btn.layer.cornerRadius = 12.5
         btn.layer.shadowColor = UIColor.systemGray.cgColor
         btn.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
@@ -80,60 +80,58 @@ class LoginViewController: UIViewController {
         btn.layer.shadowRadius = 2.5
         btn.layer.masksToBounds = false
         btn.layer.cornerRadius = 12.5
-        
+
         btn.addTarget(self, action: #selector(loginButtonClicked), for: .touchUpInside)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
-    
+
     let qrImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "qr")
         iv.contentMode = .scaleAspectFill
-        
+
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
-    
-    
-// MARK: -- lifecycle, override
-    
+
+// MARK: - - lifecycle, override
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = .black
         setupViews()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         usernameInputField.text = ""
         usernameInputField.placeholder = "Username"
         passwordInputField.text = ""
         passwordInputField.placeholder = "Password"
-        
+
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.tintColor = ColorPalette.customYellow
-        
+
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-    
-    
-// MARK: -- objc
-    
+
+// MARK: - - objc
+
     @objc private func loginButtonClicked() {
         guard let username = usernameInputField.text,
               let password = passwordInputField.text
         else { return }
-        
+
         let isUsernameCorrect = checkUsername(username: username)
         let isPasswordCorrect = checkPassword(password: password)
-        
-        if !isUsernameCorrect || !isPasswordCorrect{
+
+        if !isUsernameCorrect || !isPasswordCorrect {
             if !isUsernameCorrect {
                 incorrectUsernameFormat()
                 usernameInputField.text = ""
@@ -146,7 +144,7 @@ class LoginViewController: UIViewController {
             }
         } else {
             let userDTO = UserDTO(login: username, password: password)
-            
+
             networkService.login(credentials: userDTO) { [weak self] response in
                 guard let self = self else { return }
                 switch response {
@@ -164,9 +162,9 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
-// MARK: -- func
-    
+
+// MARK: - - func
+
     private func setupViews() {
         view.addSubview(logoImageView)
         NSLayoutConstraint.activate([
@@ -175,7 +173,7 @@ class LoginViewController: UIViewController {
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -192)
         ])
-        
+
         view.addSubview(usernameInputField)
         NSLayoutConstraint.activate([
             usernameInputField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 96),
@@ -184,8 +182,7 @@ class LoginViewController: UIViewController {
             usernameInputField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             usernameInputField.heightAnchor.constraint(equalToConstant: 48)
         ])
-        
-        
+
         view.addSubview(passwordInputField)
         NSLayoutConstraint.activate([
             passwordInputField.topAnchor.constraint(equalTo: usernameInputField.bottomAnchor, constant: 16),
@@ -194,7 +191,7 @@ class LoginViewController: UIViewController {
             passwordInputField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             passwordInputField.heightAnchor.constraint(equalToConstant: 48)
         ])
-        
+
         view.addSubview(loginButton)
         NSLayoutConstraint.activate([
             loginButton.topAnchor.constraint(equalTo: passwordInputField.bottomAnchor, constant: 64),
@@ -205,45 +202,29 @@ class LoginViewController: UIViewController {
         ])
 
     }
-    
 
     private func checkUsername(username: String) -> Bool {
         if username == "" {
             return false
         }
-        
+
         return true
     }
-    
+
     private func checkPassword(password: String) -> Bool {
         if password == "" {
             return false
         }
-        
+
         return true
     }
-    
-    private func incorrectUsernameFormat(){
+
+    private func incorrectUsernameFormat() {
         print("Incorrect username format")
     }
-    
-    private func incorrectPasswordFormat(){
+
+    private func incorrectPasswordFormat() {
         print("Incorrect password format")
     }
-    
-    
-    
-    
-    
 
-    
-    
-
-    
-    
-    
-
-    
-    
-    
 }

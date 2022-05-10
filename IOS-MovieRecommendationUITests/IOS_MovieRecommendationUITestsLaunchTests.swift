@@ -5,9 +5,9 @@
 ////  Created by Kamil on 11.03.2022.
 ////
 //
-//import XCTest
+// import XCTest
 //
-//class IOS_MovieRecommendationUITestsLaunchTests: XCTestCase {
+// class IOS_MovieRecommendationUITestsLaunchTests: XCTestCase {
 //
 //    override class var runsForEachTargetApplicationUIConfiguration: Bool {
 //        true
@@ -29,4 +29,4 @@
 //        attachment.lifetime = .keepAlways
 //        add(attachment)
 //    }
-//}
+// }

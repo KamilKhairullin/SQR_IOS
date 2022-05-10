@@ -5,24 +5,24 @@ protocol Configurable {
 }
 
 final class AppCoordinator {
-    
+
 //    let tabBarController: UITabBarController = {
 //        let view = UITabBarController()
 //        view.tabBar.backgroundColor = ColorPalette.customBlack
 //
 //        return view
 //    }()
-    
+
     // MARK: - Properties
-    
+
     private var unauthorizedPage: UnauthorizedPageViewController
     private var authorizedPage: AuthorizedPageViewController
     private var cardViewController: CardViewController
     private var ratedCollectionViewController: RatedCollectionViewController
     private var networkSerivce: NetworkService
-    private var appDelegate: AppDelegate
+    private weak var appDelegate: AppDelegate?
     // MARK: - Lifecycle
-    
+
     init(
         unauthorizedPage: UnauthorizedPageViewController,
         authorizedPage: AuthorizedPageViewController,
@@ -37,13 +37,13 @@ final class AppCoordinator {
         self.ratedCollectionViewController = ratedCollectionViewController
         self.networkSerivce = networkSerivce
         self.appDelegate = appDelegate
-        
+
         setupDesign()
         getStartingPage()
     }
-    
+
     public func getStartingPage() {
-      
+
         let username = UserDefaults.standard.string(forKey: "username") ?? ""
         let password = UserDefaults.standard.string(forKey: "password") ?? ""
         let userDTO = UserDTO(login: username, password: password)
@@ -52,49 +52,46 @@ final class AppCoordinator {
             switch response {
             case .success(let data):
                 UserDefaults.standard.set(data.token, forKey: "token")
-                self?.appDelegate.configure(with: self?.authorizedPage ?? UIViewController())
+                self?.appDelegate?.configure(with: self?.authorizedPage ?? UIViewController())
             case .failure:
-                self?.appDelegate.configure(with: self?.unauthorizedPage ?? UIViewController())
+                self?.appDelegate?.configure(with: self?.unauthorizedPage ?? UIViewController())
             }
         }
     }
-    
+
     // MARK: - Private
-    
+
     private func setupDesign() {
         setupAuthorizedPageDesign()
         setupUnauthorizedPageDesign()
         setupCardViewControllerDesign()
         setupRatedCollectionViewDesign()
     }
-    
+
     private func setupUnauthorizedPageDesign() {
         unauthorizedPage.tabBarItem.title = "Login"
         unauthorizedPage.tabBarItem.selectedImage = .add.withTintColor(ColorPalette.customYellow, renderingMode: .alwaysOriginal)
         unauthorizedPage.tabBarItem.image = .add.withTintColor(.systemGray)
     }
-    
+
     private func setupAuthorizedPageDesign() {
         authorizedPage.tabBarItem.title = "Join"
         authorizedPage.tabBarItem.selectedImage = .add.withTintColor(ColorPalette.customYellow, renderingMode: .alwaysOriginal)
         authorizedPage.tabBarItem.image = .add.withTintColor(.systemGray)
     }
-    
+
     private func setupCardViewControllerDesign() {
         cardViewController.tabBarItem.title = "Movies"
         cardViewController.tabBarItem.selectedImage = .add.withTintColor(ColorPalette.customYellow, renderingMode: .alwaysOriginal)
         cardViewController.tabBarItem.image = .add.withTintColor(.systemGray)
     }
-    
+
     private func setupRatedCollectionViewDesign() {
         ratedCollectionViewController.tabBarItem.title = "Ratings"
         ratedCollectionViewController.tabBarItem.selectedImage = .add.withTintColor(ColorPalette.customYellow, renderingMode: .alwaysOriginal)
         ratedCollectionViewController.tabBarItem.image = .add.withTintColor(.systemGray)
     }
 }
-
-
-
 
 extension AppCoordinator: LoginSucceed {
     func loginSucceed(on viewController: UIViewController, with token: String) {
@@ -114,16 +111,16 @@ extension AppCoordinator: JoinToTheRoom {
     func JoinToTheRoom(on viewController: UIViewController, roomId: String, failedToJoin: @escaping () -> Void) {
         let token = UserDefaults.standard.string(forKey: "token") ?? ""
         let slug = UserDefaults.standard.string(forKey: "roomSlug") ?? ""
-        
+
         networkSerivce.join(token: token, slug: slug) { [weak self] response in
             switch response {
             case .success(let roomDTO):
                 UserDefaults.standard.set(roomDTO.id, forKey: "roomId")
                 UserDefaults.standard.set(roomDTO.users.count, forKey: "partyAmount")
-                
+
                 let waitingRoom = WaitingRoomController()
                 waitingRoom.appCoordinator = self
-                
+
                 viewController.navigationController?.pushViewController(waitingRoom, animated: true)
             case .failure(let error):
                 failedToJoin()
@@ -136,14 +133,13 @@ extension AppCoordinator: JoinToTheRoom {
 extension AppCoordinator: WaitingForOthers {
     func waitingForOthers(on viewController: UIViewController) {
         // network Service
-        
-        
+
         let tabBar = UITabBarController()
         tabBar.setViewControllers([
             self.cardViewController,
             self.ratedCollectionViewController
         ], animated: true)
-        
+
         viewController.navigationController?.pushViewController(tabBar, animated: true)
     }
 }
@@ -152,10 +148,10 @@ extension AppCoordinator: StartTheRoom {
     func startTheRoom(on viewController: UIViewController) {
         let token = UserDefaults.standard.string(forKey: "token") ?? ""
         let slug = UserDefaults.standard.string(forKey: "roomSlug") ?? ""
-        
+
         networkSerivce.startRoom(token: token, slug: slug) { [weak self] response in
             guard let self = self else { return }
-            
+
             switch response {
                 case .success:
                     let tabBar = UITabBarController()
@@ -163,7 +159,7 @@ extension AppCoordinator: StartTheRoom {
                         self.cardViewController,
                         self.ratedCollectionViewController
                     ], animated: true)
-                    
+
                     viewController.navigationController?.pushViewController(tabBar, animated: true)
                 case .failure(let error):
                     print("here")

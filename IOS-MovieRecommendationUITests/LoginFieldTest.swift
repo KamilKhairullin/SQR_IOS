@@ -1,6 +1,6 @@
-//import XCTest
+// import XCTest
 //
-//class LoginFieldTest: XCTestCase {
+// class LoginFieldTest: XCTestCase {
 //
 //    override class var runsForEachTargetApplicationUIConfiguration: Bool {
 //        true
@@ -17,4 +17,4 @@
 //        app.buttons["Start"].tap()
 //        XCTAssertTrue(app.buttons["Movies"].exists)
 //    }
-//}
+// }

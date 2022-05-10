@@ -5,9 +5,9 @@
 ////  Created by Kamil on 12.03.2022.
 ////
 //
-//import Foundation
+// import Foundation
 //
-//final class MockNetworkService: NetworkService {
+// final class MockNetworkService: NetworkService {
 //    func recommend(token: String, slug: String, completion: @escaping (Result<MovieDTO, HTTPError>) -> Void) -> Cancellable? {
 //        completion(.success(MovieDTO(id: "mock", name: "mock", posterUrl: "mock", description: "mock", rating: Rating(kinopoisk: 0.0, imdb: 0.0, tmdb: 5.0), genres: ["mock"], actors: [ActorDTO(name: "mock", photoUrl: "mock")])))
 //            return nil
@@ -104,5 +104,5 @@
 //        
 //        return nil
 //    }
-//}
+// }
 //
